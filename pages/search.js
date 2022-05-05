@@ -66,12 +66,12 @@ const Search = (props) => {
   const {
     query = 'all',
     category = 'all',
-    store = 'all',
+    vendor = 'all',
     price = 'all',
     rating = 'all',
     //sort = 'all',
   } = router.query;
-  const { products, countProducts, categories, stores } = props;
+  const { products, countProducts, categories, vendors } = props;
 
   useEffect(() => {
     try {
@@ -191,7 +191,7 @@ const Search = (props) => {
   const filterSearch = ({
     page,
     category,
-    store,
+    vendor,
     sort,
     min,
     max,
@@ -205,7 +205,7 @@ const Search = (props) => {
     if (searchQuery) query.search = searchQuery;
     if (sort) query.sort = sort;
     if (category) query.category = category;
-    if (store) query.store = store;
+    if (vendor) query.vendor = vendor;
     if (price) query.price = price;
     if (rating) query.rating = rating;
     if (min) query.min ? query.min : query.min === 0 ? 0 : min;
@@ -255,14 +255,27 @@ const Search = (props) => {
         <Grid item md={3} xs={12}>
           <List>
             <ListItem>
+              <Typography variant='h3' style={{ fontWeight: 500 }}>
+                Filter
+              </Typography>
+            </ListItem>
+            <ListItem>
               <Box style={{ width: '100%' }}>
-                <Typography>Category</Typography>
+                <Typography variant='h6' style={{ margin: 0 }}>
+                  Category
+                </Typography>
                 <Select fullWidth value={category} onChange={categoryHandler}>
-                  <MenuItem value='all'>All</MenuItem>
+                  <MenuItem value='all'>
+                    <Typography variant='h6' style={{ margin: 0 }}>
+                      All
+                    </Typography>
+                  </MenuItem>
                   {categories &&
                     categories.map((category) => (
                       <MenuItem key={category} value={category}>
-                        {category}
+                        <Typography variant='h6' style={{ margin: 0 }}>
+                          {category}
+                        </Typography>
                       </MenuItem>
                     ))}
                 </Select>
@@ -270,13 +283,21 @@ const Search = (props) => {
             </ListItem>
             <ListItem>
               <Box style={{ width: '100%' }}>
-                <Typography>Store</Typography>
-                <Select fullWidth value={store} onChange={storeHandler}>
-                  <MenuItem value='all'>All</MenuItem>
-                  {stores &&
-                    stores.map((store) => (
-                      <MenuItem key={store} value={store}>
-                        {store}
+                <Typography variant='h6' style={{ margin: 0 }}>
+                  Vendor
+                </Typography>
+                <Select fullWidth value={vendor} onChange={storeHandler}>
+                  <MenuItem value='all'>
+                    <Typography variant='h6' style={{ margin: 0 }}>
+                      All
+                    </Typography>
+                  </MenuItem>
+                  {vendors &&
+                    vendors.map((vendor) => (
+                      <MenuItem key={vendor} value={vendor}>
+                        <Typography variant='h6' style={{ margin: 0 }}>
+                          {vendor}
+                        </Typography>
                       </MenuItem>
                     ))}
                 </Select>
@@ -284,13 +305,26 @@ const Search = (props) => {
             </ListItem>
             <ListItem>
               <Box style={{ width: '100%' }}>
-                <Typography>Price</Typography>
+                <Typography variant='h6' style={{ margin: 0 }}>
+                  Price
+                </Typography>
                 <Select fullWidth value={price} onChange={priceHandler}>
-                  <MenuItem value='all'>All</MenuItem>
+                  <MenuItem value='all'>
+                    <Typography variant='h6' style={{ margin: 0 }}>
+                      All
+                    </Typography>
+                  </MenuItem>
                   {prices &&
                     prices.map((price) => (
-                      <MenuItem key={price} value={price.value}>
-                        {price.name}
+                      <MenuItem
+                        key={price}
+                        value={price.value}
+                        variant='h6'
+                        style={{ margin: 0 }}
+                      >
+                        <Typography variant='h6' style={{ margin: 0 }}>
+                          {price.name}
+                        </Typography>
                       </MenuItem>
                     ))}
                 </Select>
@@ -298,9 +332,15 @@ const Search = (props) => {
             </ListItem>
             <ListItem>
               <Box style={{ width: '100%' }}>
-                <Typography>Rating</Typography>
+                <Typography variant='h6' style={{ margin: 0 }}>
+                  Rating
+                </Typography>
                 <Select fullWidth value={rating} onChange={ratingHandler}>
-                  <MenuItem value='all'>All</MenuItem>
+                  <MenuItem value='all'>
+                    <Typography variant='h6' style={{ margin: 0 }}>
+                      All
+                    </Typography>
+                  </MenuItem>
                   {ratings &&
                     ratings.map((rating) => (
                       <MenuItem
@@ -310,7 +350,7 @@ const Search = (props) => {
                         value={rating}
                       >
                         <Rating value={rating} readOnly size='small' />
-                        <Typography component='span'>
+                        <Typography component='span' variant='h6' style={{ margin: 0 }}>
                           {rating < 5 ? <span>&nbsp; & above</span> : ''}
                         </Typography>
                       </MenuItem>
@@ -333,7 +373,7 @@ const Search = (props) => {
                 {products.length === 1 ? 'result' : 'results'} found
                 {query !== 'all' && query !== '' && ` :: ${query}`}
                 {category !== 'all' && ` :: ${category}`}
-                {store !== 'all' && ` :: ${store}`}
+                {vendor !== 'all' && ` :: ${vendor}`}
                 {price !== 'all' && ` :: Price (${price})`}
                 {rating !== 'all' &&
                   ` :: Rating (${rating} ${rating < 2 ? `star` : `stars`} ${
@@ -341,7 +381,7 @@ const Search = (props) => {
                   })`}
                 {(query !== 'all' && query !== '') ||
                 category !== 'all' ||
-                store !== 'all' ||
+                vendor !== 'all' ||
                 rating !== 'all' ||
                 price !== 'all' ? (
                   <Button onClick={() => router.push('/search')}>
@@ -374,7 +414,7 @@ const Search = (props) => {
           </Grid>
         </Grid>
       </Grid>
-      <div style={{height: '2rem'}}/>
+      <div style={{ height: '2rem' }} />
     </Layout>
   );
 };
@@ -435,7 +475,7 @@ export async function getServerSideProps({ query }) {
       : { _id: -1 };
 
   const categories = await Product.find().distinct('category');
-  const stores = await Product.find().distinct('store');
+  const vendors = await Product.find().distinct('vendor');
   const productDocs = await Product.find(
     {
       ...queryFilter,
@@ -469,7 +509,7 @@ export async function getServerSideProps({ query }) {
       page,
       pages: Math.ceil(countProducts / pageSize),
       categories,
-      stores,
+      vendors,
     },
   };
 }
