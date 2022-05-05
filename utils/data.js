@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs';
-import {v4 as uuidv4} from 'uuid';
-const Id = uuidv4()
-console.log(uuidv4())
+import { v4 as uuidv4 } from 'uuid';
+const Id = uuidv4();
+console.log(uuidv4());
 
 const data = {
   users: [
@@ -969,7 +969,7 @@ const data = {
       servings: 8,
       slug: 'grilled_croacker_2l',
       id: Id,
-      category: 'Meats',
+      category: 'Fishes',
       image: `/images/grilled_croacker.png`,
       price: 10500,
       vendor: 'Ahia Kitchen',
@@ -984,7 +984,7 @@ const data = {
       servings: 12,
       slug: 'grilled_croacker_2.5l',
       id: Id,
-      category: 'Meats',
+      category: 'Fishes',
       image: `/images/grilled_croacker.png`,
       price: 13500,
       vendor: 'Ahia Kitchen',
@@ -1015,7 +1015,7 @@ const data = {
       servings: 8,
       slug: 'grilled_catfish_2l',
       id: Id,
-      category: 'Meats',
+      category: 'Fishes',
       image: `/images/grilled_catfish.png`,
       price: 10500,
       vendor: 'Ahia Kitchen',
@@ -1030,7 +1030,7 @@ const data = {
       servings: 12,
       slug: 'grilled_catfish_2.5l',
       id: Id,
-      category: 'Meats',
+      category: 'Fishes',
       image: `/images/grilled_catfish.png`,
       price: 13500,
       vendor: 'Ahia Kitchen',
@@ -1061,7 +1061,7 @@ const data = {
       servings: 8,
       slug: 'grilled_titus_2l',
       id: Id,
-      category: 'Meats',
+      category: 'Fishes',
       image: `/images/grilled_titus.png`,
       price: 10500,
       vendor: 'Ahia Kitchen',
@@ -1076,7 +1076,7 @@ const data = {
       servings: 12,
       slug: 'grilled_titus_2.5l',
       id: Id,
-      category: 'Meats',
+      category: 'Fishes',
       image: `/images/grilled_titus.png`,
       price: 13500,
       vendor: 'Ahia Kitchen',

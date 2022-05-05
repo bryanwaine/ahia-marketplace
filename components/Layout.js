@@ -321,7 +321,7 @@ export default function Layout({
               onClose={sidebarCloseHandler}
             >
               <List>
-                <ListItem>
+                <ListItem >
                   <Box
                     display='flex'
                     alignItems='center'
