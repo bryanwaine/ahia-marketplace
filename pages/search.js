@@ -25,7 +25,7 @@ import toCurrency from '../utils/toCurrency';
 // import { fontSize } from '@mui/system';
 import { Rating } from '@mui/material';
 
-const PAGE_SIZE = 4;
+const PAGE_SIZE = 6;
 
 const prices = [
   {
