@@ -594,8 +594,8 @@ const useStyles = makeStyles((theme) => ({
     outline: 'none !important',
 
     '& .MuiCircularProgress-colorPrimary': {
-      color: '#111111 !important',
-      background: '#111111',
+      color: '#ff0000 !important',
+      background: '#ff0000',
     },
   },
   modalLogo: {
