@@ -22,7 +22,8 @@ import { getError } from '../utils/error';
 import { Store } from '../utils/Store';
 import { useSnackbar } from 'notistack';
 import toCurrency from '../utils/toCurrency';
-// import { fontSize } from '@mui/system';
+import ahia_white_logo from '../public/images/ahia_white_logo.png';
+import Image from 'next/image';
 import { Rating } from '@mui/material';
 
 const PAGE_SIZE = 6;
@@ -247,6 +248,14 @@ const Search = (props) => {
       {loading ? (
         <Modal open={open}>
           <Box className={classes.loadingModal}>
+            <div className={classes.modalLogo}>
+              <Image
+                src={ahia_white_logo}
+                width={500}
+                height={450}
+                alt='ahia'
+              />
+            </div>
             <CircularProgress size={60} />
           </Box>
         </Modal>
@@ -350,7 +359,11 @@ const Search = (props) => {
                         value={rating}
                       >
                         <Rating value={rating} readOnly size='small' />
-                        <Typography component='span' variant='h6' style={{ margin: 0 }}>
+                        <Typography
+                          component='span'
+                          variant='h6'
+                          style={{ margin: 0 }}
+                        >
                           {rating < 5 ? <span>&nbsp; & above</span> : ''}
                         </Typography>
                       </MenuItem>

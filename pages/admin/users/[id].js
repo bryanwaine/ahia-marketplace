@@ -146,22 +146,34 @@ const UserEdit = ({ params }) => {
             <List>
               <NextLink href='/admin/dashboard'>
                 <ListItem button component='a'>
-                  <ListItemText disableTypography={true}primary='Admin Dashboard'></ListItemText>
+                  <ListItemText
+                    disableTypography={true}
+                    primary='Admin Dashboard'
+                  ></ListItemText>
                 </ListItem>
               </NextLink>
               <NextLink href='/admin/orders'>
                 <ListItem button component='a'>
-                  <ListItemText disableTypography={true}primary='Orders'></ListItemText>
+                  <ListItemText
+                    disableTypography={true}
+                    primary='Orders'
+                  ></ListItemText>
                 </ListItem>
               </NextLink>
               <NextLink href='/admin/products'>
                 <ListItem button component='a'>
-                  <ListItemText disableTypography={true}primary='Products'></ListItemText>
+                  <ListItemText
+                    disableTypography={true}
+                    primary='Products'
+                  ></ListItemText>
                 </ListItem>
               </NextLink>
               <NextLink href='/admin/users'>
                 <ListItem button component='a' selected>
-                  <ListItemText disableTypography={true}primary='Users'></ListItemText>
+                  <ListItemText
+                    disableTypography={true}
+                    primary='Users'
+                  ></ListItemText>
                 </ListItem>
               </NextLink>
             </List>
@@ -270,9 +282,10 @@ const UserEdit = ({ params }) => {
                   <ListItem
                     style={{ display: 'flex', justifyContent: 'center' }}
                   >
-                        {loadingEdit ? (
-                          <div className={classes.buttonLoading}><CircularProgress /></div>
-                      
+                    {loadingEdit ? (
+                      <div className={classes.buttonLoading}>
+                        <CircularProgress />
+                      </div>
                     ) : (
                       <Button
                         fullWidth

@@ -31,6 +31,7 @@ import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
 import cart_empty from '../public/images/cart_empty.png';
+import ahia_white_logo from '../public/images/ahia_white_logo.png';
 
 const CartScreen = () => {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
@@ -135,6 +136,14 @@ const CartScreen = () => {
         {loading ? (
           <Modal open={open}>
             <Box className={classes.loadingModal}>
+              <div className={classes.modalLogo}>
+                <Image
+                  src={ahia_white_logo}
+                  width={500}
+                  height={450}
+                  alt='ahia'
+                />
+              </div>
               <CircularProgress size={60} />
             </Box>
           </Modal>
@@ -216,9 +225,7 @@ const CartScreen = () => {
                         </NextLink>
                       </TableCell>
                       <TableCell>
-                        <Typography variant='h6'>
-                          {item.volume}
-                        </Typography>
+                        <Typography variant='h6'>{item.volume}</Typography>
                       </TableCell>
                       <TableCell align='right'>
                         <Select

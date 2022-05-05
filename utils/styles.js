@@ -592,9 +592,23 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 50,
     padding: '5px 0 0 3.5px',
     outline: 'none !important',
+
     '& .MuiCircularProgress-colorPrimary': {
-      color: '#ff0000 !important',
+      color: '#111111 !important',
+      background: '#111111',
     },
+  },
+  modalLogo: {
+    zIndex: 1000,
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    minWidth: 51,
+    margin: 'auto',
+    borderRadius: 50,
+    padding: '5px 0 0 3.5px',
+    outline: 'none !important',
   },
   buttonLoading: {
     '& .MuiCircularProgress-colorPrimary': {

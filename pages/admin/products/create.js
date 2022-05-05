@@ -55,12 +55,9 @@ const ProductCreate = () => {
   const classes = useStyles();
   useState(false);
 
-  const [{ loadingUpload, loadingCreate }, dispatch] = useReducer(
-    reducer,
-    {
-      loadingCreate: false,
-    }
-  );
+  const [{ loadingUpload, loadingCreate }, dispatch] = useReducer(reducer, {
+    loadingCreate: false,
+  });
 
   useEffect(() => {
     if (!userInfo) {
@@ -125,7 +122,7 @@ const ProductCreate = () => {
         { headers: { authorization: `Bearer ${userInfo.token}` } }
       );
       dispatch({ type: 'CREATE_SUCCESS' });
-      router.push('/admin/products')
+      router.push('/admin/products');
       enqueueSnackbar(`Product created successfully!`, {
         variant: 'success',
       });
@@ -143,22 +140,34 @@ const ProductCreate = () => {
             <List>
               <NextLink href='/admin/dashboard'>
                 <ListItem button component='a'>
-                  <ListItemText disableTypography={true} primary='Admin Dashboard'></ListItemText>
+                  <ListItemText
+                    disableTypography={true}
+                    primary='Admin Dashboard'
+                  ></ListItemText>
                 </ListItem>
               </NextLink>
               <NextLink href='/admin/orders'>
                 <ListItem button component='a'>
-                  <ListItemText disableTypography={true} primary='Orders'></ListItemText>
+                  <ListItemText
+                    disableTypography={true}
+                    primary='Orders'
+                  ></ListItemText>
                 </ListItem>
               </NextLink>
               <NextLink href='/admin/products'>
                 <ListItem button component='a' selected>
-                  <ListItemText disableTypography={true} primary='Products'></ListItemText>
+                  <ListItemText
+                    disableTypography={true}
+                    primary='Products'
+                  ></ListItemText>
                 </ListItem>
               </NextLink>
               <NextLink href='/admin/users'>
                 <ListItem button component='a'>
-                  <ListItemText disableTypography={true} primary='Users'></ListItemText>
+                  <ListItemText
+                    disableTypography={true}
+                    primary='Users'
+                  ></ListItemText>
                 </ListItem>
               </NextLink>
             </List>
@@ -250,9 +259,7 @@ const ProductCreate = () => {
                         label='Servings e.g. 12'
                         error={Boolean(errors.servings)}
                         helperText={
-                          errors.servings
-                            ? 'Serving(s) is required'
-                            : null
+                          errors.servings ? 'Serving(s) is required' : null
                         }
                         {...field}
                       />
@@ -345,7 +352,9 @@ const ProductCreate = () => {
                 </ListItem>
                 <ListItem>
                   {loadingUpload ? (
-                    <CircularProgress />
+                    <div className={classes.buttonLoading}>
+                      <CircularProgress />
+                    </div>
                   ) : (
                     <Button variant='contained' component='label'>
                       Upload Image
@@ -471,8 +480,9 @@ const ProductCreate = () => {
 
                 <ListItem style={{ display: 'flex', justifyContent: 'center' }}>
                   {loadingCreate ? (
-                    <div className={classes.buttonLoading}><CircularProgress /></div>
-                    
+                    <div className={classes.buttonLoading}>
+                      <CircularProgress />
+                    </div>
                   ) : (
                     <Button
                       fullWidth

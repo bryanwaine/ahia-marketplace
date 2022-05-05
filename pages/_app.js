@@ -6,6 +6,8 @@ import { StoreProvider } from '../utils/Store';
 import { useRouter } from 'next/router';
 import { Box, CircularProgress, Modal } from '@material-ui/core';
 import useStyles from '../utils/styles';
+import ahia_white_logo from '../public/images/ahia_white_logo.png'
+import Image from 'next/image'
 
 function MyApp({ Component, pageProps }) {
   
@@ -21,21 +23,21 @@ function MyApp({ Component, pageProps }) {
   }, []);
 
   useEffect(() => {
-    const lodingStart = () => {
+    const loadingStart = () => {
         setLoading(true);
       }
-    const lodingStop = () => {
+    const loadingStop = () => {
         setLoading(false);
     }
     
-    router.events.on('routeChangeStart', lodingStart);
-    router.events.on('routeChangeComplete', lodingStop);
-    router.events.on('routeChangeError', lodingStop);
+    router.events.on('routeChangeStart', loadingStart);
+    router.events.on('routeChangeComplete', loadingStop);
+    router.events.on('routeChangeError', loadingStop);
 
     return () => {
-          router.events.off('routeChangeStart', lodingStart);
-          router.events.off('routeChangeComplete', lodingStop);
-          router.events.off('routeChangeError', lodingStop);
+          router.events.off('routeChangeStart', loadingStart);
+          router.events.off('routeChangeComplete', loadingStop);
+          router.events.off('routeChangeError', loadingStop);
     }
     }, [router]);
 
@@ -43,8 +45,16 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       {loading ? (
-        <Modal open={open}>
+        <Modal open={true}>
           <Box className={classes.loadingModal}>
+            <div className={classes.modalLogo}>
+              <Image
+                src={ahia_white_logo}
+                width={500}
+                height={450}
+                alt='ahia'
+              />
+            </div>
             <CircularProgress size={60} />
           </Box>
         </Modal>

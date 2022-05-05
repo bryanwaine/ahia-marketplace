@@ -393,7 +393,9 @@ const ProductEdit = ({ params }) => {
                   </ListItem>
                   <ListItem>
                     {loadingUpload ? (
-                      <CircularProgress />
+                      <div className={classes.buttonLoading}>
+                        <CircularProgress />
+                      </div>
                     ) : (
                       <Button variant='contained' component='label'>
                         Upload Image
@@ -525,7 +527,9 @@ const ProductEdit = ({ params }) => {
                     style={{ display: 'flex', justifyContent: 'center' }}
                   >
                     {loadingEdit ? (
-                      <CircularProgress />
+                      <div className={classes.buttonLoading}>
+                        <CircularProgress />
+                      </div>
                     ) : (
                       <Button
                         fullWidth

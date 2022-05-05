@@ -16,6 +16,8 @@ import { getError } from '../utils/error';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import ProductItem from '../components/ProductItem';
+import ahia_white_logo from '../public/images/ahia_white_logo.png';
+import Image from 'next/image';
 
 export default function Home(props) {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
@@ -151,8 +153,16 @@ export default function Home(props) {
           Products
         </Typography>
         {loading ? (
-          <Modal open={open} style={{ outline: 'none !important' }}>
+          <Modal open={open}>
             <Box className={classes.loadingModal}>
+              <div className={classes.modalLogo}>
+                <Image
+                  src={ahia_white_logo}
+                  width={500}
+                  height={450}
+                  alt='ahia'
+                />
+              </div>
               <CircularProgress size={60} />
             </Box>
           </Modal>
