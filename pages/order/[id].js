@@ -672,7 +672,7 @@ const Order = ({ params }) => {
                         }
                         onClick={makePaymentHandler}
                       >
-                        PAY NOWg
+                        PAY NOW
                       </Button>
                     )}
                   </ListItem>
@@ -712,7 +712,9 @@ const Order = ({ params }) => {
                         variant='contained'
                         color='primary'
                         className={
-                          isPaid ? classes.noButton : classes.buttonPrimary
+                          paymentMethod === 'Pay at Pickup' && isPaid
+                            ? classes.noButton
+                            : classes.buttonPrimary
                         }
                         onClick={confirmPaymentHandler}
                       >
@@ -735,7 +737,9 @@ const Order = ({ params }) => {
                         variant='contained'
                         color='primary'
                         className={
-                          isPaid ? classes.noButton : classes.buttonPrimary
+                          paymentMethod === 'Pay on Delivery' && isPaid
+                            ? classes.noButton
+                            : classes.buttonPrimary
                         }
                         onClick={confirmPaymentHandler}
                       >
