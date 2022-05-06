@@ -478,7 +478,7 @@ const useStyles = makeStyles((theme) => ({
   },
   prefixTop: {
     fontSize: 13,
-    marginBottom: 5,
+    margin: '0 0 -15px 0'
   },
   reviewForm: {
     maxWidth: 500,
@@ -601,7 +601,7 @@ const useStyles = makeStyles((theme) => ({
   modalLogo: {
     zIndex: 1000,
     position: 'absolute',
-    top: '50%',
+    top: '45%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
     minWidth: 51,

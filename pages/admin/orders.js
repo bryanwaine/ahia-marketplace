@@ -131,6 +131,7 @@ const Orders = () => {
                   <Typography className={classes.error}>{error}</Typography>
                 ) : (
                   <TableContainer>
+                    <Typography>({orders.length} orders)</Typography>
                     <Table>
                       <TableHead>
                         <TableRow>

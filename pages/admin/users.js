@@ -225,6 +225,7 @@ const Users = () => {
                   <Typography className={classes.error}>{error}</Typography>
                 ) : (
                   <TableContainer>
+                    <Typography>({users.length} users)</Typography>
                     <Table>
                       <TableHead>
                         <TableRow>

@@ -20,6 +20,9 @@ import useStyles from '../utils/styles';
 import { useSnackbar } from 'notistack';
 import Image from 'next/image';
 import paystack from '../public/images/paystack.png';
+import StoreIcon from '@mui/icons-material/Store';
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
+import CreditCardIcon from '@mui/icons-material/CreditCard';
 
 const Payment = () => {
   const router = useRouter();
@@ -78,9 +81,14 @@ const Payment = () => {
                         style={{
                           display: 'flex',
                           justifyContent: 'space-between',
+                          alignItems: 'center',
                         }}
                       >
-                        <Typography style={{ color: '#111111' }} variant='h6'>
+                        <CreditCardIcon />
+                        <Typography
+                          style={{ color: '#111111', marginLeft: 10 }}
+                          variant='h6'
+                        >
                           Cards
                         </Typography>
                         <div style={{ width: '8rem' }} />
@@ -88,7 +96,7 @@ const Payment = () => {
                           src={paystack}
                           alt='paystack'
                           width={300}
-                          height={50}
+                          height={80}
                         />
                       </div>
                     }
@@ -97,18 +105,42 @@ const Payment = () => {
                   />
                   <FormControlLabel
                     label={
-                      <Typography style={{ color: '#111111' }} variant='h6'>
-                        Pay at Pickup
-                      </Typography>
+                      <div
+                        style={{
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          alignItems: 'center',
+                        }}
+                      >
+                        <StoreIcon />
+                        <Typography
+                          style={{ color: '#111111', marginLeft: 10 }}
+                          variant='h6'
+                        >
+                          Pay at Pickup
+                        </Typography>
+                      </div>
                     }
-                    value='Pay on Delivery'
+                    value='Pay at Pickup'
                     control={<Radio className={classes.radio} />}
                   />
                   <FormControlLabel
                     label={
-                      <Typography style={{ color: '#111111' }} variant='h6'>
-                        Pay on Delivery
-                      </Typography>
+                      <div
+                        style={{
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          alignItems: 'center',
+                        }}
+                      >
+                        <LocalShippingIcon />
+                        <Typography
+                          style={{ color: '#111111', marginLeft: 10 }}
+                          variant='h6'
+                        >
+                          Pay on Delivery
+                        </Typography>
+                      </div>
                     }
                     value='Pay on Delivery'
                     control={<Radio className={classes.radio} />}

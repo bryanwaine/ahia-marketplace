@@ -24,11 +24,17 @@ import Image from 'next/image';
 import toCurrency from '../../utils/toCurrency';
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import Router from 'next/router';
 import { getError } from '../../utils/error';
 import { useSnackbar } from 'notistack';
 import Script from 'next/script';
 import { v4 as uuidv4 } from 'uuid';
+import StoreIcon from '@mui/icons-material/Store';
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
+import CreditCardIcon from '@mui/icons-material/CreditCard';
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import HomeIcon from '@mui/icons-material/Home';
+import EmailIcon from '@mui/icons-material/Email';
+import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
 
 function reducer(state, action) {
   switch (action.type) {
@@ -137,65 +143,149 @@ const Order = ({ params }) => {
     }
   }, [order, successPay, successDeliver]);
 
-  function makePaymentHandler() {
-    /*global FlutterwaveCheckout*/
-    /*eslint no-undef: "error"*/
+  //   function makePaymentHandler() {
+  //     /*global FlutterwaveCheckout*/
+  //     /*eslint no-undef: "error"*/
 
+  //     try {
+  //       setLoadingPayNow(true);
+  //       FlutterwaveCheckout({
+  //         public_key: process.env.NEXT_PUBLIC_FLW_PUBLIC_KEY,
+  //         tx_ref: `ahia_${uuidv4()}`,
+  //         amount: totalPrice,
+  //         currency: 'NGN',
+  //         payment_options: '',
+  //         // specified redirect URL
+  //         // redirect_url: ``,
+  //         customer: {
+  //           email: userInfo.email,
+  //           phone_number: `0${Number(userInfo.phone)}`,
+  //           name: `${userInfo.firstName} ${userInfo.lastName}`,
+  //         },
+  //         callback: async function (response) {
+  //           try {
+  //             setLoadingPayNow(false);
+  //             const verification = await axios.get(
+  //               `https://cors-anywhere.herokuapp.com/https://api.flutterwave.com/v3/transactions/${response.transaction_id}/verify`,
+  //               {
+  //                 headers: {
+  //                   'Content-Type': 'application/json',
+  //                   Authorization: `Bearer ${process.env.NEXT_PUBLIC_FLW_SECRET_KEY}`,
+  //                 },
+  //               }
+  //             );
+
+  //             const verified = verification.data.data;
+
+  //             setConfirmed('pending');
+
+  //             if (
+  //               verified.amount === response.amount &&
+  //               verified.currency === response.currency &&
+  //               verified.status === response.status &&
+  //               verified.tx_ref === response.tx_ref
+  //             ) {
+  //               try {
+  //                 dispatch({ type: 'PAY_REQUEST' });
+  //                 const { data } = await axios.put(
+  //                   `/api/orders/${order._id}/pay`,
+  //                   {
+  //                     name: verified.customer.name,
+  //                     email: verified.customer.email,
+  //                     phone: verified.customer.phone_number,
+  //                     status: verified.status,
+  //                     tx_ref: verified.tx_ref,
+  //                   },
+  //                   {
+  //                     headers: { authorization: `Bearer ${userInfo.token}` },
+  //                   }
+  //                 );
+  //                 setConfirmed('yes');
+  //                 dispatch({ type: 'PAY_SUCCESS', payload: data });
+  //                 await Router.reload(window.location.pathname);
+  //                 enqueueSnackbar(`Your payment was successfull!`, {
+  //                   variant: 'success',
+  //                 });
+  //               } catch (err) {
+  //                 dispatch({ type: 'PAY_FAIL', payload: getError(err) });
+  //                 enqueueSnackbar(getError(err), {
+  //                   variant: 'error',
+  //                 });
+  //               }
+  //             } else
+  //               enqueueSnackbar(`Loading payment...`, {
+  //                 variant: 'success',
+  //               });
+  //           } catch (err) {
+  //             enqueueSnackbar(getError(err), { variant: 'error' });
+  //           }
+  //         },
+  //         onclose: function () {
+  //           // close modal
+  //           setLoadingPayNow(false);
+  //         },
+  //         customizations: {
+  //           title: `Order ${orderId}`,
+  //           description: `Payment for order ${orderId}`,
+  //           logo: 'https://i.postimg.cc/6TBPcPqk/ahia-thumb.png',
+  //         },
+  //       });
+  //     } catch (err) {
+  //       setLoadingPayNow(false);
+  //       enqueueSnackbar(getError(err), {
+  //         variant: 'error',
+  //       });
+  //     }
+  //   }
+
+  function makePaymentHandler() {
+    /*global PaystackPop*/
+    /*eslint no-undef: "error"*/
     try {
       setLoadingPayNow(true);
-      FlutterwaveCheckout({
-        public_key: process.env.NEXT_PUBLIC_FLW_PUBLIC_KEY,
-        tx_ref: `ahia_${uuidv4()}`,
-        amount: totalPrice,
+      const handler = PaystackPop.setup({
+        key: process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY,
+        email: userInfo.email,
+        amount: totalPrice * 100,
         currency: 'NGN',
-        payment_options: '',
-        // specified redirect URL
-        // redirect_url: ``,
-        customer: {
-          email: userInfo.email,
+        metadata: {
           phone_number: `0${Number(userInfo.phone)}`,
-          name: `${userInfo.firstName} ${userInfo.lastName}`,
+          first_name: `${userInfo.firstName}`,
+          last_name: `${userInfo.lastName}`,
         },
+        ref: `ahia_${uuidv4()}`,
         callback: async function (response) {
+          const reference = response.reference;
+          const status = response.status;
+
           try {
             setLoadingPayNow(false);
             const verification = await axios.get(
-              `https://cors-anywhere.herokuapp.com/https://api.flutterwave.com/v3/transactions/${response.transaction_id}/verify`,
+              `https://api.paystack.co/transaction/verify/${reference}`,
               {
                 headers: {
-                  'Content-Type': 'application/json',
-                  Authorization: `Bearer ${process.env.NEXT_PUBLIC_FLW_SECRET_KEY}`,
+                  Authorization: `Bearer ${process.env.NEXT_PUBLIC_PAYSTACK_SECRET_KEY}`,
                 },
               }
             );
 
             const verified = verification.data.data;
-            console.log(
-              verified.customer.name,
-              verified.customer.email,
-              verified.customer.phone_number,
-              verified.status,
-              verified.tx_ref
-            );
-
-            setConfirmed('pending');
+            console.log(verified);
 
             if (
-              verified.amount === response.amount &&
-              verified.currency === response.currency &&
-              verified.status === response.status &&
-              verified.tx_ref === response.tx_ref
+              verified.reference === reference &&
+              verified.status === status
             ) {
               try {
                 dispatch({ type: 'PAY_REQUEST' });
                 const { data } = await axios.put(
                   `/api/orders/${order._id}/pay`,
                   {
-                    name: verified.customer.name,
-                    email: verified.customer.email,
-                    phone: verified.customer.phone_number,
+                    name: verified.metadata.name,
+                    email: verified.email,
+                    phone: verified.metadata.phone_number,
                     status: verified.status,
-                    tx_ref: verified.tx_ref,
+                    reference: verified.refrence,
                   },
                   {
                     headers: { authorization: `Bearer ${userInfo.token}` },
@@ -203,7 +293,7 @@ const Order = ({ params }) => {
                 );
                 setConfirmed('yes');
                 dispatch({ type: 'PAY_SUCCESS', payload: data });
-                await Router.reload(window.location.pathname);
+               // await Router.reload(window.location.pathname);
                 enqueueSnackbar(`Your payment was successfull!`, {
                   variant: 'success',
                 });
@@ -218,19 +308,18 @@ const Order = ({ params }) => {
                 variant: 'success',
               });
           } catch (err) {
+            setLoadingPayNow(false);
             enqueueSnackbar(getError(err), { variant: 'error' });
           }
         },
-        onclose: function () {
-          // close modal
+        onClose: function () {
           setLoadingPayNow(false);
-        },
-        customizations: {
-          title: `Order ${orderId}`,
-          description: `Payment for order ${orderId}`,
-          logo: 'https://i.postimg.cc/6TBPcPqk/ahia-thumb.png',
+          enqueueSnackbar(`Transaction was not completed, window closed.`, {
+            variant: 'error',
+          });
         },
       });
+      handler.openIframe();
     } catch (err) {
       setLoadingPayNow(false);
       enqueueSnackbar(getError(err), {
@@ -265,19 +354,23 @@ const Order = ({ params }) => {
 
   return (
     <Layout title={`Order ${orderId}`}>
-      <Script src='https://checkout.flutterwave.com/v3.js' />
+      <Script src='https://js.paystack.co/v1/inline.js' />
       <Typography component='h1' variant='h1'>
         Order {orderId}
       </Typography>
 
       {loading ? (
-        <CircularProgress size={60} />
+        <div className={classes.buttonLoading}>
+          <CircularProgress size={60} />
+        </div>
       ) : error ? (
         <Typography variant='h6' className={classes.error}>
           {error}
         </Typography>
       ) : confirmed === 'pending' ? (
-        <CircularProgress size={60} />
+        <div className={classes.buttonLoading}>
+          <CircularProgress size={60} />
+        </div>
       ) : (
         <Grid container spacing={3}>
           <Grid item md={9} xs={12}>
@@ -288,23 +381,51 @@ const Order = ({ params }) => {
                     Shipping Address
                   </Typography>
                 </ListItem>
-                <ListItem>
+                <ListItem
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'start',
+                    alignItems: 'center',
+                  }}
+                >
+                  <AccountBoxIcon sx={{ marginRight: 1 }} />
                   <Typography variant='h6' style={{ margin: 0 }}>
                     {shippingAddress.fullName}
-                  </Typography>
+                  </Typography>{' '}
                 </ListItem>
-                <ListItem>
+                <ListItem
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'start',
+                    alignItems: 'center',
+                  }}
+                >
+                  <HomeIcon sx={{ marginRight: 1 }} />
                   <Typography variant='h6' style={{ margin: 0 }}>
                     {shippingAddress.address}, {shippingAddress.city},{' '}
                     {shippingAddress.state}
                   </Typography>
                 </ListItem>
-                <ListItem>
+                <ListItem
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'start',
+                    alignItems: 'center',
+                  }}
+                >
+                  <EmailIcon sx={{ marginRight: 1 }} />
                   <Typography variant='h6' style={{ margin: 0 }}>
                     {shippingAddress.email}
                   </Typography>
                 </ListItem>
-                <ListItem>
+                <ListItem
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'start',
+                    alignItems: 'center',
+                  }}
+                >
+                  <PhoneIphoneIcon sx={{ marginRight: 1 }} />
                   <Typography variant='h6' style={{ margin: 0 }}>{`+234${Number(
                     shippingAddress.phone
                   )}`}</Typography>
@@ -331,7 +452,24 @@ const Order = ({ params }) => {
                     Payment Method
                   </Typography>
                 </ListItem>
-                <ListItem>{paymentMethod}</ListItem>
+                <ListItem
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'start',
+                    alignItems: 'center',
+                  }}
+                >
+                  {paymentMethod === 'Paystack Secure Payment' ? (
+                    <CreditCardIcon />
+                  ) : paymentMethod === 'Pay at Pickup' ? (
+                    <StoreIcon />
+                  ) : paymentMethod === 'Pay on Delivery' ? (
+                    <LocalShippingIcon />
+                  ) : null}
+                  <Typography variant='h6' style={{ marginLeft: 10 }}>
+                    {paymentMethod}
+                  </Typography>
+                </ListItem>
                 <ListItem>
                   <Typography variant='h6' style={{ margin: 0 }}>
                     {' '}
@@ -498,7 +636,9 @@ const Order = ({ params }) => {
                         variant='contained'
                         color='primary'
                         className={
-                          userInfo.isAdmin
+                          userInfo.isAdmin ||
+                          paymentMethod === 'Pay at Pickup' ||
+                          paymentMethod === 'Pay on Delivery'
                             ? classes.noButton
                             : classes.buttonPrimary
                         }

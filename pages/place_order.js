@@ -28,6 +28,14 @@ import { useRouter } from 'next/router';
 import { useSnackbar } from 'notistack';
 import { getError } from '../utils/error';
 import Cookies from 'js-cookie';
+import StoreIcon from '@mui/icons-material/Store';
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
+import CreditCardIcon from '@mui/icons-material/CreditCard';
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import HomeIcon from '@mui/icons-material/Home';
+import EmailIcon from '@mui/icons-material/Email';
+import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
+
 
 const Place_Order = () => {
   const classes = useStyles();
@@ -97,24 +105,51 @@ const Place_Order = () => {
                   Shipping Address
                 </Typography>
               </ListItem>
-              <ListItem>
-                {' '}
+              <ListItem
+                style={{
+                  display: 'flex',
+                  justifyContent: 'start',
+                  alignItems: 'center',
+                }}
+              >
+                <AccountBoxIcon sx={{ marginRight: 1 }} />
                 <Typography variant='h6' style={{ margin: 0 }}>
                   {shippingAddress.fullName}
                 </Typography>{' '}
               </ListItem>
-              <ListItem>
+              <ListItem
+                style={{
+                  display: 'flex',
+                  justifyContent: 'start',
+                  alignItems: 'center',
+                }}
+              >
+                <HomeIcon sx={{ marginRight: 1 }} />
                 <Typography variant='h6' style={{ margin: 0 }}>
                   {shippingAddress.address}, {shippingAddress.city},{' '}
                   {shippingAddress.state}
                 </Typography>
               </ListItem>
-              <ListItem>
+              <ListItem
+                style={{
+                  display: 'flex',
+                  justifyContent: 'start',
+                  alignItems: 'center',
+                }}
+              >
+                <EmailIcon sx={{ marginRight: 1 }} />
                 <Typography variant='h6' style={{ margin: 0 }}>
                   {shippingAddress.email}
                 </Typography>
               </ListItem>
-              <ListItem>
+              <ListItem
+                style={{
+                  display: 'flex',
+                  justifyContent: 'start',
+                  alignItems: 'center',
+                }}
+              >
+                <PhoneIphoneIcon sx={{ marginRight: 1 }} />
                 <Typography variant='h6' style={{ margin: 0 }}>{`+234${Number(
                   shippingAddress.phone
                 )}`}</Typography>
@@ -128,8 +163,21 @@ const Place_Order = () => {
                   Payment Method
                 </Typography>
               </ListItem>
-              <ListItem>
-                <Typography variant='h6' style={{ margin: 0 }}>
+              <ListItem
+                style={{
+                  display: 'flex',
+                  justifyContent: 'start',
+                  alignItems: 'center',
+                }}
+              >
+                {paymentMethod === 'Paystack Secure Payment' ? (
+                  <CreditCardIcon />
+                ) : paymentMethod === 'Pay at Pickup' ? (
+                  <StoreIcon />
+                ) : paymentMethod === 'Pay on Delivery' ? (
+                  <LocalShippingIcon />
+                ) : null}
+                <Typography variant='h6' style={{ marginLeft: 10 }}>
                   {paymentMethod}
                 </Typography>
               </ListItem>

@@ -26,7 +26,7 @@ import ahia_white_logo from '../public/images/ahia_white_logo.png';
 import Image from 'next/image';
 import { Rating } from '@mui/material';
 
-const PAGE_SIZE = 6;
+const PAGE_SIZE = 9;
 
 const prices = [
   {

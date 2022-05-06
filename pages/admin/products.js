@@ -233,6 +233,9 @@ const Products = () => {
                   <Typography className={classes.error}>{error}</Typography>
                 ) : (
                   <TableContainer>
+                    <Typography>
+                      ({products.length} products)
+                    </Typography>
                     <Table>
                       <TableHead>
                         <TableRow>
