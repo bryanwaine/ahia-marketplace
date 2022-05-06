@@ -131,7 +131,9 @@ const Orders = () => {
                   <Typography className={classes.error}>{error}</Typography>
                 ) : (
                   <TableContainer>
-                    <Typography>({orders.length} orders)</Typography>
+                    <Typography>
+                      ({orders.length} {orders.length > 1 ? 'orders' : 'order'})
+                    </Typography>
                     <Table>
                       <TableHead>
                         <TableRow>

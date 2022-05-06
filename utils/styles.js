@@ -458,7 +458,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   noButton: {
-    display: 'none',
+    display: 'none !important',
   },
   redText: {
     color: '#eb3434',

@@ -20,7 +20,7 @@ handler.put(async (req, res) => {
       email: req.body.email,
       phone: req.body.phone,
       status: req.body.status,
-      refence: req.body.reference,
+      reference: req.body.reference,
     };
     const paidOrder = await order.save();
     await db.disconnect();

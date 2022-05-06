@@ -281,11 +281,11 @@ const Order = ({ params }) => {
                 const { data } = await axios.put(
                   `/api/orders/${order._id}/pay`,
                   {
-                    name: verified.metadata.name,
+                    name: `${verified.metadata.first_name} ${verified.metadata.last_name}`,
                     email: verified.email,
                     phone: verified.metadata.phone_number,
                     status: verified.status,
-                    reference: verified.refrence,
+                    reference: verified.reference,
                   },
                   {
                     headers: { authorization: `Bearer ${userInfo.token}` },
@@ -293,7 +293,6 @@ const Order = ({ params }) => {
                 );
                 setConfirmed('yes');
                 dispatch({ type: 'PAY_SUCCESS', payload: data });
-               // await Router.reload(window.location.pathname);
                 enqueueSnackbar(`Your payment was successfull!`, {
                   variant: 'success',
                 });
@@ -346,6 +345,35 @@ const Order = ({ params }) => {
     } catch (err) {
       closeSnackbar();
       dispatch({ type: 'DELIVERY_FAIL', payload: getError(err) });
+      enqueueSnackbar(getError(err), {
+        variant: 'error',
+      });
+    }
+  };
+
+  const confirmPaymentHandler = async () => {
+    try {
+      dispatch({ type: 'PAY_REQUEST' });
+      const { data } = await axios.put(
+        `/api/orders/${order._id}/pay`,
+        {
+          name: shippingAddress.fullName,
+          email: shippingAddress.email,
+          phone: `+234${Number(shippingAddress.phone)}`,
+          status: `true`,
+          reference: `ahia_${uuidv4()}`,
+        },
+        {
+          headers: { authorization: `Bearer ${userInfo.token}` },
+        }
+      );
+      setConfirmed('yes');
+      dispatch({ type: 'PAY_SUCCESS', payload: data });
+      enqueueSnackbar(`Payment was successfull!`, {
+        variant: 'success',
+      });
+    } catch (err) {
+      dispatch({ type: 'PAY_FAIL', payload: getError(err) });
       enqueueSnackbar(getError(err), {
         variant: 'error',
       });
@@ -644,7 +672,7 @@ const Order = ({ params }) => {
                         }
                         onClick={makePaymentHandler}
                       >
-                        PAY NOW
+                        PAY NOWg
                       </Button>
                     )}
                   </ListItem>
@@ -654,7 +682,9 @@ const Order = ({ params }) => {
                     style={{ display: 'flex', justifyContent: 'center' }}
                   >
                     {loadingDeliver ? (
-                      <CircularProgress />
+                      <div className={classes.buttonLoading}>
+                        <CircularProgress />
+                      </div>
                     ) : (
                       <Button
                         fullWidth
@@ -664,6 +694,52 @@ const Order = ({ params }) => {
                         onClick={deliverOrderHandler}
                       >
                         DELIVER ORDER
+                      </Button>
+                    )}
+                  </ListItem>
+                )}
+                {userInfo.isAdmin && paymentMethod === 'Pay at Pickup' && (
+                  <ListItem
+                    style={{ display: 'flex', justifyContent: 'center' }}
+                  >
+                    {loadingPay ? (
+                      <div className={classes.buttonLoading}>
+                        <CircularProgress />
+                      </div>
+                    ) : (
+                      <Button
+                        fullWidth
+                        variant='contained'
+                        color='primary'
+                        className={
+                          isPaid ? classes.noButton : classes.buttonPrimary
+                        }
+                        onClick={confirmPaymentHandler}
+                      >
+                        CONFIRM PAYMENT
+                      </Button>
+                    )}
+                  </ListItem>
+                )}
+                {userInfo.isAdmin && paymentMethod === 'Pay on Delivery' && (
+                  <ListItem
+                    style={{ display: 'flex', justifyContent: 'center' }}
+                  >
+                    {loadingPay ? (
+                      <div className={classes.buttonLoading}>
+                        <CircularProgress />
+                      </div>
+                    ) : (
+                      <Button
+                        fullWidth
+                        variant='contained'
+                        color='primary'
+                        className={
+                          isPaid ? classes.noButton : classes.buttonPrimary
+                        }
+                        onClick={confirmPaymentHandler}
+                      >
+                        CONFIRM PAYMENT
                       </Button>
                     )}
                   </ListItem>

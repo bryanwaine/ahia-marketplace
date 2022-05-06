@@ -234,7 +234,7 @@ const Products = () => {
                 ) : (
                   <TableContainer>
                     <Typography>
-                      ({products.length} products)
+                      ({products.length} {products.length > 1 ? 'products' : 'product'})
                     </Typography>
                     <Table>
                       <TableHead>
