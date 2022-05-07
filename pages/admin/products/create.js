@@ -431,6 +431,18 @@ const ProductCreate = () => {
                   />
                 </ListItem>
                 <ListItem>
+                  <FormControlLabel
+                    label='Featured image'
+                    control={
+                      <Checkbox
+                        onClick={(e) => setIsFeatured(e.target.checked)}
+                        checked={isFeatured}
+                        name='isFeatured'
+                      />
+                    }
+                  />
+                </ListItem>
+                <ListItem>
                   {loadingUploadFeaturedImage ? (
                     <div className={classes.buttonLoading}>
                       <CircularProgress />
@@ -445,18 +457,6 @@ const ProductCreate = () => {
                       />
                     </Button>
                   )}
-                </ListItem>
-                <ListItem>
-                  <FormControlLabel
-                    label='Featured image'
-                    control={
-                      <Checkbox
-                        onClick={(e) => setIsFeatured(e.target.checked)}
-                        checked={isFeatured}
-                        name='isFeatured'
-                      />
-                    }
-                  />
                 </ListItem>
                 <ListItem>
                   <Controller

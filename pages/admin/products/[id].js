@@ -487,6 +487,18 @@ const ProductEdit = ({ params }) => {
                     />
                   </ListItem>
                   <ListItem>
+                    <FormControlLabel
+                      label='Featured image'
+                      control={
+                        <Checkbox
+                          onClick={(e) => setIsFeatured(e.target.checked)}
+                          checked={isFeatured}
+                          name='isFeatured'
+                        />
+                      }
+                    />
+                  </ListItem>
+                  <ListItem>
                     {loadingUploadFeaturedImage ? (
                       <div className={classes.buttonLoading}>
                         <CircularProgress />
@@ -501,18 +513,6 @@ const ProductEdit = ({ params }) => {
                         />
                       </Button>
                     )}
-                  </ListItem>
-                  <ListItem>
-                    <FormControlLabel
-                      label='Featured image'
-                      control={
-                        <Checkbox
-                          onClick={(e) => setIsFeatured(e.target.checked)}
-                          checked={isFeatured}
-                          name='isFeatured'
-                        />
-                      }
-                    />
                   </ListItem>
                   <ListItem>
                     <Controller
