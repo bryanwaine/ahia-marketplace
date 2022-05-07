@@ -24,7 +24,7 @@ import { useSnackbar } from 'notistack';
 import toCurrency from '../utils/toCurrency';
 import ahia_white_logo from '../public/images/ahia_white_logo.png';
 import Image from 'next/image';
-import { Rating } from '@mui/material';
+import { Pagination, Rating } from '@mui/material';
 
 const PAGE_SIZE = 9;
 
@@ -70,9 +70,9 @@ const Search = (props) => {
     vendor = 'all',
     price = 'all',
     rating = 'all',
-    //sort = 'all',
+    sort = 'all',
   } = router.query;
-  const { products, countProducts, categories, vendors } = props;
+  const { products, countProducts, categories, vendors, pages } = props;
 
   useEffect(() => {
     try {
@@ -222,18 +222,18 @@ const Search = (props) => {
     setLoading(true);
     filterSearch({ category: e.target.value });
   };
-  // const pageHandler = (e) => {
-  //  setLoading(true);
-  //   filterSearch({ page: e.target.value });
-  // };
+  const pageHandler = (e, page) => {
+   setLoading(true);
+    filterSearch({ page});
+  };
   const storeHandler = (e) => {
     setLoading(true);
     filterSearch({ store: e.target.value });
   };
-  // const sortHandler = (e) => {
-  //  setLoading(true);
-  //   filterSearch({ sort: e.target.value });
-  // };
+  const sortHandler = (e) => {
+   setLoading(true);
+    filterSearch({ sort: e.target.value });
+  };
   const priceHandler = (e) => {
     setLoading(true);
     filterSearch({ price: e.target.value });
@@ -412,8 +412,30 @@ const Search = (props) => {
                 ) : null}
               </strong>
             </Grid>
+            <Grid item>
+              <Typography component='span' variant='h6' style={{marginRight: 5}}>
+                Sort by
+              </Typography>
+              <Select value={sort} onChange={sortHandler}>
+                <MenuItem value='featured'>
+                  <Typography variant='h6' style={{ margin: 0 }}>Featured</Typography>
+                </MenuItem>
+                <MenuItem value='lowest'>
+                  <Typography variant='h6' style={{ margin: 0 }}>Price: Low to High</Typography>
+                </MenuItem>
+                <MenuItem value='highest'>
+                  <Typography variant='h6' style={{ margin: 0 }}>Price: High to Low</Typography>
+                </MenuItem>
+                <MenuItem value='toprated'>
+                  <Typography variant='h6' style={{ margin: 0 }}>Customer Reviews</Typography>
+                </MenuItem>
+                <MenuItem value='newest'>
+                  <Typography variant='h6' style={{ margin: 0 }}>Newest Arrivals</Typography>
+                </MenuItem>
+              </Select>
+            </Grid>
           </Grid>
-          <Grid container spacing={2}>
+          <Grid container spacing={2} style={{marginTop:1}}>
             {productArray.map((product) => (
               <Grid item md={4} xs={6} key={product._id}>
                 <ProductItem
@@ -425,6 +447,7 @@ const Search = (props) => {
               </Grid>
             ))}
           </Grid>
+          <Pagination sx={{ marginTop: 3}} defaultPage={parseInt(query.page || '1')} count={pages} onChange={pageHandler}/>
         </Grid>
       </Grid>
       <div style={{ height: '2rem' }} />
@@ -439,7 +462,7 @@ export async function getServerSideProps({ query }) {
   const pageSize = query.pageSize || PAGE_SIZE;
   const page = query.page || 1;
   const category = query.category || '';
-  const store = query.store || '';
+  const vendor = query.vendor || '';
   const price = query.price || '';
   const rating = query.rating || '';
   const sort = query.sort || '';
@@ -455,7 +478,7 @@ export async function getServerSideProps({ query }) {
         }
       : {};
   const categoryFilter = category && category !== 'all' ? { category } : {};
-  const storeFilter = store && store !== 'all' ? { store } : {};
+  const vendorFilter = vendor && vendor !== 'all' ? { vendor } : {};
   const ratingFilter =
     rating && rating !== 'all'
       ? {
@@ -494,7 +517,7 @@ export async function getServerSideProps({ query }) {
       ...queryFilter,
       ...categoryFilter,
       ...priceFilter,
-      ...storeFilter,
+      ...vendorFilter,
       ...ratingFilter,
     },
     '-reviews'
@@ -508,7 +531,7 @@ export async function getServerSideProps({ query }) {
     ...queryFilter,
     ...categoryFilter,
     ...priceFilter,
-    ...storeFilter,
+    ...vendorFilter,
     ...ratingFilter,
   });
   await db.disconnect();
