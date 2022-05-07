@@ -189,7 +189,9 @@ const UserEdit = ({ params }) => {
               className={classes.form}
             >
               {loading ? (
-                <CircularProgress />
+                <div className={classes.buttonLoading}>
+                  <CircularProgress />
+                </div>
               ) : error ? (
                 <Typography className={classes.error}>{error}</Typography>
               ) : (

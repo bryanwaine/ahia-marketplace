@@ -10,7 +10,15 @@ import {
   ListItemText,
   Typography,
 } from '@material-ui/core';
-import { BarChart, XAxis, CartesianGrid, Tooltip, Legend, Bar, YAxis } from 'recharts';
+import {
+  BarChart,
+  XAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  Bar,
+  YAxis,
+} from 'recharts';
 // import { Bar } from 'react-chartjs-2';
 import axios from 'axios';
 import dynamic from 'next/dynamic';
@@ -112,8 +120,9 @@ const Admin_Dashboard = () => {
             <List>
               <ListItem>
                 {loading ? (
-                  <div className={classes.buttonLoading}><CircularProgress size={60} /></div>
-                  
+                  <div className={classes.buttonLoading}>
+                    <CircularProgress size={60} />
+                  </div>
                 ) : error ? (
                   <Typography className={classes.error}>{error}</Typography>
                 ) : (

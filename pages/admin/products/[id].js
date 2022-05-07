@@ -120,54 +120,54 @@ const ProductEdit = ({ params }) => {
     }
   }, []);
 
-    const uploadImageHandler = async (e) => {
-      const file = e.target.files[0];
-      const bodyFormData = new FormData();
-      bodyFormData.append('file', file);
-      try {
-        closeSnackbar();
-        dispatch({ type: 'UPLOAD_IMAGE_REQUEST' });
-        const { data } = await axios.post('/api/admin/upload', bodyFormData, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            authorization: `Bearer ${userInfo.token}`,
-          },
-        });
-        dispatch({ type: 'UPLOAD_IMAGE_SUCCESS' });
-        enqueueSnackbar(`Image uploaded successfully!`, {
-          variant: 'success',
-        });
-        setValue('image', data.secure_url);
-      } catch (err) {
-        closeSnackbar();
-        dispatch({ type: 'UPLOAD_IMAGE_FAIL' });
-        enqueueSnackbar(getError(err), { variant: 'error' });
-      }
-    };
-    const uploadFeaturedImageHandler = async (e) => {
-      const file = e.target.files[0];
-      const bodyFormData = new FormData();
-      bodyFormData.append('file', file);
-      try {
-        closeSnackbar();
-        dispatch({ type: 'UPLOAD_FEAT_IMAGE_REQUEST' });
-        const { data } = await axios.post('/api/admin/upload', bodyFormData, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            authorization: `Bearer ${userInfo.token}`,
-          },
-        });
-        dispatch({ type: 'UPLOAD_FEAT_IMAGE_SUCCESS' });
-        enqueueSnackbar(`Image uploaded successfully!`, {
-          variant: 'success',
-        });
-        setValue('featuredImage', data.secure_url);
-      } catch (err) {
-        closeSnackbar();
-        dispatch({ type: 'UPLOAD_FEAT_IMAGE_FAIL' });
-        enqueueSnackbar(getError(err), { variant: 'error' });
-      }
-    };
+  const uploadImageHandler = async (e) => {
+    const file = e.target.files[0];
+    const bodyFormData = new FormData();
+    bodyFormData.append('file', file);
+    try {
+      closeSnackbar();
+      dispatch({ type: 'UPLOAD_IMAGE_REQUEST' });
+      const { data } = await axios.post('/api/admin/upload', bodyFormData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          authorization: `Bearer ${userInfo.token}`,
+        },
+      });
+      dispatch({ type: 'UPLOAD_IMAGE_SUCCESS' });
+      enqueueSnackbar(`Image uploaded successfully!`, {
+        variant: 'success',
+      });
+      setValue('image', data.secure_url);
+    } catch (err) {
+      closeSnackbar();
+      dispatch({ type: 'UPLOAD_IMAGE_FAIL' });
+      enqueueSnackbar(getError(err), { variant: 'error' });
+    }
+  };
+  const uploadFeaturedImageHandler = async (e) => {
+    const file = e.target.files[0];
+    const bodyFormData = new FormData();
+    bodyFormData.append('file', file);
+    try {
+      closeSnackbar();
+      dispatch({ type: 'UPLOAD_FEAT_IMAGE_REQUEST' });
+      const { data } = await axios.post('/api/admin/upload', bodyFormData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          authorization: `Bearer ${userInfo.token}`,
+        },
+      });
+      dispatch({ type: 'UPLOAD_FEAT_IMAGE_SUCCESS' });
+      enqueueSnackbar(`Image uploaded successfully!`, {
+        variant: 'success',
+      });
+      setValue('featuredImage', data.secure_url);
+    } catch (err) {
+      closeSnackbar();
+      dispatch({ type: 'UPLOAD_FEAT_IMAGE_FAIL' });
+      enqueueSnackbar(getError(err), { variant: 'error' });
+    }
+  };
 
   const submitHandler = async ({
     name,
@@ -264,7 +264,9 @@ const ProductEdit = ({ params }) => {
               className={classes.form}
             >
               {loading ? (
-                <CircularProgress size={60} className={classes.buttonLoading} />
+                <div className={classes.buttonLoading}>
+                  <CircularProgress size={60} />
+                </div>
               ) : error ? (
                 <Typography className={classes.error}>{error}</Typography>
               ) : (
