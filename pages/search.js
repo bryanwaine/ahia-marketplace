@@ -462,7 +462,7 @@ const Search = (props) => {
             ))}
           </Grid>
           <Pagination
-            sx={{ marginTop: 3 }}
+            sx={{ marginTop: 3,  color: '#ff0000' }}
             defaultPage={parseInt(query.page || '1')}
             count={pages}
             onChange={pageHandler}
