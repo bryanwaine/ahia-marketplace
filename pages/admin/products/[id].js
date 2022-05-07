@@ -455,6 +455,18 @@ const ProductEdit = ({ params }) => {
                     )}
                   </ListItem>
                   <ListItem>
+                    <FormControlLabel
+                      label='Featured'
+                      control={
+                        <Checkbox
+                          onClick={(e) => setIsFeatured(e.target.checked)}
+                          checked={isFeatured}
+                          name='isFeatured'
+                        />
+                      }
+                    />
+                  </ListItem>
+                  <ListItem>
                     <Controller
                       name='featuredImage'
                       control={control}
@@ -487,25 +499,13 @@ const ProductEdit = ({ params }) => {
                     />
                   </ListItem>
                   <ListItem>
-                    <FormControlLabel
-                      label='Featured image'
-                      control={
-                        <Checkbox
-                          onClick={(e) => setIsFeatured(e.target.checked)}
-                          checked={isFeatured}
-                          name='isFeatured'
-                        />
-                      }
-                    />
-                  </ListItem>
-                  <ListItem>
                     {loadingUploadFeaturedImage ? (
                       <div className={classes.buttonLoading}>
                         <CircularProgress />
                       </div>
                     ) : (
                       <Button variant='contained' component='label'>
-                        Upload Image
+                        Upload Featured Image
                         <input
                           type='file'
                           onChange={uploadFeaturedImageHandler}
