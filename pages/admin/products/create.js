@@ -26,18 +26,25 @@ import NextLink from 'next/link';
 
 function reducer(state, action) {
   switch (action.type) {
-    case 'UPLOAD_REQUEST':
-      return { ...state, loadingUpload: true };
-    case 'UPLOAD_SUCCESS':
-      return { ...state, loadingUpload: false, successUpload: true };
-    case 'UPLOAD_FAIL':
-      return { ...state, loadingUpload: false };
+  
     case 'CREATE_REQUEST':
       return { ...state, loadingCreate: true };
     case 'CREATE_SUCCESS':
       return { ...state, loadingCreate: false, successCreate: true };
     case 'CREATE_FAIL':
       return { ...state, loadingCreate: false };
+    case 'UPLOAD_IMAGE_REQUEST':
+      return { ...state, loadingUploadImage: true };
+    case 'UPLOAD_IMAGE_SUCCESS':
+      return { ...state, loadingUploadImage: false, successUpload: true };
+    case 'UPLOAD_IMAGE_FAIL':
+      return { ...state, loadingUploadImage: false };
+    case 'UPLOAD_FEAT_IMAGE_REQUEST':
+      return { ...state, loadingUploadFeaturedImage: true };
+    case 'UPLOAD_FEAT_IMAGE_SUCCESS':
+      return { ...state, loadingUploadFeaturedImage: false, successUpload: true };
+    case 'UPLOAD_FEAT_IMAGE_FAIL':
+      return { ...state, loadingUploadFeaturedImage: false };
     default:
       state;
   }
@@ -57,7 +64,7 @@ const ProductCreate = () => {
   const classes = useStyles();
   const [isFeatured, setIsFeatured] = useState(false);
 
-  const [{ loadingUpload, loadingCreate }, dispatch] = useReducer(reducer, {
+  const [{ loadingUploadImage, loadingUploadFeaturedImage, loadingCreate }, dispatch] = useReducer(reducer, {
     loadingCreate: false,
   });
 
@@ -73,21 +80,21 @@ const ProductCreate = () => {
     bodyFormData.append('file', file);
     try {
       closeSnackbar();
-      dispatch({ type: 'UPLOAD_REQUEST' });
+      dispatch({ type: 'UPLOAD_IMAGE_REQUEST' });
       const { data } = await axios.post('/api/admin/upload', bodyFormData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           authorization: `Bearer ${userInfo.token}`,
         },
       });
-      dispatch({ type: 'UPLOAD_SUCCESS' });
+      dispatch({ type: 'UPLOAD_IMAGE_SUCCESS' });
       enqueueSnackbar(`Image uploaded successfully!`, {
         variant: 'success',
       });
       setValue('image', data.secure_url);
     } catch (err) {
       closeSnackbar();
-      dispatch({ type: 'UPLOAD_FAIL' });
+      dispatch({ type: 'UPLOAD_IMAGE_FAIL' });
       enqueueSnackbar(getError(err), { variant: 'error' });
     }
   };
@@ -97,21 +104,21 @@ const ProductCreate = () => {
     bodyFormData.append('file', file);
     try {
       closeSnackbar();
-      dispatch({ type: 'UPLOAD_REQUEST' });
+      dispatch({ type: 'UPLOAD_FEAT_IMAGE_REQUEST' });
       const { data } = await axios.post('/api/admin/upload', bodyFormData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           authorization: `Bearer ${userInfo.token}`,
         },
       });
-      dispatch({ type: 'UPLOAD_SUCCESS' });
+      dispatch({ type: 'UPLOAD_FEAT_IMAGE_SUCCESS' });
       enqueueSnackbar(`Image uploaded successfully!`, {
         variant: 'success',
       });
       setValue('featuredImage', data.secure_url);
     } catch (err) {
       closeSnackbar();
-      dispatch({ type: 'UPLOAD_FAIL' });
+      dispatch({ type: 'UPLOAD_FEAT_IMAGE_FAIL' });
       enqueueSnackbar(getError(err), { variant: 'error' });
     }
   };
@@ -380,7 +387,7 @@ const ProductCreate = () => {
                   />
                 </ListItem>
                 <ListItem>
-                  {loadingUpload ? (
+                  {loadingUploadImage ? (
                     <div className={classes.buttonLoading}>
                       <CircularProgress />
                     </div>
@@ -424,7 +431,7 @@ const ProductCreate = () => {
                   />
                 </ListItem>
                 <ListItem>
-                  {loadingUpload ? (
+                  {loadingUploadFeaturedImage ? (
                     <div className={classes.buttonLoading}>
                       <CircularProgress />
                     </div>
