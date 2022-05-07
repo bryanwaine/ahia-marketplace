@@ -226,9 +226,9 @@ const Search = (props) => {
    setLoading(true);
     filterSearch({ page});
   };
-  const storeHandler = (e) => {
+  const vendorHandler = (e) => {
     setLoading(true);
-    filterSearch({ store: e.target.value });
+    filterSearch({ vendor: e.target.value });
   };
   const sortHandler = (e) => {
    setLoading(true);
@@ -295,7 +295,7 @@ const Search = (props) => {
                 <Typography variant='h6' style={{ margin: 0 }}>
                   Vendor
                 </Typography>
-                <Select fullWidth value={vendor} onChange={storeHandler}>
+                <Select fullWidth value={vendor} onChange={vendorHandler}>
                   <MenuItem value='all'>
                     <Typography variant='h6' style={{ margin: 0 }}>
                       All
