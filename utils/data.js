@@ -13,6 +13,14 @@ const data = {
       phone: '9012345678',
       isAdmin: true,
     },
+    {
+      firstName: 'Manchi',
+      lastName: 'Lee',
+      email: 'user@example.com',
+      password: bcrypt.hashSync('user1234'),
+      phone: '9012345678',
+      isAdmin: false,
+    },
   ],
   products: [
     // Abacha

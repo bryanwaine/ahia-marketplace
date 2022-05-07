@@ -80,6 +80,7 @@ const Place_Order = () => {
         },
         { headers: { authorization: `Bearer ${userInfo.token}` } }
       );
+       enqueueSnackbar(`Your order was placed successfully!`, { variant: 'success' });
       dispatch({ type: 'CART_CLEAR' });
       router.push(`/order/${data._id}`);
       Cookies.remove('cartItems');

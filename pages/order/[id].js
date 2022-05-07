@@ -702,8 +702,14 @@ const Order = ({ params }) => {
                   <ListItem
                     style={{ display: 'flex', justifyContent: 'center' }}
                   >
-                    {loadingPay ? (
-                      <div className={classes.buttonLoading}>
+                    {loadingPay && paymentMethod === 'Pay at Pickup' ? (
+                      <div
+                        className={
+                          loadingPay && paymentMethod !== 'Pay on Delivery'
+                            ? classes.noButton
+                            : classes.buttonLoading
+                        }
+                      >
                         <CircularProgress />
                       </div>
                     ) : (
@@ -727,8 +733,14 @@ const Order = ({ params }) => {
                   <ListItem
                     style={{ display: 'flex', justifyContent: 'center' }}
                   >
-                    {loadingPay ? (
-                      <div className={classes.buttonLoading}>
+                    {loadingPay && paymentMethod === 'Pay on Delivery' ? (
+                      <div
+                        className={
+                          loadingPay && paymentMethod !== 'Pay at Pickup'
+                            ? classes.noButton
+                            : classes.buttonLoading
+                        }
+                      >
                         <CircularProgress />
                       </div>
                     ) : (
