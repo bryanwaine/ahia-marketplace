@@ -1,7 +1,9 @@
 import {
   Button,
   Card,
+  Checkbox,
   CircularProgress,
+  FormControlLabel,
   Grid,
   List,
   ListItem,
@@ -53,7 +55,7 @@ const ProductCreate = () => {
   const { state } = useContext(Store);
   const { userInfo } = state;
   const classes = useStyles();
-  useState(false);
+  const [isFeatured, setIsFeatured] = useState(false);
 
   const [{ loadingUpload, loadingCreate }, dispatch] = useReducer(reducer, {
     loadingCreate: false,
@@ -65,7 +67,7 @@ const ProductCreate = () => {
     }
   }, []);
 
-  const uploadHandler = async (e) => {
+  const uploadImageHandler = async (e) => {
     const file = e.target.files[0];
     const bodyFormData = new FormData();
     bodyFormData.append('file', file);
@@ -89,14 +91,39 @@ const ProductCreate = () => {
       enqueueSnackbar(getError(err), { variant: 'error' });
     }
   };
+  const uploadFeaturedImageHandler = async (e) => {
+    const file = e.target.files[0];
+    const bodyFormData = new FormData();
+    bodyFormData.append('file', file);
+    try {
+      closeSnackbar();
+      dispatch({ type: 'UPLOAD_REQUEST' });
+      const { data } = await axios.post('/api/admin/upload', bodyFormData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          authorization: `Bearer ${userInfo.token}`,
+        },
+      });
+      dispatch({ type: 'UPLOAD_SUCCESS' });
+      enqueueSnackbar(`Image uploaded successfully!`, {
+        variant: 'success',
+      });
+      setValue('featuredImage', data.secure_url);
+    } catch (err) {
+      closeSnackbar();
+      dispatch({ type: 'UPLOAD_FAIL' });
+      enqueueSnackbar(getError(err), { variant: 'error' });
+    }
+  };
 
   const submitHandler = async ({
     name,
-    quantity,
+    volume,
     servings,
     slug,
     category,
     image,
+    featuredImage,
     price,
     vendor,
     countInStock,
@@ -109,11 +136,13 @@ const ProductCreate = () => {
         `/api/admin/products`,
         {
           name,
-          quantity,
+          volume,
           servings,
           slug,
           category,
           image,
+          featuredImage,
+          isFeatured,
           price,
           vendor,
           countInStock,
@@ -358,9 +387,69 @@ const ProductCreate = () => {
                   ) : (
                     <Button variant='contained' component='label'>
                       Upload Image
-                      <input type='file' onChange={uploadHandler} hidden />
+                      <input type='file' onChange={uploadImageHandler} hidden />
                     </Button>
                   )}
+                </ListItem>
+                <ListItem>
+                  <Controller
+                    name='featuredImage'
+                    control={control}
+                    defaultValue=''
+                    rules={{
+                      required: false,
+                    }}
+                    render={({ field }) => (
+                      <TextField
+                        InputProps={{
+                          style: { fontSize: '0.8rem', fontWeight: 300 },
+                        }}
+                        InputLabelProps={{
+                          style: { fontSize: '0.8rem', fontWeight: 300 },
+                        }}
+                        variant='standard'
+                        fullWidth
+                        disabled
+                        id='featuredImage'
+                        label='Featured image'
+                        error={Boolean(errors.featuredImage)}
+                        helperText={
+                          errors.featuredImage
+                            ? 'Please upload valid image'
+                            : null
+                        }
+                        {...field}
+                      />
+                    )}
+                  />
+                </ListItem>
+                <ListItem>
+                  {loadingUpload ? (
+                    <div className={classes.buttonLoading}>
+                      <CircularProgress />
+                    </div>
+                  ) : (
+                    <Button variant='contained' component='label'>
+                      Upload Image
+                      <input
+                        type='file'
+                        onChange={uploadFeaturedImageHandler}
+                        hidden
+                      />
+                    </Button>
+                  )}
+                </ListItem>
+                <ListItem>
+                  <FormControlLabel
+                    label='Featured image'
+                    control={
+                      <Checkbox
+                        onClick={(e) => setIsFeatured(e.target.checked)}
+                        checked={isFeatured}
+                        name='isFeatured'
+                      />
+                    }
+                  />
                 </ListItem>
                 <ListItem>
                   <Controller

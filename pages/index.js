@@ -161,7 +161,6 @@ export default function Home(props) {
                   alt={product.name}
                   width={1000}
                   height={300}
-                  className={classes.featuredImage}
                 />
               </Link>
             </NextLink>

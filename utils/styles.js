@@ -623,10 +623,6 @@ const useStyles = makeStyles((theme) => ({
   carousel: {
     marginTop: '2rem',
   },
-  // featuredImage: {
-  //   marginTop: 10,
-  //   zIndex: '1000 !important',
-  // },
 }));
 
 export default useStyles;

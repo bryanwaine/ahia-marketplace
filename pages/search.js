@@ -26,7 +26,7 @@ import ahia_white_logo from '../public/images/ahia_white_logo.png';
 import Image from 'next/image';
 import { Pagination, Rating } from '@mui/material';
 
-const PAGE_SIZE = 8;
+const PAGE_SIZE = 6;
 
 const prices = [
   {
@@ -451,7 +451,7 @@ const Search = (props) => {
           </Grid>
           <Grid container spacing={2} style={{ marginTop: 10 }}>
             {productArray.map((product) => (
-              <Grid item md={3} xs={6} key={product._id}>
+              <Grid item md={4} xs={6} key={product._id}>
                 <ProductItem
                   product={product}
                   addToCartHandler={addToCartHandler}

@@ -19,6 +19,8 @@ handler.post(async (req, res) => {
     slug: req.body.slug,
     category: req.body.category,
     image: req.body.image,
+    featuredImage: req.body.featuredImage,
+    isFeatured: req.body.isFeatured,
     price: req.body.price,
     vendor: req.body.vendor,
     countInStock: req.body.countInStock,
