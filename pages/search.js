@@ -378,9 +378,9 @@ const Search = (props) => {
             container
             justifyContent='space-between'
             alignItems='center'
-            style={{ marginBottom: 15 }}
+            style={{ marginBottom: 25 }}
           >
-            <Grid item>
+            <Grid item style={{ marginBottom: 10 }}>
               <strong>
                 {products.length === 0 ? 'No' : countProducts}{' '}
                 {products.length === 1 ? 'result' : 'results'} found
@@ -412,30 +412,44 @@ const Search = (props) => {
                 ) : null}
               </strong>
             </Grid>
-            <Grid item>
-              <Typography component='span' variant='h6' style={{marginRight: 5}}>
+            <Grid item style={{ marginBottom: 10 }}>
+              <Typography
+                component='span'
+                variant='h6'
+                style={{ marginRight: 5 }}
+              >
                 Sort by
               </Typography>
               <Select value={sort} onChange={sortHandler}>
                 <MenuItem value='featured'>
-                  <Typography variant='h6' style={{ margin: 0 }}>Featured</Typography>
+                  <Typography variant='h6' style={{ margin: 0 }}>
+                    Featured
+                  </Typography>
                 </MenuItem>
                 <MenuItem value='lowest'>
-                  <Typography variant='h6' style={{ margin: 0 }}>Price: Low to High</Typography>
+                  <Typography variant='h6' style={{ margin: 0 }}>
+                    Price: Low to High
+                  </Typography>
                 </MenuItem>
                 <MenuItem value='highest'>
-                  <Typography variant='h6' style={{ margin: 0 }}>Price: High to Low</Typography>
+                  <Typography variant='h6' style={{ margin: 0 }}>
+                    Price: High to Low
+                  </Typography>
                 </MenuItem>
                 <MenuItem value='toprated'>
-                  <Typography variant='h6' style={{ margin: 0 }}>Customer Reviews</Typography>
+                  <Typography variant='h6' style={{ margin: 0 }}>
+                    Customer Reviews
+                  </Typography>
                 </MenuItem>
                 <MenuItem value='newest'>
-                  <Typography variant='h6' style={{ margin: 0 }}>Newest Arrivals</Typography>
+                  <Typography variant='h6' style={{ margin: 0 }}>
+                    Newest Arrivals
+                  </Typography>
                 </MenuItem>
               </Select>
             </Grid>
           </Grid>
-          <Grid container spacing={2} style={{marginTop:1}}>
+          <Grid container spacing={2} style={{ marginTop: 10 }}>
             {productArray.map((product) => (
               <Grid item md={3} xs={6} key={product._id}>
                 <ProductItem
@@ -447,7 +461,12 @@ const Search = (props) => {
               </Grid>
             ))}
           </Grid>
-          <Pagination sx={{ marginTop: 3}} defaultPage={parseInt(query.page || '1')} count={pages} onChange={pageHandler}/>
+          <Pagination
+            sx={{ marginTop: 3 }}
+            defaultPage={parseInt(query.page || '1')}
+            count={pages}
+            onChange={pageHandler}
+          />
         </Grid>
       </Grid>
       <div style={{ height: '2rem' }} />
