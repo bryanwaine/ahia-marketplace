@@ -264,7 +264,7 @@ const Search = (props) => {
         <Grid item md={3} xs={12}>
           <List>
             <ListItem>
-              <Typography variant='h3' style={{ fontWeight: 500 }}>
+              <Typography variant='h3' style={{ fontWeight: 500, marginTop: '-10px' }}>
                 Filter
               </Typography>
             </ListItem>
