@@ -478,7 +478,7 @@ const useStyles = makeStyles((theme) => ({
   },
   prefixTop: {
     fontSize: 13,
-    margin: '0 0 -15px 0'
+    margin: '0 0 -15px 0',
   },
   reviewForm: {
     maxWidth: 500,
@@ -620,6 +620,13 @@ const useStyles = makeStyles((theme) => ({
       color: '#01464a',
     },
   },
+  carousel: {
+    marginTop: '2rem',
+  },
+  // featuredImage: {
+  //   marginTop: 10,
+  //   zIndex: '1000 !important',
+  // },
 }));
 
 export default useStyles;

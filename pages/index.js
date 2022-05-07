@@ -1,8 +1,5 @@
-import {
-  CircularProgress,
-  Grid,
-  Typography,
-} from '@material-ui/core';
+/* eslint-disable @next/next/no-img-element */
+import { CircularProgress, Grid, Link, Typography } from '@material-ui/core';
 import Layout from '../components/Layout';
 import db from '../utils/db';
 import Product from '../models/Product';
@@ -18,10 +15,13 @@ import Box from '@mui/material/Box';
 import ProductItem from '../components/ProductItem';
 import ahia_white_logo from '../public/images/ahia_white_logo.png';
 import Image from 'next/image';
+import Carousel from 'react-material-ui-carousel';
+// import { Carousel } from 'react-responsive-carousel';
+import NextLink from 'next/link';
 
 export default function Home(props) {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
-  const { products } = props;
+  const { topRatedProducts, featuredProducts } = props;
   const classes = useStyles();
   const { state, dispatch } = useContext(Store);
   const [quantityArray, setVolumeArray] = useState([]);
@@ -33,7 +33,7 @@ export default function Home(props) {
 
   useEffect(() => {
     try {
-      const quantityArr = products.map((product) => {
+      const quantityArr = topRatedProducts.map((product) => {
         const index = cartItems.findIndex((item) => {
           return item._id === product._id;
         });
@@ -52,7 +52,7 @@ export default function Home(props) {
       });
       return;
     }
-  }, [products, cartItems, enqueueSnackbar, closeSnackbar]);
+  }, [topRatedProducts, cartItems, enqueueSnackbar, closeSnackbar]);
 
   const addToCartHandler = async (product) => {
     closeSnackbar();
@@ -143,14 +143,33 @@ export default function Home(props) {
   };
 
   let productArray = quantityArray.map((item, i) =>
-    Object.assign({}, item, products[i])
+    Object.assign({}, item, topRatedProducts[i])
   );
 
   return (
     <Layout title='Home' selectedNavHome>
+        <Carousel className={classes.carousel}>
+          {featuredProducts.map((product) => (
+            <NextLink
+              key={product._id}
+              href={`/products/${product.slug}`}
+              passHref
+            >
+              <Link style={{display: 'flex', justifyContent: 'center' }}>
+                <Image
+                  src={product.featuredImage}
+                  alt={product.name}
+                  width={1000}
+                  height={300}
+                  className={classes.featuredImage}
+                />
+              </Link>
+            </NextLink>
+          ))}
+        </Carousel>
       <div>
-        <Typography component='h1' variant='h1'>
-          Products
+        <Typography component='h2' variant='h2'>
+          Popular Foods
         </Typography>
         {loading ? (
           <Modal open={open}>
@@ -187,11 +206,23 @@ export default function Home(props) {
 
 export async function getServerSideProps() {
   await db.connect();
-  const products = await Product.find({}, '-reviews').lean();
+  const featuredProductsDocs = await Product.find(
+    { isFeatured: true },
+    '-reviews'
+  )
+    .lean()
+    .limit(3);
+  const topRatedProductsDocs = await Product.find({}, '-reviews')
+    .lean()
+    .sort({
+      rating: -1,
+    })
+    .limit(8);
   await db.disconnect();
   return {
     props: {
-      products: products.map(db.convertDocToObj),
+      featuredProducts: featuredProductsDocs.map(db.convertDocToObj),
+      topRatedProducts: topRatedProductsDocs.map(db.convertDocToObj),
     },
   };
 }

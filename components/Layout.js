@@ -309,7 +309,7 @@ export default function Layout({
                         : ahia_white_logo
                     }
                     alt='ahia-marketplace'
-                    width={100}
+                    width={90}
                     height={60}
                   />
                 </NextLink>
