@@ -43,11 +43,11 @@ const Categories = () => {
               style={{
                 display: 'flex',
                 justifyContent: 'center',
-                margin: '5px 0 5px 0',
+                margin: '10px 0 10px 0',
                 cursor: 'pointer',
               }}
             >
-              <Card style={{ width: '10rem', height: '5rem', padding: '1rem' }}>
+              <Card style={{ width: '7rem', height: '5rem', padding: '1rem' }}>
                 <Typography variant='h4' style={{ margin: 0 }}>
                   <strong> {category}</strong>
                 </Typography>
