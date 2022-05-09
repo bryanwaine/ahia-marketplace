@@ -306,7 +306,7 @@ export default function ProductScreen(props) {
                 <Link href='#reviews'>
                   <Typography variant='h6' style={{ margin: 0 }}>
                     ({product.numReviews}{' '}
-                    {product.numReviews.length > 1 ? `reviews` : `review`})
+                    {product.numReviews.length === 0 ? `reviews` : product.numReviews.length > 1 ? `reviews` : `review`})
                   </Typography>
                 </Link>
               </ListItem>
@@ -426,7 +426,7 @@ export default function ProductScreen(props) {
           {reviews.length === 0 ? (
             <Card style={{ width: '100%', maxWidth: 500, padding: 10 }}>
               {' '}
-              No reviews yet.
+              No reviews yet. Be the first to leave a review.
             </Card>
           ) : (
             reviews.map((review) => (

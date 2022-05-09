@@ -141,7 +141,7 @@ const Tracking = ({ params }) => {
         }
       );
       dispatch({ type: 'READY_FOR_DELIVERY_SUCCESS', payload: data });
-      enqueueSnackbar(`Order is ready for delivery`, {
+      enqueueSnackbar(`Order is ready for delivery!`, {
         variant: 'success',
       });
     } catch (err) {
@@ -164,7 +164,7 @@ const Tracking = ({ params }) => {
         }
       );
       dispatch({ type: 'DELIVERY_SUCCESS', payload: data });
-      enqueueSnackbar(`Order delivered successfully!!`, {
+      enqueueSnackbar(`Order delivered successfully!`, {
         variant: 'success',
       });
     } catch (err) {

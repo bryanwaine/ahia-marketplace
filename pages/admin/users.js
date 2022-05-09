@@ -226,7 +226,7 @@ const Users = () => {
                 ) : (
                   <TableContainer>
                     <Typography>
-                      ({users.length} {users.length > 1 ? 'users' : 'user'})
+                      ({users.length} {users.length === 0 ? 'users' : users.length > 1 ? 'users' : 'user'})
                     </Typography>
                     <Table>
                       <TableHead>

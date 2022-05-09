@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { CircularProgress, Grid, Link, Typography } from '@material-ui/core';
+import { Button, CircularProgress, Grid, Link, Typography } from '@material-ui/core';
 import Layout from '../components/Layout';
 import db from '../utils/db';
 import Product from '../models/Product';
@@ -148,24 +148,24 @@ export default function Home(props) {
 
   return (
     <Layout title='Home' selectedNavHome>
-        <Carousel className={classes.carousel}>
-          {featuredProducts.map((product) => (
-            <NextLink
-              key={product._id}
-              href={`/products/${product.slug}`}
-              passHref
-            >
-              <Link style={{display: 'flex', justifyContent: 'center' }}>
-                <Image
-                  src={product.featuredImage}
-                  alt={product.name}
-                  width={1000}
-                  height={300}
-                />
-              </Link>
-            </NextLink>
-          ))}
-        </Carousel>
+      <Carousel className={classes.carousel}>
+        {featuredProducts.map((product) => (
+          <NextLink
+            key={product._id}
+            href={`/products/${product.slug}`}
+            passHref
+          >
+            <Link style={{ display: 'flex', justifyContent: 'center' }}>
+              <Image
+                src={product.featuredImage}
+                alt={product.name}
+                width={1000}
+                height={300}
+              />
+            </Link>
+          </NextLink>
+        ))}
+      </Carousel>
       <div>
         <Typography component='h2' variant='h2'>
           Popular Foods
@@ -197,6 +197,20 @@ export default function Home(props) {
             </Grid>
           ))}
         </Grid>
+        <Grid container style={{ display: 'flex', justifyContent: 'center', margin: '3rem 0 0 0' }}>
+        <Grid item md={3} xs={6}>
+          <NextLink href={`/categories`}>
+          <Button
+            fullWidth
+            variant='contained'
+            color='primary'
+            className={classes.buttonPrimary}
+          >
+            BROWSE ALL CATEGORIES
+            </Button>
+          </NextLink>
+          </Grid>
+        </Grid>
         <div style={{ height: '2rem' }} />
       </div>
     </Layout>
@@ -216,7 +230,7 @@ export async function getServerSideProps() {
     .sort({
       rating: -1,
     })
-    .limit(8);
+    .limit(12);
   await db.disconnect();
   return {
     props: {

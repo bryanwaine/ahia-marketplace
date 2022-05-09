@@ -132,7 +132,7 @@ const Orders = () => {
                 ) : (
                   <TableContainer>
                     <Typography>
-                      ({orders.length} {orders.length > 1 ? 'orders' : 'order'})
+                      ({orders.length} {orders.length === 0 ? 'orders' : orders.length > 1 ? 'orders' : 'order'})
                     </Typography>
                     <Table>
                       <TableHead>

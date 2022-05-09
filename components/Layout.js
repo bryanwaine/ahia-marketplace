@@ -139,6 +139,7 @@ export default function Layout({
   selectedNavHome,
   selectedNavPerson,
   selectedNavCart,
+  selectedNavCategories,
 }) {
   const date = new Date().getFullYear();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
@@ -183,6 +184,11 @@ export default function Layout({
       },
       h3: {
         fontSize: '1.2rem',
+        fontWeight: 300,
+        margin: '1rem 0',
+      },
+      h4: {
+        fontSize: '1rem',
         fontWeight: 300,
         margin: '1rem 0',
       },
@@ -321,7 +327,7 @@ export default function Layout({
               onClose={sidebarCloseHandler}
             >
               <List>
-                <ListItem >
+                <ListItem>
                   <Box
                     display='flex'
                     alignItems='center'
@@ -710,7 +716,7 @@ export default function Layout({
                     <div className={classes.navButtonDiv}>
                       <CategoryOutlinedIcon
                         className={
-                          activeCategories
+                          activeCategories || selectedNavCategories
                             ? classes.selectedCategoriesIcon
                             : theme.palette.type === 'light'
                             ? classes.navButton
@@ -721,7 +727,7 @@ export default function Layout({
                         variant='h6'
                         component='h6'
                         className={
-                          activeCategories
+                          activeCategories || selectedNavCategories
                             ? classes.selectedCategoriesText
                             : theme.palette.type === 'light'
                             ? classes.typography

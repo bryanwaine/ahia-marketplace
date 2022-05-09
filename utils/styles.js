@@ -623,6 +623,26 @@ const useStyles = makeStyles((theme) => ({
   carousel: {
     marginTop: '2rem',
   },
+  stepperLabel: {
+    '& .MuiStepLabel-label': {
+      color:
+        theme.palette.type === 'dark'
+          ? '#666666  !important'
+          : '#aaaaaa  !important',
+    },
+    '& .Mui-active': {
+      color:
+        theme.palette.type === 'dark'
+          ? '#ffffff !important'
+          : '#111111 !important',
+    },
+    '& .Mui-completed': {
+      color:
+        theme.palette.type === 'dark'
+          ? '#ffffff !important'
+          : '#111111 !important',
+    },
+  },
 }));
 
 export default useStyles;

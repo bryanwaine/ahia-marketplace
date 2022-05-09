@@ -10,6 +10,7 @@ import HouseIcon from '@mui/icons-material/House';
 import StepConnector, {
   stepConnectorClasses,
 } from '@mui/material/StepConnector';
+import useStyles from '../utils/styles';
 
 const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
@@ -102,6 +103,7 @@ const steps = [
 ];
 
 const CheckoutWizard = ({ activeStep = 0 }) => {
+  const classes = useStyles();
   return (
     <div style={{ width: '100%', marginTop: `2rem` }} spacing={4}>
       <Stepper
@@ -111,7 +113,12 @@ const CheckoutWizard = ({ activeStep = 0 }) => {
       >
         {steps.map((label) => (
           <Step key={label}>
-            <StepLabel StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>
+            <StepLabel
+              StepIconComponent={ColorlibStepIcon}
+              className={classes.stepperLabel}
+            >
+              {label}
+            </StepLabel>
           </Step>
         ))}
       </Stepper>
