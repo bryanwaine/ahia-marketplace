@@ -1121,7 +1121,7 @@ const data = {
       servings: 1,
       slug: 'moi_moi_fish',
       id: Id,
-      category: 'wraps',
+      category: 'Wraps',
       image: `/images/moi_moi_fish.png`,
       price: 350,
       vendor: 'Ahia Kitchen',
