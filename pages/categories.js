@@ -29,7 +29,7 @@ const Categories = () => {
       <Typography variant='h1' component='h1'>
         Browse Categories
       </Typography>
-      <Grid container style={{ marginTop: '2rem' }}>
+      <Grid container style={{ marginTop: '2rem' }} spacing={1}>
         {categories.map((category) => (
           <NextLink
             key={category}
@@ -47,7 +47,7 @@ const Categories = () => {
                 cursor: 'pointer',
               }}
             >
-              <Card style={{ width: '7rem', height: '5rem', padding: '1rem' }}>
+              <Card style={{ width: '10rem', height: '5rem', padding: '1rem' }}>
                 <Typography variant='h4' style={{ margin: 0 }}>
                   <strong> {category}</strong>
                 </Typography>
