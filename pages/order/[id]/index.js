@@ -16,15 +16,15 @@ import {
 } from '@material-ui/core';
 import React, { useContext, useEffect, useReducer, useState } from 'react';
 import dynamic from 'next/dynamic';
-import Layout from '../../components/Layout';
+import Layout from '../../../components/Layout';
 import NextLink from 'next/link';
-import { Store } from '../../utils/Store';
-import useStyles from '../../utils/styles';
+import { Store } from '../../../utils/Store';
+import useStyles from '../../../utils/styles';
 import Image from 'next/image';
-import toCurrency from '../../utils/toCurrency';
+import toCurrency from '../../../utils/toCurrency';
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import { getError } from '../../utils/error';
+import { getError } from '../../../utils/error';
 import { useSnackbar } from 'notistack';
 import Script from 'next/script';
 import { v4 as uuidv4 } from 'uuid';
@@ -71,7 +71,7 @@ function reducer(state, action) {
 }
 
 const Order = ({ params }) => {
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
   const orderId = params.id;
   const classes = useStyles();
   const { state } = useContext(Store);
@@ -83,7 +83,6 @@ const Order = ({ params }) => {
     {
       loading,
       loadingPay,
-      loadingDeliver,
       order,
       successPay,
       successDeliver,
@@ -93,7 +92,6 @@ const Order = ({ params }) => {
   ] = useReducer(reducer, {
     loading: true,
     loadingPay: false,
-    loadingDeliver: false,
     order: {},
     error: '',
   });
@@ -326,30 +324,6 @@ const Order = ({ params }) => {
       });
     }
   }
-
-  const deliverOrderHandler = async () => {
-    try {
-      closeSnackbar();
-      dispatch({ type: 'DELIVER_REQUEST' });
-      const { data } = await axios.put(
-        `/api/orders/${order._id}/deliver`,
-        {},
-        {
-          headers: { authorization: `Bearer ${userInfo.token}` },
-        }
-      );
-      dispatch({ type: 'DELIVERY_SUCCESS', payload: data });
-      enqueueSnackbar(`Order delivered successfully!!`, {
-        variant: 'success',
-      });
-    } catch (err) {
-      closeSnackbar();
-      dispatch({ type: 'DELIVERY_FAIL', payload: getError(err) });
-      enqueueSnackbar(getError(err), {
-        variant: 'error',
-      });
-    }
-  };
 
   const confirmPaymentHandler = async () => {
     try {
@@ -677,7 +651,7 @@ const Order = ({ params }) => {
                     )}
                   </ListItem>
                 )}
-                {userInfo.isAdmin && isPaid && !isDelivered && (
+                {/* {userInfo.isAdmin && isPaid && !isDelivered && (
                   <ListItem
                     style={{ display: 'flex', justifyContent: 'center' }}
                   >
@@ -697,7 +671,7 @@ const Order = ({ params }) => {
                       </Button>
                     )}
                   </ListItem>
-                )}
+                )} */}
                 {userInfo.isAdmin && paymentMethod === 'Pay at Pickup' && (
                   <ListItem
                     style={{ display: 'flex', justifyContent: 'center' }}
@@ -762,6 +736,18 @@ const Order = ({ params }) => {
                 )}
               </List>
             </Card>
+            <div style={{ margin: '30px 0 30px 0', padding: '0 15px' }}>
+              <NextLink href={`/order/${order._id}/tracking`} passHref>
+                <Button
+                  fullWidth
+                  variant='contained'
+                  color='primary'
+                  className={classes.buttonPrimary}
+                >
+                  TRACK ORDER
+                </Button>
+              </NextLink>
+            </div>
           </Grid>
         </Grid>
       )}

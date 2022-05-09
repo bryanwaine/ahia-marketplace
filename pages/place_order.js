@@ -77,6 +77,8 @@ const Place_Order = () => {
           itemsPrice,
           shippingPrice,
           totalPrice,
+          isProcessing: true,
+          processingAt: new Date().toUTCString(),
         },
         { headers: { authorization: `Bearer ${userInfo.token}` } }
       );

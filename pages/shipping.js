@@ -346,7 +346,7 @@ const Shipping = () => {
             />
           </ListItem>
 
-          <ListItem style={{ display: 'flex', justifyContent: 'center' }}>
+          <ListItem style={{ display: 'flex', justifyContent: 'center', marginBottom: '2rem' }}>
             {loading ? (
               <div className={classes.buttonLoading}>
                 <CircularProgress />
