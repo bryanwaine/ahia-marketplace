@@ -178,8 +178,19 @@ const Tracking = ({ params }) => {
 
   return (
     <Layout title='Track your order'>
+      <Typography component='h1' variant='h1'>
+        Track order {orderId}
+      </Typography>
       <TrackingWizard activeStep={step ? step : 0} />
-      <Grid container style={{ marginTop: `4rem`, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <Grid
+        container
+        style={{
+          marginTop: `4rem`,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
         <Grid item md={5} xs={12}>
           <Card style={{ padding: 20 }}>
             <div style={{ display: 'flex', alignItems: 'end' }}>
@@ -231,10 +242,16 @@ const Tracking = ({ params }) => {
                 </span>
               </Typography>
             </div>
-          </Card>          
+          </Card>
         </Grid>
-        <Grid item md={6} xs={12} style={{display: step === 2 && `none`}}>
-          <div style={{ margin: '30px 0 30px 0', padding: '0 15px', width: '100%' }}>
+        <Grid item md={6} xs={12} style={{ display: step === 2 && `none` }}>
+          <div
+            style={{
+              margin: '30px 0 30px 0',
+              padding: '0 15px',
+              width: '100%',
+            }}
+          >
             {loadingReadyForDelivery || loadingDeliver ? (
               <div
                 style={{ display: 'flex', justifyContent: 'center' }}
