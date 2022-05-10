@@ -55,7 +55,7 @@ function ButtonIncrement({ product, onClickFunc }) {
     </div>
   );
 }
-//href={`/products/${product.slug}`} passHref
+
 const ProductItem = ({
   product,
   addToCartHandler,
@@ -140,7 +140,7 @@ const ProductItem = ({
                   variant='h6'
                   style={{ color: '#ff0000', margin: 0 }}
                 >
-                  ({product.rating})
+                  ({product.numReviews})
                 </Typography>
               </Grid>
               <Grid item md={12} xs={12}>

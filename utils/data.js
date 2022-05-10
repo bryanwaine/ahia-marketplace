@@ -1019,7 +1019,7 @@ const data = {
       price: 7500,
       vendor: 'Ahia Kitchen',
       rating: 4.5,
-      numReviews: 90,
+      numReviews: 25,
       countInStock: 20,
       description: 'A pot of sumptuous freshly grilled catfish barbeque.',
     },

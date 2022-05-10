@@ -518,7 +518,7 @@ export async function getServerSideProps({ query }) {
 
   const order =
     sort === 'featured'
-      ? { featured: -1 }
+      ? {isFeatured: -1 }
       : sort === 'lowest'
       ? { price: 1 }
       : sort === 'highest'
