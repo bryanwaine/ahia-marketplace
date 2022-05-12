@@ -7,6 +7,7 @@ import { sendVerifyEmail, sendWelcomeEmail } from '../../../utils/emailService';
 
 const handler = nc();
 
+// User registration
 handler.post(async (req, res) => {
   await db.connect();
   const existingUser = await User.findOne({ email: req.body.email });
@@ -23,10 +24,8 @@ handler.post(async (req, res) => {
     });
     const verificationCode = user.createVerificationToken();
     await user.save()
-
-    const token = signToken(user);
+    
     res.send({
-      token,
       _id: user._id,
       firstName: user.firstName,
       lastName: user.lastName,
@@ -60,6 +59,7 @@ handler.post(async (req, res) => {
   }
 });
 
+// Email verification
 handler.put(async (req, res) => {
   await db.connect();
   const user = await User.findOne({ email: req.body.email });
@@ -70,7 +70,9 @@ handler.put(async (req, res) => {
     (user.isEmailVerified = true), await user.save();
     await sendWelcomeEmail(user.email, user.firstName);
     await db.disconnect();
+    const token = signToken(user);
     res.send({
+      token,
       _id: user._id,
       firstName: user.firstName,
       lastName: user.lastName,
