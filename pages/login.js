@@ -63,11 +63,14 @@ const Login = () => {
         password,
       });
       if (!data.isEmailVerified) {
-        router.push(`/verify_email`)
+        router.push(`/verify_email`);
+        return
+      } else {
+        enqueueSnackbar(`Welcome back, ${data.firstName}`, {
+          variant: 'success',
+        });
       }
-      enqueueSnackbar(`Welcome back, ${data.firstName}`, {
-        variant: 'success',
-      });
+
       dispatch({ type: 'USER_LOGIN', payload: data });
       Cookies.set('userInfo', JSON.stringify(data));
       router.push(redirect || '/');

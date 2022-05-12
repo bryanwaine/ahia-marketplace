@@ -39,18 +39,25 @@ const VerifyEmail = () => {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const router = useRouter();
   const { redirect } = router.query;
-  const { state, dispatch } = useContext(Store);
-  const { userInfo } = state;
+  const { dispatch } = useContext(Store);
+  // const { userInfo } = state;
   const classes = useStyles();
   const [loading, setLoadingVerify] = useState(false);
+  const [userInfoEmail, setUserInfoEmail] = useState('');
 
   useEffect(() => {
-    if (userInfo && userInfo.isEmailVerified) {
-      router.push('/');
-    }
-    if (userInfo && !userInfo.isEmailVerified) {
-      setValue('email', userInfo.email);
-    }
+    // if (userInfo && userInfo.isEmailVerified) {
+    //   router.push('/');
+    // }
+    // if (userInfo && !userInfo.isEmailVerified) {
+    //   setValue('email', userInfo.email);
+    // }
+    const userInfo = JSON.parse(Cookies.get('userInfo'))
+    console.log(userInfo)
+    setUserInfoEmail(userInfo.email)
+    if (userInfo && userInfo.isEmailVerified) { router.push('/'); }
+    if (userInfo && !userInfo.isEmailVerified) { setValue('email', userInfo.email);}
+    
   }, []);
 
   const verifyEmailHandler = async ({ email, verificationCode }) => {
@@ -61,7 +68,7 @@ const VerifyEmail = () => {
         email,
         verificationCode,
       });
-      Cookies.set('userInfo', JSON.stringify(data));
+      // Cookies.set('userInfo', JSON.stringify(data));
       dispatch({ type: 'USER_LOGIN', payload: data });
       enqueueSnackbar(`Welcome ${data.firstName}, enjoy your shopping!`, {
         variant: 'success',
@@ -122,7 +129,10 @@ const VerifyEmail = () => {
           <ListItem>
             <Typography variant='h6'>
               Please enter the 6-digit code sent to
-              <br /> <strong>{userInfo ? userInfo.email : `your email address`}</strong>
+              <br />{' '}
+              <strong>
+                {userInfoEmail || `your email address`}
+              </strong>
             </Typography>
           </ListItem>
           <ListItem style={{ display: 'flex', justifyContent: 'center' }}>
@@ -173,6 +183,13 @@ const VerifyEmail = () => {
           </ListItem>
         </List>
       </form>
+      <Typography variant='h6'>
+        <span style={{ color: '#666666' }}>
+          (NB: Check your spam folder if the email does not appear in your
+          inbox. Be sure to include our email address in your address book to
+          prevent our emails from going to your spam folder.)
+        </span>
+      </Typography>
     </Layout>
   );
 };

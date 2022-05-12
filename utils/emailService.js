@@ -1,4 +1,4 @@
-import nodemailer from 'nodemailer';
+import nodeMailjet from 'node-mailjet';
 import Welcome from './email_templates/welcome';
 import VerifyEmail from './email_templates/verifyEmail';
 import ResetPassword from './email_templates/resetPassword';
@@ -9,41 +9,69 @@ const verifyEmailSubject = `Your Ahia Marketplace verification code`;
 const resetPasswordSubject = `Reset your password`;
 const resetPasswordSuccessSubject = `Your password has been reset successfully`;
 
-const transporter = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
-  //   secure: true, // true for 465, false for other ports
-  port: 465,
-  auth: {
-    user: process.env.NEXT_PUBLIC_USER_EMAIL,
-    pass: process.env.NEXT_PUBLIC_USER_PASSWORD,
-  },
-});
+const mailjet = nodeMailjet.connect(
+  process.env.NEXT_PUBLIC_MAILJET_API_KEY,
+  process.env.NEXT_PUBLIC_MAILJET_SECRET_KEY
+);
 
-const sendVerifyEmail = async (email, code) => {
-  await transporter
-    .sendMail({
-      from: `'Ahia Marketplace' <ahia.marketplace.ng@gmail.com>`,
-      to: email,
-      subject: verifyEmailSubject,
-      html: VerifyEmail(code),
+const sendVerifyEmail = (email, firstName, code) => {
+  const request = mailjet.post('send', { version: 'v3.1' }).request({
+    Messages: [
+      {
+        From: {
+          Email: 'ahia.marketplace.ng@gmail.com',
+          Name: 'Ahia Marketplace',
+        },
+        To: [
+          {
+            Email: email,
+            Name: firstName,
+          },
+        ],
+        Subject: verifyEmailSubject,
+        TextPart: '',
+        HTMLPart: VerifyEmail(code),
+        CustomID: 'Ahia Marketplace',
+      },
+    ],
+  });
+  request
+    .then((result) => {
+      console.log(result.body);
     })
-    .then(console.info)
     .catch((err) => {
-      console.log(err);
+      console.log(err.statusCode);
     });
 };
 
-const sendWelcomeEmail = async (email, firstName) => {
-  await transporter
-    .sendMail({
-      from: `'Ahia Marketplace' <ahia.marketplace.ng@gmail.com>`,
-      to: email,
-      subject: welcomeSubject,
-      html: Welcome(firstName),
+const sendWelcomeEmail =  (email, firstName) => {
+ const request =  mailjet.post('send', { version: 'v3.1' })
+    .request({
+    Messages: [
+      {
+        From: {
+          Email: 'ahia.marketplace.ng@gmail.com',
+          Name: 'Ahia Marketplace',
+        },
+        To: [
+          {
+            Email: email,
+            Name: firstName,
+          },
+        ],
+        Subject: welcomeSubject,
+        TextPart: '',
+        HTMLPart: Welcome(firstName),
+        CustomID: 'Ahia Marketplace',
+      },
+    ],
+  });
+  request
+    .then((result) => {
+      console.log(result.body);
     })
-    .then(console.info)
     .catch((err) => {
-      console.log(err);
+      console.log(err.statusCode);
     });
 };
 
@@ -54,30 +82,65 @@ const sendResetPasswordEmail = async (
   operating_system,
   browser_name
 ) => {
-  await transporter
-    .sendMail({
-      from: `'Ahia Marketplace' <ahia.marketplace.ng@gmail.com>`,
-      to: email,
-      subject: resetPasswordSubject,
-      html: ResetPassword(firstName, url, operating_system, browser_name),
+  const request = await mailjet.post('send', { version: 'v3.1' }).request({
+    Messages: [
+      {
+        From: {
+          Email: 'ahia.marketplace.ng@gmail.com',
+          Name: 'Ahia Marketplace',
+        },
+        To: [
+          {
+            Email: email,
+            Name: firstName,
+          },
+        ],
+        Subject: resetPasswordSubject,
+        TextPart: '',
+        HTMLPart: ResetPassword(firstName, url, operating_system, browser_name),
+        CustomID: 'Ahia Marketplace',
+      },
+    ],
+  });
+  request
+    .then((result) => {
+      console.log(result.body);
     })
-    .then(console.info)
     .catch((err) => {
-      console.log(err);
+      console.log(err.statusCode);
     });
 };
 
-const sendResetPasswordSuccessEmail = async (email, firstName) => {
-  await transporter
-    .sendMail({
-      from: `'Ahia Marketplace' <ahia.marketplace.ng@gmail.com>`,
-      to: email,
-      subject: resetPasswordSuccessSubject,
-      html: ResetPasswordSuccess(firstName),
+const sendResetPasswordSuccessEmail = async (
+  email,
+  firstName
+) => {
+  const request = await mailjet.post('send', { version: 'v3.1' }).request({
+    Messages: [
+      {
+        From: {
+          Email: 'ahia.marketplace.ng@gmail.com',
+          Name: 'Ahia Marketplace',
+        },
+        To: [
+          {
+            Email: email,
+            Name: firstName,
+          },
+        ],
+        Subject: resetPasswordSuccessSubject,
+        TextPart: '',
+        HTMLPart: ResetPasswordSuccess(firstName),
+        CustomID: 'Ahia Marketplace',
+      },
+    ],
+  });
+  request
+    .then((result) => {
+      console.log(result.body);
     })
-    .then(console.info)
     .catch((err) => {
-      console.log(err);
+      console.log(err.statusCode);
     });
 };
 

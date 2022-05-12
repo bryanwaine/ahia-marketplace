@@ -26,6 +26,7 @@ import { useSnackbar } from 'notistack';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import { getError } from '../utils/error';
+import Cookies from 'js-cookie';
 
 function NumberFormatCustom(props) {
   const { inputRef, onChange, ...other } = props;
@@ -85,7 +86,7 @@ const Register = () => {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const router = useRouter();
   const { redirect } = router.query;
-  const { state, dispatch } = useContext(Store);
+  const { state } = useContext(Store);
   const { userInfo } = state;
   const classes = useStyles();
   const [showPassword, setShowPassword] = useState(false);
@@ -127,9 +128,8 @@ const Register = () => {
         phone,
         password,
       });
+      Cookies.set('userInfo', JSON.stringify(data));      
       router.push('/verify_email');
-      dispatch({ type: 'USER_LOGIN', payload: data });
-      
       
       enqueueSnackbar(`Please check your email to complete your registration.`, {
         variant: 'success',

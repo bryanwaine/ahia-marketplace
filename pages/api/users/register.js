@@ -36,7 +36,7 @@ handler.post(async (req, res) => {
     });
     try {
 
-      await sendVerifyEmail(user.email, verificationCode);
+      await sendVerifyEmail(user.email, user.firstName, verificationCode);
 
       await db.disconnect();
 
