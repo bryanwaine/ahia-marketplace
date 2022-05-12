@@ -122,7 +122,7 @@ const VerifyEmail = () => {
           <ListItem>
             <Typography variant='h6'>
               Please enter the 6-digit code sent to
-              <br /> <strong>{userInfo.email}</strong>
+              <br /> <strong>{userInfo ? userInfo.email : `your email address`}</strong>
             </Typography>
           </ListItem>
           <ListItem style={{ display: 'flex', justifyContent: 'center' }}>
