@@ -11,8 +11,8 @@ const resetPasswordSuccessSubject = `Your password has been reset successfully`;
 
 const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
-  port: 587,
   //   secure: true, // true for 465, false for other ports
+  port: 465,
   auth: {
     user: process.env.NEXT_PUBLIC_USER_EMAIL,
     pass: process.env.NEXT_PUBLIC_USER_PASSWORD,
