@@ -36,6 +36,7 @@ const Login = () => {
   const { redirect } = router.query;
   const { state, dispatch } = useContext(Store);
   const { userInfo } = state;
+
   useEffect(() => {
     if (userInfo) {
       router.push('/');
@@ -61,7 +62,9 @@ const Login = () => {
         email,
         password,
       });
-
+      if (!data.isEmailVerified) {
+        router.push(`/verify_email`)
+      }
       enqueueSnackbar(`Welcome back, ${data.firstName}`, {
         variant: 'success',
       });

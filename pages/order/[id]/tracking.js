@@ -95,7 +95,7 @@ const Tracking = ({ params }) => {
 
   useEffect(() => {
     if (!userInfo) {
-      return router.push('/login');
+      return router.push(`/login?redirect=/order/${order._id}/tracking`);
     }
     if (order.isReadyForDelivery) {
       setStep(1);
@@ -179,7 +179,7 @@ const Tracking = ({ params }) => {
   return (
     <Layout title='Track your order'>
       <Typography component='h1' variant='h1'>
-        Track order {orderId}
+        Track order ({orderId})
       </Typography>
       <TrackingWizard activeStep={step ? step : 0} />
       <Grid

@@ -20,6 +20,7 @@ handler.post(async (req, res) => {
       email: user.email,
       phone: user.phone,
       isAdmin: user.isAdmin,
+      isEmailVerified: user.isEmailVerified,
     });
   } else {
     res.status(401).send({ message: `Invalid credentials` });

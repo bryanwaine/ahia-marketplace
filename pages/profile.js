@@ -123,8 +123,8 @@ const Profile = () => {
       });
     } catch (err) {
       closeSnackbar();
-      enqueueSnackbar(getError(err), { variant: 'error' });
       setLoading(false);
+      enqueueSnackbar(getError(err), { variant: 'error' });
     }
   };
 

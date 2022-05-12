@@ -21,7 +21,6 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import { Store } from '../utils/Store';
 import { useContext } from 'react';
-import Cookies from 'js-cookie';
 import { Controller, useForm } from 'react-hook-form';
 import { useSnackbar } from 'notistack';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -71,7 +70,7 @@ const Register = () => {
       .max(10, `Phone number should be 10 digits excluding the first '0'`),
     password: Yup.string()
       .required('Password is required')
-      .min(6, 'Password must be at least 6 characters'),
+      .min(10, 'Password must be at least 10 characters'),
     confirmPassword: Yup.string()
       .required('Confirm Password is required')
       .oneOf([Yup.ref('password')], 'Passwords must match'),
@@ -128,23 +127,26 @@ const Register = () => {
         phone,
         password,
       });
-      enqueueSnackbar(`Welcome ${data.firstName}, enjoy your shopping!`, {
+      router.push('/verify_email');
+      dispatch({ type: 'USER_LOGIN', payload: data });
+      
+      
+      enqueueSnackbar(`Please check your email to complete your registration.`, {
         variant: 'success',
       });
-      dispatch({ type: 'USER_LOGIN', payload: data });
-      Cookies.set('userInfo', JSON.stringify(data));
-      router.push(redirect || '/');
     } catch (err) {
+      setLoading(false);
       enqueueSnackbar(getError(err), { variant: 'error' });
     }
   };
 
   return (
     <Layout title='Register'>
-      <form onSubmit={handleSubmit(submitHandler)} className={classes.form}>
-        <Typography component='h1' variant='h1'>
+      <Typography component='h1' variant='h1'>
           Create an Account
         </Typography>
+      <form onSubmit={handleSubmit(submitHandler)} className={classes.form}>
+        
         <List>
           <ListItem>
             <Controller
@@ -357,6 +359,7 @@ const Register = () => {
             )}
           </ListItem>
         </List>
+      </form>
         <Typography variant='h6' className={classes.centeredText}>
           Already have an account? &nbsp;{' '}
         </Typography>
@@ -367,7 +370,6 @@ const Register = () => {
             </Typography>
           </Link>
         </NextLink>
-      </form>
     </Layout>
   );
 };

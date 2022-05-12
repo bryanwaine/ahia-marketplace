@@ -536,7 +536,7 @@ export default function Layout({
                 </div>
               </IconButton>
             </div>
-            {userInfo ? (
+            {userInfo && userInfo.isEmailVerified ? (
               <div className={classes.flexDiv}>
                 <IconButton
                   className={classes.navButtonWrapper}
@@ -617,6 +617,38 @@ export default function Layout({
                     <ListItemText primary='Logout' />
                   </StyledMenuItem>
                 </StyledMenu>
+              </div>
+            ) : userInfo && !userInfo.isEmailVerified ? (
+              <div className={classes.flexDiv}>
+                <NextLink href='/login' passHref>
+                  <Link>
+                    <IconButton
+                      className={classes.navButtonWrapper}
+                      aria-label='sign_in'
+                    >
+                      <div className={classes.navButtonDiv}>
+                        <PersonOutlineOutlinedIcon
+                          className={
+                            theme.palette.type === 'light'
+                              ? classes.navButton
+                              : classes.navButtonDark
+                          }
+                        />
+                        <Typography
+                          variant='h6'
+                          component='h6'
+                          className={
+                            theme.palette.type === 'light'
+                              ? classes.typography
+                              : classes.typographyDark
+                          }
+                        >
+                          Sign In
+                        </Typography>
+                      </div>
+                    </IconButton>
+                  </Link>
+                </NextLink>
               </div>
             ) : (
               <div className={classes.flexDiv}>
@@ -741,7 +773,7 @@ export default function Layout({
                 </Link>
               </NextLink>
             </div>
-            {userInfo ? (
+            {userInfo && userInfo.isEmailVerified ? (
               <div className={classes.flexDivBotttom}>
                 <IconButton
                   className={classes.navButtonWrapper}
@@ -855,6 +887,38 @@ export default function Layout({
                     </ListItem>
                   </List>
                 </Drawer>
+              </div>
+            ) : userInfo && !userInfo.isEmailVerified ? (
+              <div className={classes.flexDivBottom}>
+                <NextLink href='/login' passHref>
+                  <Link>
+                    <IconButton
+                      className={classes.navButtonWrapper}
+                      aria-label='sign_in'
+                    >
+                      <div className={classes.navButtonDiv}>
+                        <PersonOutlineOutlinedIcon
+                          className={
+                            theme.palette.type === 'light'
+                              ? classes.navButton
+                              : classes.navButtonDark
+                          }
+                        />
+                        <Typography
+                          variant='h6'
+                          component='h6'
+                          className={
+                            theme.palette.type === 'light'
+                              ? classes.typography
+                              : classes.typographyDark
+                          }
+                        >
+                          Sign In
+                        </Typography>
+                      </div>
+                    </IconButton>
+                  </Link>
+                </NextLink>
               </div>
             ) : (
               <div className={classes.flexDivBottom}>

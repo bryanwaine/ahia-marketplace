@@ -358,7 +358,7 @@ const Order = ({ params }) => {
     <Layout title={`Order ${orderId}`}>
       <Script src='https://js.paystack.co/v1/inline.js' />
       <Typography component='h1' variant='h1'>
-        Order {orderId}
+        Order ({orderId})
       </Typography>
 
       {loading ? (
@@ -651,27 +651,6 @@ const Order = ({ params }) => {
                     )}
                   </ListItem>
                 )}
-                {/* {userInfo.isAdmin && isPaid && !isDelivered && (
-                  <ListItem
-                    style={{ display: 'flex', justifyContent: 'center' }}
-                  >
-                    {loadingDeliver ? (
-                      <div className={classes.buttonLoading}>
-                        <CircularProgress />
-                      </div>
-                    ) : (
-                      <Button
-                        fullWidth
-                        variant='contained'
-                        color='primary'
-                        className={classes.buttonPrimary}
-                        onClick={deliverOrderHandler}
-                      >
-                        DELIVER ORDER
-                      </Button>
-                    )}
-                  </ListItem>
-                )} */}
                 {userInfo.isAdmin && paymentMethod === 'Pay at Pickup' && (
                   <ListItem
                     style={{ display: 'flex', justifyContent: 'center' }}
