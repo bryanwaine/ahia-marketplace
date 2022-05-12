@@ -185,6 +185,17 @@ const Login = () => {
             )}
           </ListItem>
         </List>
+        <NextLink href={`/forgot_password`} passHref>
+          <Link>
+            <Typography
+              variant='h6'
+              className={classes.centeredText}
+              style={{ color: '#ff0000' }}
+            >
+              Forgot password?
+            </Typography>
+          </Link>
+        </NextLink>
         <Typography variant='h6' className={classes.centeredText}>
           New to Ahịa? &nbsp;{' '}
         </Typography>

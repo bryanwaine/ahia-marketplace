@@ -265,7 +265,7 @@ const Tracking = ({ params }) => {
                 variant='contained'
                 color='primary'
                 className={
-                  userInfo.isAdmin ? classes.buttonPrimary : classes.noButton
+                  userInfo && userInfo.isAdmin ? classes.buttonPrimary : classes.noButton
                 }
                 onClick={
                   step === 0
