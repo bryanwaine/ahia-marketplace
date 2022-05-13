@@ -38,7 +38,7 @@ const Login = () => {
   const { userInfo } = state;
 
   useEffect(() => {
-    if (userInfo) {
+    if (userInfo && userInfo.isEmailVerified) {
       router.push('/');
     }
   }, []);
@@ -75,14 +75,15 @@ const Login = () => {
           }
         );
         return;
-      } else {
-        enqueueSnackbar(`Welcome back, ${data.firstName}`, {
-          variant: 'success',
-        });
-        dispatch({ type: 'USER_LOGIN', payload: data });
-        Cookies.set('userInfo', JSON.stringify(data));
-        router.push(redirect || '/');
       }
+       if (data.isEmailVerified) {
+         enqueueSnackbar(`Welcome back, ${data.firstName}`, {
+           variant: 'success',
+         });
+         dispatch({ type: 'USER_LOGIN', payload: data });
+         Cookies.set('userInfo', JSON.stringify(data));
+         router.push(redirect || '/');
+       }
     } catch (err) {
       setLoading(false);
       enqueueSnackbar(getError(err), { variant: 'error' });

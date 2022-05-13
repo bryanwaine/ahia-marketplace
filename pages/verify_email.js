@@ -19,14 +19,15 @@ import { useSnackbar } from 'notistack';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import { getError } from '../utils/error';
+import Countdown from 'react-countdown';
 
 const VerifyEmail = () => {
   // form validation rules
   const validationSchema = Yup.object().shape({
-    verificationCode: Yup.string()
-      .required('Verification code is required')
-      .min(6, 'Verification code must be 6 characters')
-      .max(6, 'Verification code must be 6 characters'),
+    verificationCode: Yup.string(),
+    // .required('Verification code is required')
+    // .min(6, 'Verification code must be 6 characters')
+    // .max(6, 'Verification code must be 6 characters'),
   });
   const formOptions = { resolver: yupResolver(validationSchema) };
 
@@ -44,6 +45,8 @@ const VerifyEmail = () => {
   const classes = useStyles();
   const [loading, setLoadingVerify] = useState(false);
   const [userInfoEmail, setUserInfoEmail] = useState('');
+  const [waitToResend, setWaitToResend] = useState(false);
+const [inputValue, setInputValue] = useState('')
 
   useEffect(() => {
     // if (userInfo && userInfo.isEmailVerified) {
@@ -52,12 +55,14 @@ const VerifyEmail = () => {
     // if (userInfo && !userInfo.isEmailVerified) {
     //   setValue('email', userInfo.email);
     // }
-    const userInfo = JSON.parse(Cookies.get('userInfo'))
-    console.log(userInfo)
-    setUserInfoEmail(userInfo.email)
-    if (userInfo && userInfo.isEmailVerified) { router.push('/'); }
-    if (userInfo && !userInfo.isEmailVerified) { setValue('email', userInfo.email);}
-    
+    const userInfo = JSON.parse(Cookies.get('userInfo'));
+    setUserInfoEmail(userInfo.email);
+    if (userInfo && userInfo.isEmailVerified) {
+      router.push('/');
+    }
+    if (userInfo && !userInfo.isEmailVerified) {
+      setValue('email', userInfo.email);
+    }
   }, []);
 
   const verifyEmailHandler = async ({ email, verificationCode }) => {
@@ -76,6 +81,38 @@ const VerifyEmail = () => {
       router.push(redirect || '/');
     } catch (err) {
       setLoadingVerify(false);
+      enqueueSnackbar(getError(err), { variant: 'error' });
+    }
+  };
+
+  const renderer = ({ minutes, seconds, completed }) => {
+    if (completed) {
+      setWaitToResend(false);
+      return null;
+    } else {
+      // Render a countdown
+      return (
+        <span>
+          {minutes}:{seconds}
+        </span>
+      );
+    }
+  };
+
+  const resendCodeHandler = async () => {
+    try {
+      const email = userInfoEmail;
+      setWaitToResend(true);
+      await axios.patch('/api/users/login', {
+        email,
+      });
+      enqueueSnackbar(
+        `Please check your email to complete your registration.`,
+        {
+          variant: 'success',
+        }
+      );
+    } catch (err) {
       enqueueSnackbar(getError(err), { variant: 'error' });
     }
   };
@@ -129,10 +166,7 @@ const VerifyEmail = () => {
           <ListItem>
             <Typography variant='h6'>
               Please enter the 6-digit code sent to
-              <br />{' '}
-              <strong>
-                {userInfoEmail || `your email address`}
-              </strong>
+              <br /> <strong>{userInfoEmail || `your email address`}</strong>
             </Typography>
           </ListItem>
           <ListItem style={{ display: 'flex', justifyContent: 'center' }}>
@@ -144,6 +178,7 @@ const VerifyEmail = () => {
                 <TextField
                   InputProps={{
                     inputProps: {
+                      maxLength: 6,
                       style: {
                         fontSize: '2rem',
                         fontWeight: 300,
@@ -155,6 +190,7 @@ const VerifyEmail = () => {
                   variant='outlined'
                   autoFocus={true}
                   autoComplete={false}
+                  onInput={(e) => setInputValue(e.target.value)}
                   id='verificationCode'
                   label='Verification Code'
                   inputProps={{ type: 'text' }}
@@ -176,8 +212,28 @@ const VerifyEmail = () => {
                 className={classes.buttonPrimary}
                 color='primary'
                 type='submit'
+                disabled={inputValue.length === 6 ? false : true}
               >
                 VERIFY EMAIL
+              </Button>
+            )}
+          </ListItem>
+          <ListItem style={{ display: 'flex', justifyContent: 'center' }}>
+            {waitToResend ? (
+              <Button variant='text' disabled>
+                <Typography variant='h6' style={{ margin: 0 }}>
+                  Resend code in&nbsp;
+                  {<Countdown date={Date.now() + 60000} renderer={renderer} />}
+                </Typography>
+              </Button>
+            ) : (
+              <Button variant='text' onClick={() => resendCodeHandler()}>
+                <Typography
+                  variant='h6'
+                  style={{ margin: 0, color: '#ff0000' }}
+                >
+                  Resend code
+                </Typography>
               </Button>
             )}
           </ListItem>

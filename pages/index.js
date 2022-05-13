@@ -16,22 +16,27 @@ import ProductItem from '../components/ProductItem';
 import ahia_white_logo from '../public/images/ahia_white_logo.png';
 import Image from 'next/image';
 import Carousel from 'react-material-ui-carousel';
-// import { Carousel } from 'react-responsive-carousel';
 import NextLink from 'next/link';
+import { useRouter } from 'next/router';
 
 export default function Home(props) {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const { topRatedProducts, featuredProducts } = props;
   const classes = useStyles();
   const { state, dispatch } = useContext(Store);
+  const { userInfo } = state;
   const [quantityArray, setVolumeArray] = useState([]);
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const {
     cart: { cartItems },
   } = state;
+  const router = useRouter();
 
   useEffect(() => {
+    if (userInfo && !userInfo.isEmailVerified) {
+      router.push('/verify_email');
+    }
     try {
       const quantityArr = topRatedProducts.map((product) => {
         const index = cartItems.findIndex((item) => {
