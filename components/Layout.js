@@ -44,7 +44,6 @@ import SearchIcon from '@mui/icons-material/Search';
 import { withStyles } from '@material-ui/core/styles';
 import { useRouter } from 'next/router';
 import { useSnackbar } from 'notistack';
-import { getError } from '../utils/error';
 import ahia_black_logo from '../public/images/ahia_black_logo.png';
 import ahia_white_logo from '../public/images/ahia_white_logo.png';
 import Image from 'next/image';
