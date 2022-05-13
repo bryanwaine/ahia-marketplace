@@ -15,7 +15,9 @@ export default class MyDocument extends Document {
           />
         </Head>
         <body>
+          <div style={{ height: '80px' }} />
           <Main />
+          <div style={{ height: '100px' }} />
           <NextScript />
         </body>
       </Html>

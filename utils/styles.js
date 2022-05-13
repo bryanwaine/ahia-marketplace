@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   navbar: {
-    position: 'sticky !important',
+    position: 'fixed !important',
     top: '0px !important',
     padding: 5,
     background: '#eeeeee !important',
@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   darkNavbar: {
-    position: 'sticky !important',
+    position: 'fixed !important',
     top: '0px !important',
     padding: 5,
     background: '#04111d !important',
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   navbarBottom: {
-    position: 'sticky !important',
+    position: 'fixed !important',
     bottom: '0px !important',
     marginTop: 30,
     paddingTop: 5,
@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   darkNavbarBottom: {
-    position: 'sticky !important',
+    position: 'fixed !important',
     bottom: '0px !important',
     marginTop: 30,
     paddingTop: 5,
