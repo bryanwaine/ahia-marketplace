@@ -63,17 +63,26 @@ const Login = () => {
         password,
       });
       if (!data.isEmailVerified) {
+        await axios.patch('/api/users/login', {
+          email,
+        });
+        await Cookies.set('userInfo', JSON.stringify(data));
         router.push(`/verify_email`);
-        return
+        enqueueSnackbar(
+          `Please check your email to complete your registration.`,
+          {
+            variant: 'success',
+          }
+        );
+        return;
       } else {
         enqueueSnackbar(`Welcome back, ${data.firstName}`, {
           variant: 'success',
         });
+        dispatch({ type: 'USER_LOGIN', payload: data });
+        Cookies.set('userInfo', JSON.stringify(data));
+        router.push(redirect || '/');
       }
-
-      dispatch({ type: 'USER_LOGIN', payload: data });
-      Cookies.set('userInfo', JSON.stringify(data));
-      router.push(redirect || '/');
     } catch (err) {
       setLoading(false);
       enqueueSnackbar(getError(err), { variant: 'error' });

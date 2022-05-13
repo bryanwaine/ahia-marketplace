@@ -64,7 +64,7 @@ const VerifyEmail = () => {
     try {
       closeSnackbar();
       setLoadingVerify(true);
-      const { data } = await axios.put('/api/users/register', {
+      const { data } = await axios.patch('/api/users/register', {
         email,
         verificationCode,
       });

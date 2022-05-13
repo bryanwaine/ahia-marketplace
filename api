@@ -1,0 +1,92 @@
+// const { default: axios } = require('axios');
+// const https = require('https');
+// const { userInfo } = require('os');
+// const params = JSON.stringify({
+//   email: 'customer@email.com',
+//   amount: '20000',
+// });
+// const options = {
+//   hostname: 'api.paystack.co',
+//   port: 443,
+//   path: '/transaction/initialize',
+//   method: 'POST',
+//   headers: {
+//     Authorization: 'Bearer SECRET_KEY',
+//     'Content-Type': 'application/json',
+//   },
+// };
+// const req = https
+//   .request(options, (res) => {
+//     let data = '';
+//     res.on('data', (chunk) => {
+//       data += chunk;
+//     });
+//     res.on('end', () => {
+//       console.log(JSON.parse(data));
+//     });
+//   })
+//   .on('error', (error) => {
+//     console.error(error);
+//   });
+// req.write(params);
+// req.end();
+
+import axios from "axios";
+
+// async function makePaymentHandler() {
+//   try {
+//     const paymentRequest = await axios.post(
+//       `https://api.paystack.co/transaction/initialize`,
+//       {
+//         email: userInfo.email,
+//         amount: totalPrice,
+//         currency: 'NGN',
+//         reference: `ahia_${uuidv4()}`,
+//       },
+//       {
+//         headers: {
+//           'Content-Type': 'application/json',
+//           Authorization: `Bearer ${process.env.NEXT_PUBLIC_PAYSTACK_SECRET_KEY}`,
+//         },
+//       }
+//       );
+//       console.log(paymentRequest)
+//   } catch (err) {
+//     enqueueSnackbar(getError(err), { variant: 'error' });
+//   }
+// }
+
+function makePaymentHandler() {
+  /*global PaystackPop*/
+  /*eslint no-undef: "error"*/
+
+  const handler = PaystackPop.setup({
+    key: process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY, 
+    email: userInfo.email,
+    amount: totalPrice * 100, 
+    currency: 'NGN', 
+    ref: `ahia_${uuidv4()}`, 
+      callback: async function (response) {
+     
+          const reference = response.reference;
+       
+          try {
+              setLoadingPayNow(false);
+              const verification = await axios.get(`https://api.paystack.co/transaction/verify/${reference}`,
+                  {
+                      headers: {
+                          Authorization: `Bearer ${process.env.NEXT_PUBLIC_PAYSTACK_SECRET_KEY}`,
+                      },
+                  })
+              console.log(verification)
+          } catch (err) {
+              console.log(err)
+          }
+      },
+      onClose: function () {
+         setLoadingPayNow(false);
+      alert('Transaction was not completed, window closed.');
+    },
+  });
+  handler.openIframe();
+}

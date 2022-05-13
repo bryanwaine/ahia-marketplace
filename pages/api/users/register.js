@@ -60,7 +60,7 @@ handler.post(async (req, res) => {
 });
 
 // Email verification
-handler.put(async (req, res) => {
+handler.patch(async (req, res) => {
   await db.connect();
   const user = await User.findOne({ email: req.body.email });
   if (
