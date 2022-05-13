@@ -160,9 +160,7 @@ export default function Layout({
       const { data } = await axios.get(`/api/products/categories`);
       setCategories(data);
     } catch (err) {
-      enqueueSnackbar(getError(err), {
-        variant: 'error',
-      });
+     console.error(err)
     }
   };
 
