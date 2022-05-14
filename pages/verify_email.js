@@ -240,8 +240,7 @@ const [inputValue, setInputValue] = useState('')
       </form>
       <Typography variant='h6'>
         <span style={{ color: '#666666' }}>
-          (Did not get the code? Check your spam folder. Be sure to include our email address in your address book to
-          prevent our emails from going to your spam folder.)
+          (Did not get the code? Check your spam folder.)
         </span>
       </Typography>
     </Layout>
