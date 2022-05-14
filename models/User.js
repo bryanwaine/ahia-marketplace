@@ -65,7 +65,7 @@ userSchema.methods.createPasswordResetToken = function () {
     expiresIn: '600s',
   });
 
-  this.passwordResetToken = resetToken;
+  this.passwordResetToken = bcrypt.hashSync(resetToken);
 
   return resetToken;
 };

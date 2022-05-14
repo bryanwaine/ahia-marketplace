@@ -6,7 +6,7 @@ import {
   TextField,
   Typography,
 } from '@material-ui/core';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import Layout from '../components/Layout';
 import useStyles from '../utils/styles';
@@ -14,6 +14,7 @@ import { useSnackbar } from 'notistack';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { getError } from '../utils/error';
+import { fnOsDetect, fnBrowserDetect } from '../utils/deviceDetect';
 
 const Forgot_password = () => {
   const {
@@ -24,14 +25,23 @@ const Forgot_password = () => {
   const classes = useStyles();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const [loading, setLoading] = useState(false);
+  const [os, setOs] = useState('');
+  const [browser, setBrowser] = useState('')
   const router = useRouter();
+
+  useEffect(() => {
+    setBrowser(fnBrowserDetect())
+    setOs(fnOsDetect());
+  },[])
 
   const submitHandler = async ({ email }) => {
     try {
       closeSnackbar();
       setLoading(true);
-      await axios.patch('/api/users/reset_password', {
+      await axios.patch('/api/users/request_password_reset', {
         email,
+        os,
+        browser
       });
 
       enqueueSnackbar(`Check your email for further instructions.`, {

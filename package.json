@@ -53,7 +53,8 @@
     "streamifier": "^0.1.1",
     "uuid": "^8.3.2",
     "uuidv4": "^6.2.13",
-    "yup": "^0.32.11"
+    "yup": "^0.32.11",
+    "yup-password": "^0.2.2"
   },
   "devDependencies": {
     "eslint": "8.5.0",

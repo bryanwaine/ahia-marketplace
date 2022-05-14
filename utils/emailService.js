@@ -50,14 +50,16 @@ const sendWelcomeEmail = async (email, firstName) => {
 const sendResetPasswordEmail = async (
   email,
   firstName,
-  url
+  url,
+  operating_system,
+  browser_name
 ) => {
   try {
     const result = await transporter.sendMail({
       from: `'Ahia Marketplace' <ahia.marketplace.ng@gmail.com>`,
       to: email,
       subject: resetPasswordSubject,
-      html: ResetPassword(firstName, url),
+      html: ResetPassword(firstName, url, operating_system, browser_name),
     });
     return console.log(result);
   } catch (err) {

@@ -41,7 +41,6 @@ const VerifyEmail = () => {
   const router = useRouter();
   const { redirect } = router.query;
   const { dispatch } = useContext(Store);
-  // const { userInfo } = state;
   const classes = useStyles();
   const [loadingVerify, setLoadingVerify] = useState(false);
   const [loadingResend, setLoadingResend] = useState('');
