@@ -3,7 +3,7 @@ import React from 'react';
 import Layout from '../components/Layout';
 import NextLink from 'next/link';
 import useStyles from '../utils/styles';
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import DoneAllIcon from '@mui/icons-material/DoneAll';
 
 const Check_email = () => {
   const classes = useStyles();
@@ -17,8 +17,8 @@ const Check_email = () => {
         style={{
           display: 'flex',
           flexDirection: 'column',
-            alignItems: 'center',
-          marginTop: '5rem'
+          alignItems: 'center',
+          marginTop: '5rem',
         }}
       >
         <Grid item md={4} xs={12}>
@@ -27,14 +27,14 @@ const Check_email = () => {
               margin: 10,
               display: 'flex',
               flexDirection: 'column',
-                          alignItems: 'center',
-              padding: 20
+              alignItems: 'center',
+              padding: 20,
             }}
           >
-            <CheckCircleOutlineIcon fontSize='large' color='success' />
+                      <DoneAllIcon fontSize='large' style={{fontSize: '5rem'}}color='success' />
             <Typography style={{ marginTop: 20 }}>
-              Check your registered email address for
-              further instructions on how to reset your password.
+              Check your registered email address for further instructions on
+              how to reset your password.
             </Typography>
           </Card>
         </Grid>
