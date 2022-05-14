@@ -42,8 +42,8 @@ handler.patch(async (req, res) => {
       (user.verifyEmailToken = null), (user.verifyEmailExpires = null);
       const verificationCode = user.createVerificationToken();
       await user.save();
-      await db.disconnect();
       sendVerifyEmail(user.email, verificationCode);
+      await db.disconnect();
 
       const token = signToken(user);
       return res.status(201).send({

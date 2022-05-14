@@ -147,7 +147,7 @@ const Order = ({ params }) => {
     try {
       setLoadingPayNow(true);
       const handler = PaystackPop.setup({
-        key: process.env.PAYSTACK_PUBLIC_KEY,
+        key: process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY,
         email: userInfo.email,
         amount: totalPrice * 100,
         currency: 'NGN',
@@ -167,7 +167,7 @@ const Order = ({ params }) => {
               `https://api.paystack.co/transaction/verify/${reference}`,
               {
                 headers: {
-                  Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`,
+                  Authorization: `Bearer ${process.env.NEXT_PUBLIC_PAYSTACK_SECRET_KEY}`,
                 },
               }
             );

@@ -26,6 +26,7 @@ handler.post(async (req, res) => {
       await user.save();
       sendVerifyEmail(user.email, verificationCode);
       await db.disconnect();
+      
       return res.status(201).send({
         _id: user._id,
         firstName: user.firstName,

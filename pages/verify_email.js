@@ -68,6 +68,8 @@ const [inputValue, setInputValue] = useState('')
         email,
         verificationCode,
       });
+      Cookies.remove('userInfo')
+      Cookies.set('userInfo', JSON.stringify(data));
       dispatch({ type: 'USER_LOGIN', payload: data });
       enqueueSnackbar(`Welcome ${data.firstName}, enjoy your shopping!`, {
         variant: 'success',
@@ -245,7 +247,7 @@ const [inputValue, setInputValue] = useState('')
         style={{ display: 'flex', justifyContent: 'center' }}
       >
         <span style={{ color: '#666666' }}>
-          Did not get the code? Check your spam folder.
+          {`Didn't get the code? Check your spam folder.`}
         </span>
       </Typography>
     </Layout>
