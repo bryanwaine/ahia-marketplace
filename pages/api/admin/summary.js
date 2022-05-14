@@ -13,32 +13,36 @@ const handler = nc({
 handler.use(isAuth, isAdmin);
 
 handler.get(async (req, res) => {
-  await db.connect();
-  const ordersCount = await Order.countDocuments();
-  const productsCount = await Product.countDocuments();
-  const usersCount = await User.countDocuments();
-  const ordersPriceGroup = await Order.aggregate([
-    {
-      $group: {
-        _id: null,
-        sales: { $sum: '$totalPrice' },
+  try {
+    await db.connect();
+    const ordersCount = await Order.countDocuments();
+    const productsCount = await Product.countDocuments();
+    const usersCount = await User.countDocuments();
+    const ordersPriceGroup = await Order.aggregate([
+      {
+        $group: {
+          _id: null,
+          sales: { $sum: '$totalPrice' },
+        },
       },
-    },
-  ]);
-  const ordersPrice =
-    ordersPriceGroup.length > 0 ? ordersPriceGroup[0].sales : 0;
-  const salesData = await Order.aggregate([
-    {
-      $group: {
-        _id: { $dateToString: { format: '%Y-%m', date: '$createdAt' } },
-        'Total Sales': { $sum: '$totalPrice' },
+    ]);
+    const ordersPrice =
+      ordersPriceGroup.length > 0 ? ordersPriceGroup[0].sales : 0;
+    const salesData = await Order.aggregate([
+      {
+        $group: {
+          _id: { $dateToString: { format: '%Y-%m', date: '$createdAt' } },
+          'Total Sales': { $sum: '$totalPrice' },
+        },
       },
-    },
-  ]);
-  await db.disconnect();
-  res
-    .status(200)
-    .send({ ordersCount, productsCount, usersCount, ordersPrice, salesData });
+    ]);
+    await db.disconnect();
+    res
+      .status(200)
+      .send({ ordersCount, productsCount, usersCount, ordersPrice, salesData });
+  } catch (err) {
+    res.statusCode.send({ message: err.message });
+  }
 });
 
 export default handler;

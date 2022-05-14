@@ -69,7 +69,7 @@ const Login = () => {
         await Cookies.set('userInfo', JSON.stringify(data));
         router.push(`/verify_email`);
         enqueueSnackbar(
-          `Please check your email to complete your registration.`,
+          `Please check your email to complete sign in.`,
           {
             variant: 'success',
           }
@@ -91,7 +91,7 @@ const Login = () => {
   };
 
   return (
-    <Layout title='Login'>
+    <Layout title='Sign in to your account'>
       <form onSubmit={handleSubmit(submitHandler)} className={classes.form}>
         <Typography component='h1' variant='h1'>
           Sign In

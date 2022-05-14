@@ -8,7 +8,8 @@ const handler = nc();
 handler.use(isAuth);
 
 handler.put(async (req, res) => {
-  await db.connect();
+  try {
+    await db.connect();
   const user = await User.findById(req.user._id);
   (user.firstName = req.body.firstName),
     (user.lastName = req.body.lastName),
@@ -30,6 +31,10 @@ handler.put(async (req, res) => {
     phone: user.phone,
     isAdmin: user.isAdmin,
   });
+  } catch (err) {
+    res.statusCode.send({ message: err.message})
+  }
+  
 });
 
 export default handler;

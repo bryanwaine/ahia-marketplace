@@ -5,10 +5,14 @@ import db from '../../../utils/db';
 const handler = nc();
 
 handler.get(async (req, res) => {
-  await db.connect();
-  const categories = await Product.find().distinct('category');
-  await db.disconnect();
-  res.send(categories);
+  try {
+    await db.connect();
+    const categories = await Product.find().distinct('category');
+    await db.disconnect();
+    res.send(categories);
+  } catch (err) {
+    res.statusCode.send({ message: err.message });
+  }
 });
 
 export default handler;

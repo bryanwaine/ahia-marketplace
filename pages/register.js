@@ -128,25 +128,29 @@ const Register = () => {
         phone,
         password,
       });
-      Cookies.set('userInfo', JSON.stringify(data));      
-      router.push('/verify_email');
-      
-      enqueueSnackbar(`Please check your email to complete your registration.`, {
-        variant: 'success',
-      });
+      if (data) {
+        Cookies.set('userInfo', JSON.stringify(data));
+        router.push('/verify_email');
+
+        return enqueueSnackbar(
+          `Please check your email to complete your registration.`,
+          {
+            variant: 'success',
+          }
+        );
+      }
     } catch (err) {
       setLoading(false);
-      enqueueSnackbar(getError(err), { variant: 'error' });
+      return enqueueSnackbar(getError(err), { variant: 'error' });
     }
   };
 
   return (
     <Layout title='Register'>
       <Typography component='h1' variant='h1'>
-          Create an Account
-        </Typography>
+        Create an Account
+      </Typography>
       <form onSubmit={handleSubmit(submitHandler)} className={classes.form}>
-        
         <List>
           <ListItem>
             <Controller
@@ -360,16 +364,16 @@ const Register = () => {
           </ListItem>
         </List>
       </form>
-        <Typography variant='h6' className={classes.centeredText}>
-          Already have an account? &nbsp;{' '}
-        </Typography>
-        <NextLink href={`/login?redirect=${redirect || '/'}`} passHref>
-          <Link>
-            <Typography variant='h6' className={classes.centeredLink}>
-              SIGN IN
-            </Typography>
-          </Link>
-        </NextLink>
+      <Typography variant='h6' className={classes.centeredText}>
+        Already have an account? &nbsp;{' '}
+      </Typography>
+      <NextLink href={`/login?redirect=${redirect || '/'}`} passHref>
+        <Link>
+          <Typography variant='h6' className={classes.centeredLink}>
+            SIGN IN
+          </Typography>
+        </Link>
+      </NextLink>
     </Layout>
   );
 };

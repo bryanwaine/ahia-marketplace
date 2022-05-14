@@ -11,13 +11,17 @@ const handler = nc({
 handler.use(isAuth, isAdmin);
 
 handler.get(async (req, res) => {
-  await db.connect();
-  const users = await User.find({});
-  await db.disconnect();
-  if (!users) {
-    res.status(404).send({ message: 'Users not found!' });
-  } else {
-    res.send(users);
+  try {
+    await db.connect();
+    const users = await User.find({});
+    await db.disconnect();
+    if (!users) {
+      res.status(404).send({ message: 'Users not found!' });
+    } else {
+      res.send(users);
+    }
+  } catch (err) {
+    res.statusCode.send({ message: err.message });
   }
 });
 

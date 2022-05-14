@@ -11,13 +11,17 @@ const handler = nc({
 handler.use(isAuth, isAdmin);
 
 handler.get(async (req, res) => {
-  await db.connect();
-  const orders = await Order.find({}).populate('user', 'firstName');
-  await db.disconnect();
-  if (!orders) {
-    res.status(404).send({ message: 'Orders not found!' });
-  } else {
-    res.send(orders);
+  try {
+    await db.connect();
+    const orders = await Order.find({}).populate('user', 'firstName');
+    await db.disconnect();
+    if (!orders) {
+      res.status(404).send({ message: 'Orders not found!' });
+    } else {
+      res.send(orders);
+    }
+  } catch (err) {
+    res.statusCode.send({ message: err.message });
   }
 });
 

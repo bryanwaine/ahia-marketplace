@@ -24,20 +24,24 @@ const handler = nc({
 });
 
 handler.use(isAuth, isAdmin, upload.single('file')).post(async (req, res) => {
-  const streamUpload = (req) => {
-    return new Promise((resolve, reject) => {
-      const stream = cloudinary.uploader.upload_stream((error, result) => {
-        if (result) {
-          resolve(result);
-        } else {
-          reject(error);
-        }
+  try {
+    const streamUpload = (req) => {
+      return new Promise((resolve, reject) => {
+        const stream = cloudinary.uploader.upload_stream((error, result) => {
+          if (result) {
+            resolve(result);
+          } else {
+            reject(error);
+          }
+        });
+        streamifier.createReadStream(req.file.buffer).pipe(stream);
       });
-      streamifier.createReadStream(req.file.buffer).pipe(stream);
-    });
-  };
-  const result = await streamUpload(req, res);
-  res.send(result);
+    };
+    const result = await streamUpload(req, res);
+    res.send(result);
+  } catch (err) {
+    res.statusCode.send({ message: err.message });
+  }
 });
 
 export default handler;

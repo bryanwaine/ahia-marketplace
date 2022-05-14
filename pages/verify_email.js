@@ -43,7 +43,8 @@ const VerifyEmail = () => {
   const { dispatch } = useContext(Store);
   // const { userInfo } = state;
   const classes = useStyles();
-  const [loading, setLoadingVerify] = useState(false);
+  const [loadingVerify, setLoadingVerify] = useState(false);
+  const [loadingResend, setLoadingResend] = useState('');
   const [userInfoEmail, setUserInfoEmail] = useState('');
   const [waitToResend, setWaitToResend] = useState(false);
 const [inputValue, setInputValue] = useState('')
@@ -94,8 +95,8 @@ const [inputValue, setInputValue] = useState('')
 
   const resendCodeHandler = async () => {
     try {
+      setLoadingResend(true)
       const email = userInfoEmail;
-      setWaitToResend(true);
       await axios.patch('/api/users/login', {
         email,
       });
@@ -104,8 +105,11 @@ const [inputValue, setInputValue] = useState('')
         {
           variant: 'success',
         }
-      );
+        );
+      setWaitToResend(true);
+      setLoadingResend(false);
     } catch (err) {
+       setLoadingResend(false);
       enqueueSnackbar(getError(err), { variant: 'error' });
     }
   };
@@ -194,7 +198,7 @@ const [inputValue, setInputValue] = useState('')
             />
           </ListItem>
           <ListItem style={{ display: 'flex', justifyContent: 'center' }}>
-            {loading ? (
+            {loadingVerify ? (
               <div className={classes.buttonLoading}>
                 <CircularProgress />
               </div>
@@ -219,6 +223,10 @@ const [inputValue, setInputValue] = useState('')
                   <span style={{ textTransform: 'lowercase' }}>s</span>
                 </Typography>
               </Button>
+            ) : loadingResend ? (
+              <div className={classes.buttonLoading}>
+                  <CircularProgress size={28}/>
+              </div>
             ) : (
               <Button variant='text' onClick={() => resendCodeHandler()}>
                 <Typography

@@ -11,10 +11,14 @@ const handler = nc({
 handler.use(isAuth);
 
 handler.get(async (req, res) => {
-  await db.connect();
-  const orders = await Order.find({ user: req.user._id });
-  await db.disconnect();
-  res.status(200).send(orders);
+  try {
+    await db.connect();
+    const orders = await Order.find({ user: req.user._id });
+    await db.disconnect();
+    res.status(200).send(orders);
+  } catch (err) {
+    res.statusCode.send({ message: err.message });
+  }
 });
 
 export default handler;
