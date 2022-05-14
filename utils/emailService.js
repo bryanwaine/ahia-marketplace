@@ -20,31 +20,32 @@ const transporter = nodemailer.createTransport({
 });
 
 const sendVerifyEmail = async (email, code) => {
-  await transporter
+  try {
+    const result = await transporter
     .sendMail({
       from: `'Ahia Marketplace' <ahia.marketplace.ng@gmail.com>`,
       to: email,
       subject: verifyEmailSubject,
       html: VerifyEmail(code),
     })
-    .then(console.info)
-    .catch((err) => {
-      console.log(err);
-    });
+    return console.log(result);
+  } catch (err) {
+     return console.log(err);
+  }
 };
 
 const sendWelcomeEmail = async (email, firstName) => {
-  await transporter
-    .sendMail({
+  try {
+    const result = await transporter.sendMail({
       from: `'Ahia Marketplace' <ahia.marketplace.ng@gmail.com>`,
       to: email,
       subject: welcomeSubject,
       html: Welcome(firstName),
-    })
-    .then(console.info)
-    .catch((err) => {
-      console.log(err);
     });
+    return console.log(result);
+  } catch (err) {
+    return console.log(err);
+  }
 };
 
 const sendResetPasswordEmail = async (

@@ -49,12 +49,6 @@ const VerifyEmail = () => {
 const [inputValue, setInputValue] = useState('')
 
   useEffect(() => {
-    // if (userInfo && userInfo.isEmailVerified) {
-    //   router.push('/');
-    // }
-    // if (userInfo && !userInfo.isEmailVerified) {
-    //   setValue('email', userInfo.email);
-    // }
     const userInfo = JSON.parse(Cookies.get('userInfo'));
     setUserInfoEmail(userInfo.email);
     if (userInfo && userInfo.isEmailVerified) {
@@ -73,7 +67,6 @@ const [inputValue, setInputValue] = useState('')
         email,
         verificationCode,
       });
-      // Cookies.set('userInfo', JSON.stringify(data));
       dispatch({ type: 'USER_LOGIN', payload: data });
       enqueueSnackbar(`Welcome ${data.firstName}, enjoy your shopping!`, {
         variant: 'success',
@@ -222,7 +215,8 @@ const [inputValue, setInputValue] = useState('')
               <Button variant='text' disabled>
                 <Typography variant='h6' style={{ margin: 0 }}>
                   Resend code in&nbsp;
-                  {<Countdown date={Date.now() + 59000} renderer={renderer} />}<span style={{textTransform: 'lowercase'}}>s</span>
+                  {<Countdown date={Date.now() + 59000} renderer={renderer} />}
+                  <span style={{ textTransform: 'lowercase' }}>s</span>
                 </Typography>
               </Button>
             ) : (
@@ -238,9 +232,12 @@ const [inputValue, setInputValue] = useState('')
           </ListItem>
         </List>
       </form>
-      <Typography variant='h6'>
+      <Typography
+        variant='h6'
+        style={{ display: 'flex', justifyContent: 'center' }}
+      >
         <span style={{ color: '#666666' }}>
-          (Did not get the code? Check your spam folder.)
+          Did not get the code? Check your spam folder.
         </span>
       </Typography>
     </Layout>
