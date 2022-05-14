@@ -13,7 +13,7 @@ handler.get(async (req, res) => {
     await db.disconnect();
     res.send(order);
   } catch (err) {
-    res.statusCode.send({ message: err.message });
+    res.status(err.status).send({ message: err.message });
   }
 });
 

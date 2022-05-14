@@ -147,10 +147,11 @@ const Register = () => {
 
   return (
     <Layout title='Register'>
-      <Typography component='h1' variant='h1'>
+      
+      <form onSubmit={handleSubmit(submitHandler)} className={classes.form}>
+        <Typography component='h1' variant='h1'>
         Create an Account
       </Typography>
-      <form onSubmit={handleSubmit(submitHandler)} className={classes.form}>
         <List>
           <ListItem>
             <Controller

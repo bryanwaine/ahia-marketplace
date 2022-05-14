@@ -21,7 +21,7 @@ handler.post(async (req, res) => {
     await db.disconnect();
     res.status(201).send(order);
   } catch (err) {
-    res.statusCode.send({ message: err.message });
+    res.status(err.status).send({ message: err.message });
   }
 });
 

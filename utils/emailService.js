@@ -21,16 +21,15 @@ const transporter = nodemailer.createTransport({
 
 const sendVerifyEmail = async (email, code) => {
   try {
-    const result = await transporter
-    .sendMail({
+    const result = await transporter.sendMail({
       from: `'Ahia Marketplace' <ahia.marketplace.ng@gmail.com>`,
       to: email,
       subject: verifyEmailSubject,
       html: VerifyEmail(code),
-    })
+    });
     return console.log(result);
   } catch (err) {
-     return console.log(err);
+    return console.log(err);
   }
 };
 
@@ -51,35 +50,33 @@ const sendWelcomeEmail = async (email, firstName) => {
 const sendResetPasswordEmail = async (
   email,
   firstName,
-  url,
-  operating_system,
-  browser_name
+  url
 ) => {
-  await transporter
-    .sendMail({
+  try {
+    const result = await transporter.sendMail({
       from: `'Ahia Marketplace' <ahia.marketplace.ng@gmail.com>`,
       to: email,
       subject: resetPasswordSubject,
-      html: ResetPassword(firstName, url, operating_system, browser_name),
-    })
-    .then(console.info)
-    .catch((err) => {
-      console.log(err);
+      html: ResetPassword(firstName, url),
     });
+    return console.log(result);
+  } catch (err) {
+    return console.log(err);
+  }
 };
 
 const sendResetPasswordSuccessEmail = async (email, firstName) => {
-  await transporter
-    .sendMail({
+  try {
+    const result = await transporter.sendMail({
       from: `'Ahia Marketplace' <ahia.marketplace.ng@gmail.com>`,
       to: email,
       subject: resetPasswordSuccessSubject,
       html: ResetPasswordSuccess(firstName),
     })
-    .then(console.info)
-    .catch((err) => {
-      console.log(err);
-    });
+    return console.log(result)
+  } catch (err) {
+    return console.log(err);
+  }
 };
 
 export {

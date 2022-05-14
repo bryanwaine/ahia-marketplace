@@ -24,7 +24,7 @@ handler.put(async (req, res) => {
       res.status(404).send({ message: `Order not found` });
     }
   } catch (err) {
-    res.statusCode.send({ message: err.message });
+    res.status(err.status).send({ message: err.message });
   }
 });
 

@@ -41,7 +41,7 @@ handler.get(async (req, res) => {
       .status(200)
       .send({ ordersCount, productsCount, usersCount, ordersPrice, salesData });
   } catch (err) {
-    res.statusCode.send({ message: err.message });
+    res.status(err.status).send({ message: err.message });
   }
 });
 

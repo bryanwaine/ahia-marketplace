@@ -26,7 +26,7 @@ handler.post(async (req, res) => {
       await user.save();
       sendVerifyEmail(user.email, verificationCode);
       await db.disconnect();
-      
+
       return res.status(201).send({
         _id: user._id,
         firstName: user.firstName,
@@ -42,7 +42,7 @@ handler.post(async (req, res) => {
         .send({ message: `Email already exists. Please sign in.` });
     }
   } catch (err) {
-    return res.statusCode.send({ message: err.message });
+   return res.status(err.status).send({ message: err.message });
   }
 });
 
@@ -76,10 +76,10 @@ handler.patch(async (req, res) => {
     ) {
       return res.status(400).send({ message: `Verification code is invalid` });
     } else {
-      return res.status(401).send({ message: `Email does not exist.` });
+      return res.status(404).send({ message: `Email does not exist.` });
     }
   } catch (err) {
-    return res.statusCode.send({ message: err.message });
+    return res.status(err.status).send({ message: err.message });
   }
 });
 

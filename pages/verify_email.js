@@ -118,13 +118,14 @@ const [inputValue, setInputValue] = useState('')
 
   return (
     <Layout title='Register'>
-      <Typography component='h1' variant='h1'>
-        Complete your registration
-      </Typography>
+      
       <form
         onSubmit={handleSubmit(verifyEmailHandler)}
         className={classes.form}
       >
+        <Typography component='h1' variant='h1'>
+        Complete your registration
+      </Typography>
         <List>
           <ListItem style={{ display: 'none' }}>
             <Controller

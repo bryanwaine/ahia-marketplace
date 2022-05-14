@@ -21,7 +21,7 @@ handler.get(async (req, res) => {
       res.send(product);
     }
   } catch (err) {
-    res.statusCode.send({ message: err.message });
+    res.status(err.status).send({ message: err.message });
   }
 });
 
@@ -50,7 +50,7 @@ handler.put(async (req, res) => {
       res.send({ message: 'Product updated successfully' });
     }
   } catch (err) {
-    res.statusCode.send({ message: err.message });
+    res.status(err.status).send({ message: err.message });
   }
 });
 
@@ -65,7 +65,7 @@ handler.delete(async (req, res) => {
       res.send({ message: 'Product deleted successfully' });
     }
   } catch (err) {
-    res.statusCode.send({ message: err.message });
+    res.status(err.status).send({ message: err.message });
   }
 });
 

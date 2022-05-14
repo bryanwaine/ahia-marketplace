@@ -28,7 +28,7 @@ handler.post(async (req, res) => {
       res.status(401).send({ message: `Invalid credentials` });
     }
   } catch (err) {
-    res.statusCode.send({ message: err.message });
+    res.status(err.status).send({ message: err.message });
   }
 });
 
@@ -39,7 +39,6 @@ handler.patch(async (req, res) => {
     const user = await User.findOne({ email: req.body.email });
 
     if (!user.isEmailVerified) {
-      (user.verifyEmailToken = null), (user.verifyEmailExpires = null);
       const verificationCode = user.createVerificationToken();
       await user.save();
       sendVerifyEmail(user.email, verificationCode);
@@ -64,7 +63,7 @@ handler.patch(async (req, res) => {
       return res.status(400).send({ message: `Verification code is invalid` });
     }
   } catch (err) {
-    return res.statusCode.send({ message: err.message });
+    return res.status(err.status).send({ message: err.message });
   }
 });
 

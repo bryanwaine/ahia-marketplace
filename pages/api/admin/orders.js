@@ -21,7 +21,7 @@ handler.get(async (req, res) => {
       res.send(orders);
     }
   } catch (err) {
-    res.statusCode.send({ message: err.message });
+    res.status(err.status).send({ message: err.message });
   }
 });
 

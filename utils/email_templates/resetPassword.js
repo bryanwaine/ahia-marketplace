@@ -1,6 +1,6 @@
 
 
-const ResetPassword = (firstName, url, operating_system, browser_name) => {
+const ResetPassword = (firstName, url) => {
   return `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
@@ -496,7 +496,7 @@ const ResetPassword = (firstName, url, operating_system, browser_name) => {
                             </td>
                           </tr>
                         </table>
-                        <p style="font-size: 16px; line-height: 1.625; color: #51545E; margin: .4em 0 1.1875em;">For security, this request was received from a ${operating_system} device using ${browser_name}. If you did not request a password reset, please ignore this email or <a href="https://ahia.vercel.app/support" style="color: #ff0000;">contact support</a> if you have questions.</p>
+                        <p style="font-size: 16px; line-height: 1.625; color: #51545E; margin: .4em 0 1.1875em;">If you did not request a password reset, please ignore this email or <a href="https://ahia.vercel.app/support" style="color: #ff0000;">contact support</a> if you have questions.</p>
                         <p style="font-size: 16px; line-height: 1.625; color: #51545E; margin: .4em 0 1.1875em;">Thanks,
                           <br />The Ahia Marketplace Team</p>
                         <!-- Sub copy -->
