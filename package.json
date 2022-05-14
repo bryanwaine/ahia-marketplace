@@ -26,6 +26,7 @@
     "cloudinary": "^1.28.1",
     "cors": "^2.8.5",
     "flutterwave-react-v3": "^1.2.0",
+    "googleapis": "^100.0.0",
     "js-cookie": "^3.0.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.1.3",

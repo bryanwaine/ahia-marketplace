@@ -189,7 +189,6 @@ const [inputValue, setInputValue] = useState('')
                   }}
                   variant='outlined'
                   autoFocus={true}
-                  autoComplete={false}
                   onInput={(e) => setInputValue(e.target.value)}
                   id='verificationCode'
                   label='Verification Code'
@@ -223,7 +222,7 @@ const [inputValue, setInputValue] = useState('')
               <Button variant='text' disabled>
                 <Typography variant='h6' style={{ margin: 0 }}>
                   Resend code in&nbsp;
-                  {<Countdown date={Date.now() + 60000} renderer={renderer} />}
+                  {<Countdown date={Date.now() + 59000} renderer={renderer} />}<span style={{textTransform: 'lowercase'}}>s</span>
                 </Typography>
               </Button>
             ) : (
