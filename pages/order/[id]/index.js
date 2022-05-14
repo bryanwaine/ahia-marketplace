@@ -141,108 +141,13 @@ const Order = ({ params }) => {
     }
   }, [order, successPay, successDeliver]);
 
-  //   function makePaymentHandler() {
-  //     /*global FlutterwaveCheckout*/
-  //     /*eslint no-undef: "error"*/
-
-  //     try {
-  //       setLoadingPayNow(true);
-  //       FlutterwaveCheckout({
-  //         public_key: process.env.NEXT_PUBLIC_FLW_PUBLIC_KEY,
-  //         tx_ref: `ahia_${uuidv4()}`,
-  //         amount: totalPrice,
-  //         currency: 'NGN',
-  //         payment_options: '',
-  //         // specified redirect URL
-  //         // redirect_url: ``,
-  //         customer: {
-  //           email: userInfo.email,
-  //           phone_number: `0${Number(userInfo.phone)}`,
-  //           name: `${userInfo.firstName} ${userInfo.lastName}`,
-  //         },
-  //         callback: async function (response) {
-  //           try {
-  //             setLoadingPayNow(false);
-  //             const verification = await axios.get(
-  //               `https://cors-anywhere.herokuapp.com/https://api.flutterwave.com/v3/transactions/${response.transaction_id}/verify`,
-  //               {
-  //                 headers: {
-  //                   'Content-Type': 'application/json',
-  //                   Authorization: `Bearer ${process.env.NEXT_PUBLIC_FLW_SECRET_KEY}`,
-  //                 },
-  //               }
-  //             );
-
-  //             const verified = verification.data.data;
-
-  //             setConfirmed('pending');
-
-  //             if (
-  //               verified.amount === response.amount &&
-  //               verified.currency === response.currency &&
-  //               verified.status === response.status &&
-  //               verified.tx_ref === response.tx_ref
-  //             ) {
-  //               try {
-  //                 dispatch({ type: 'PAY_REQUEST' });
-  //                 const { data } = await axios.put(
-  //                   `/api/orders/${order._id}/pay`,
-  //                   {
-  //                     name: verified.customer.name,
-  //                     email: verified.customer.email,
-  //                     phone: verified.customer.phone_number,
-  //                     status: verified.status,
-  //                     tx_ref: verified.tx_ref,
-  //                   },
-  //                   {
-  //                     headers: { authorization: `Bearer ${userInfo.token}` },
-  //                   }
-  //                 );
-  //                 setConfirmed('yes');
-  //                 dispatch({ type: 'PAY_SUCCESS', payload: data });
-  //                 await Router.reload(window.location.pathname);
-  //                 enqueueSnackbar(`Your payment was successfull!`, {
-  //                   variant: 'success',
-  //                 });
-  //               } catch (err) {
-  //                 dispatch({ type: 'PAY_FAIL', payload: getError(err) });
-  //                 enqueueSnackbar(getError(err), {
-  //                   variant: 'error',
-  //                 });
-  //               }
-  //             } else
-  //               enqueueSnackbar(`Loading payment...`, {
-  //                 variant: 'success',
-  //               });
-  //           } catch (err) {
-  //             enqueueSnackbar(getError(err), { variant: 'error' });
-  //           }
-  //         },
-  //         onclose: function () {
-  //           // close modal
-  //           setLoadingPayNow(false);
-  //         },
-  //         customizations: {
-  //           title: `Order ${orderId}`,
-  //           description: `Payment for order ${orderId}`,
-  //           logo: 'https://i.postimg.cc/6TBPcPqk/ahia-thumb.png',
-  //         },
-  //       });
-  //     } catch (err) {
-  //       setLoadingPayNow(false);
-  //       enqueueSnackbar(getError(err), {
-  //         variant: 'error',
-  //       });
-  //     }
-  //   }
-
   function makePaymentHandler() {
     /*global PaystackPop*/
     /*eslint no-undef: "error"*/
     try {
       setLoadingPayNow(true);
       const handler = PaystackPop.setup({
-        key: process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY,
+        key: process.env.PAYSTACK_PUBLIC_KEY,
         email: userInfo.email,
         amount: totalPrice * 100,
         currency: 'NGN',
@@ -262,7 +167,7 @@ const Order = ({ params }) => {
               `https://api.paystack.co/transaction/verify/${reference}`,
               {
                 headers: {
-                  Authorization: `Bearer ${process.env.NEXT_PUBLIC_PAYSTACK_SECRET_KEY}`,
+                  Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`,
                 },
               }
             );
