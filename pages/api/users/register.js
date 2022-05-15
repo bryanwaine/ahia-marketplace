@@ -2,6 +2,7 @@ import nc from 'next-connect';
 import User from '../../../models/User';
 import db from '../../../utils/db';
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 import { signToken } from '../../../utils/auth';
 import { sendVerifyEmail, sendWelcomeEmail } from '../../../utils/emailService';
 
@@ -39,10 +40,10 @@ handler.post(async (req, res) => {
     } else {
       return res
         .status(401)
-        .send({ message: `Email already exists. Please sign in.` });
+        .send({ message: `Email already exists. Please Login.` });
     }
   } catch (err) {
-   return res.status(err.status).send({ message: err.message });
+    return res.status(err.status).send({ message: err.message });
   }
 });
 
@@ -51,10 +52,13 @@ handler.patch(async (req, res) => {
   try {
     await db.connect();
     const user = await User.findOne({ email: req.body.email });
-    if (
-      user &&
-      bcrypt.compareSync(req.body.verificationCode, user.verifyEmailToken)
-    ) {
+    const decodedToken = jwt.verify(
+      user.verifyEmailToken,
+      process.env.JWT_SECRET
+    );
+    const verificationToken = decodedToken.verificationToken;
+
+    if (verificationToken === req.body.verificationCode) {
       (user.isEmailVerified = true), await user.save();
       await db.disconnect();
       sendWelcomeEmail(user.email, user.firstName);
@@ -70,16 +74,15 @@ handler.patch(async (req, res) => {
         isAdmin: user.isAdmin,
         isEmailVerified: user.isEmailVerified,
       });
-    } else if (
-      user &&
-      !bcrypt.compareSync(req.body.verificationCode, user.verifyEmailToken)
-    ) {
-      return res.status(400).send({ message: `Verification code is invalid` });
+    }  else if (verificationToken !== req.body.verificationCode) {
+      return res
+        .status(400)
+        .send({ message: `Verification code is invalid` });
     } else {
       return res.status(404).send({ message: `Email does not exist.` });
     }
   } catch (err) {
-    return res.status(err.status).send({ message: err.message });
+    return res.status(400).send({ message: `Verification code is expired` });
   }
 });
 

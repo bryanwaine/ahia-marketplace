@@ -159,7 +159,7 @@ export default function Layout({
       const { data } = await axios.get(`/api/products/categories`);
       setCategories(data);
     } catch (err) {
-     console.error(err)
+      console.error(err);
     }
   };
 
@@ -171,7 +171,7 @@ export default function Layout({
     typography: {
       h1: {
         fontSize: '1.6rem',
-        fontWeight: 300,
+        fontWeight: 500,
         margin: '1rem 0',
       },
       h2: {
@@ -640,7 +640,7 @@ export default function Layout({
                               : classes.typographyDark
                           }
                         >
-                          Sign In
+                          Login
                         </Typography>
                       </div>
                     </IconButton>
@@ -672,7 +672,7 @@ export default function Layout({
                               : classes.typographyDark
                           }
                         >
-                          Sign In
+                          Login
                         </Typography>
                       </div>
                     </IconButton>
@@ -910,7 +910,7 @@ export default function Layout({
                               : classes.typographyDark
                           }
                         >
-                          Sign In
+                          Login
                         </Typography>
                       </div>
                     </IconButton>
@@ -942,7 +942,7 @@ export default function Layout({
                               : classes.typographyDark
                           }
                         >
-                          Sign In
+                          Login
                         </Typography>
                       </div>
                     </IconButton>

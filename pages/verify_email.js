@@ -117,14 +117,13 @@ const [inputValue, setInputValue] = useState('')
 
   return (
     <Layout title='Register'>
-      
       <form
         onSubmit={handleSubmit(verifyEmailHandler)}
         className={classes.form}
       >
         <Typography component='h1' variant='h1'>
-        Complete your registration
-      </Typography>
+          Complete your registration
+        </Typography>
         <List>
           <ListItem style={{ display: 'none' }}>
             <Controller
@@ -202,7 +201,7 @@ const [inputValue, setInputValue] = useState('')
           <ListItem style={{ display: 'flex', justifyContent: 'center' }}>
             {loadingVerify ? (
               <div className={classes.buttonLoading}>
-                <CircularProgress />
+                <CircularProgress size={31} />
               </div>
             ) : (
               <Button
@@ -227,7 +226,7 @@ const [inputValue, setInputValue] = useState('')
               </Button>
             ) : loadingResend ? (
               <div className={classes.buttonLoading}>
-                  <CircularProgress size={28}/>
+                <CircularProgress size={28} />
               </div>
             ) : (
               <Button variant='text' onClick={() => resendCodeHandler()}>

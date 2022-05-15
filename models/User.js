@@ -1,6 +1,5 @@
 import mongoose from 'mongoose';
 import crypto from 'crypto';
-import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
 const refreshToken = new mongoose.Schema({
@@ -30,9 +29,6 @@ const userSchema = new mongoose.Schema(
     verifyEmailToken: {
       type: String,
     },
-    verifyEmailExpires: {
-      type: Date,
-    },
     passwordResetToken: {
       type: String,
     },
@@ -45,13 +41,15 @@ const userSchema = new mongoose.Schema(
 userSchema.methods.createVerificationToken = function () {
   this.verifyEmailToken = null;
 
-  this.verifyEmailExpires = null;
-
   const verificationToken = crypto.randomBytes(3).toString('hex');
 
-  this.verifyEmailToken = bcrypt.hashSync(verificationToken);
-
-  this.verifyEmailExpires = Date.now() + 10 * 60 * 1000;
+  this.verifyEmailToken = jwt.sign(
+    { verificationToken },
+    process.env.JWT_SECRET,
+    {
+      expiresIn: '600s',
+    }
+  );
 
   return verificationToken;
 };
@@ -65,7 +63,7 @@ userSchema.methods.createPasswordResetToken = function () {
     expiresIn: '600s',
   });
 
-  this.passwordResetToken = bcrypt.hashSync(resetToken);
+  this.passwordResetToken = resetToken
 
   return resetToken;
 };

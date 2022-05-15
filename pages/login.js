@@ -68,22 +68,19 @@ const Login = () => {
         });
         await Cookies.set('userInfo', JSON.stringify(data));
         router.push(`/verify_email`);
-        enqueueSnackbar(
-          `Please check your email to complete sign in.`,
-          {
-            variant: 'success',
-          }
-        );
+        enqueueSnackbar(`Please check your email to complete Login.`, {
+          variant: 'success',
+        });
         return;
       }
-       if (data.isEmailVerified) {
-         enqueueSnackbar(`Welcome back, ${data.firstName}`, {
-           variant: 'success',
-         });
-         dispatch({ type: 'USER_LOGIN', payload: data });
-         Cookies.set('userInfo', JSON.stringify(data));
-         router.push(redirect || '/');
-       }
+      if (data.isEmailVerified) {
+        enqueueSnackbar(`Welcome back, ${data.firstName}`, {
+          variant: 'success',
+        });
+        dispatch({ type: 'USER_LOGIN', payload: data });
+        Cookies.set('userInfo', JSON.stringify(data));
+        router.push(redirect || '/');
+      }
     } catch (err) {
       setLoading(false);
       enqueueSnackbar(getError(err), { variant: 'error' });
@@ -91,10 +88,10 @@ const Login = () => {
   };
 
   return (
-    <Layout title='Sign in to your account'>
+    <Layout title='Login to your account'>
       <form onSubmit={handleSubmit(submitHandler)} className={classes.form}>
         <Typography component='h1' variant='h1'>
-          Sign In
+          Login
         </Typography>
         <List>
           <ListItem>
@@ -193,7 +190,7 @@ const Login = () => {
                 color='primary'
                 type='submit'
               >
-                SIGN IN
+                Login
               </Button>
             )}
           </ListItem>

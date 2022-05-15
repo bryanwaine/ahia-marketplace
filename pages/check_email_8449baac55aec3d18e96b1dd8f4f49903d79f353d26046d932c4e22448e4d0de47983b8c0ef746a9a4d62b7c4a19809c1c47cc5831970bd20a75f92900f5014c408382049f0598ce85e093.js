@@ -7,12 +7,10 @@ import DoneAllIcon from '@mui/icons-material/DoneAll';
 
 const Check_email = () => {
   const classes = useStyles();
+
   return (
     <Layout title='Check your email for further Instructions'>
       <div className={classes.form}>
-        <Typography component='h1' variant='h1'>
-          Reset password
-        </Typography>
         <Grid
           container
           style={{
@@ -51,7 +49,7 @@ const Check_email = () => {
                 className={classes.centeredText}
                 style={{ color: '#ff0000' }}
               >
-                Back to sign in
+                Back to Login
               </Typography>
             </Link>
           </NextLink>

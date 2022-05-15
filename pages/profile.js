@@ -27,7 +27,13 @@ import { Controller, useForm } from 'react-hook-form';
 import { useSnackbar } from 'notistack';
 import { getError } from '../utils/error';
 import dynamic from 'next/dynamic';
-import NextLink from 'next/link';
+import NextLink from 'next/link'; import * as Yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+import YupPassword from 'yup-password';
+YupPassword(Yup); // extend yup
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+
 
 function NumberFormatCustom(props) {
   const { inputRef, onChange, ...other } = props;
@@ -56,12 +62,23 @@ NumberFormatCustom.propTypes = {
 };
 
 const Profile = () => {
+  // form validation rules
+  const validationSchema = Yup.object().shape({
+    password: Yup.string().password().required('Password is required'),
+    confirmPassword: Yup.string()
+      .password()
+      .required('Confirm Password is required')
+      .oneOf([Yup.ref('password')], 'Passwords must match'),
+  });
+
+  const formOptions = { resolver: yupResolver(validationSchema) };
+
   const {
     handleSubmit,
     control,
     formState: { errors },
     setValue,
-  } = useForm();
+  } = useForm(formOptions);
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const router = useRouter();
   const { state, dispatch } = useContext(Store);
@@ -70,6 +87,12 @@ const Profile = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+    const [showPasswordInfo, setShowPasswordInfo] = useState(false);
+    const [inputValue, setInputValue] = useState('');
+    const [isUpperCase, setIsUpperCase] = useState(false);
+    const [isLowerCase, setIsLowerCase] = useState(false);
+    const [isNumber, setIsNumber] = useState(false);
+    const [isSymbol, setIsSymbol] = useState(false);
 
   useEffect(() => {
     if (!userInfo) {
@@ -93,6 +116,22 @@ const Profile = () => {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
+
+   const passwordHintHandler = (e) => {
+     const uppercase = new RegExp('(?=.*[A-Z])');
+     const lowercase = new RegExp('(?=.*[a-z])');
+     const number = new RegExp('(?=.*\\d)');
+     const symbol = new RegExp('(?=.*[(-+~:=_!@#$%^&*.,?)])');
+
+     uppercase.test(e.target.value)
+       ? setIsUpperCase(true)
+       : setIsUpperCase(false);
+     lowercase.test(e.target.value)
+       ? setIsLowerCase(true)
+       : setIsLowerCase(false);
+     number.test(e.target.value) ? setIsNumber(true) : setIsNumber(false);
+     symbol.test(e.target.value) ? setIsSymbol(true) : setIsSymbol(false);
+   };
 
   const submitHandler = async ({
     firstName,
@@ -325,28 +364,25 @@ const Profile = () => {
                     name='password'
                     control={control}
                     defaultValue=''
-                    rules={{
-                      validate: (value) =>
-                        value === '' ||
-                        value.length > 6 ||
-                        'Password must be at least 6 characters',
-                    }}
                     render={({ field }) => (
                       <TextField
                         variant='standard'
                         fullWidth
+                        onInput={(e) => {
+                          setInputValue(e.target.value);
+                          passwordHintHandler(e);
+                        }}
                         id='password'
                         label='Password'
+                        onFocus={() => setShowPasswordInfo(true)}
+                        onBlur={() => setShowPasswordInfo(false)}
                         autoComplete='new-password'
                         error={Boolean(errors.password)}
-                        helperText={
-                          errors.password
-                            ? 'Password must be at least 6 characters'
-                            : ''
-                        }
+                        helperText={errors.password?.message}
                         {...field}
                         InputProps={{
                           style: { fontSize: '0.8rem', fontWeight: 300 },
+
                           endAdornment: (
                             <InputAdornment position='end'>
                               <IconButton
@@ -372,17 +408,133 @@ const Profile = () => {
                     )}
                   />
                 </ListItem>
+                {showPasswordInfo ? (
+                  <ListItem>
+                    <div>
+                      <span style={{ display: 'flex', margin: 0 }}>
+                        {inputValue.length < 8 ? (
+                          <HighlightOffIcon
+                            fontSize='small'
+                            style={{ fontSize: '1rem', color: '#ff0000' }}
+                          />
+                        ) : (
+                          <CheckCircleOutlineIcon
+                            fontSize='small'
+                            style={{ fontSize: '1rem', color: '#00ff00' }}
+                          />
+                        )}
+                        <Typography
+                          variant='h6'
+                          style={{
+                            margin: '0 0 0 5px',
+                            fontSize: '0.7rem',
+                            color:
+                              inputValue.length < 8 ? '#ff0000' : '#00ff00',
+                          }}
+                        >
+                          Length must be at least 8 characters
+                        </Typography>
+                      </span>
+                      <span style={{ display: 'flex', margin: 0 }}>
+                        {isUpperCase ? (
+                          <CheckCircleOutlineIcon
+                            fontSize='small'
+                            style={{ fontSize: '1rem', color: '#00ff00' }}
+                          />
+                        ) : (
+                          <HighlightOffIcon
+                            fontSize='small'
+                            style={{ fontSize: '1rem', color: '#ff0000' }}
+                          />
+                        )}
+                        <Typography
+                          variant='h6'
+                          style={{
+                            margin: '0 0 0 5px',
+                            fontSize: '0.7rem',
+                            color: isUpperCase ? '#00ff00' : '#ff0000',
+                          }}
+                        >
+                          Must contain one uppercase letter
+                        </Typography>
+                      </span>
+                      <span style={{ display: 'flex', margin: 0 }}>
+                        {isLowerCase ? (
+                          <CheckCircleOutlineIcon
+                            fontSize='small'
+                            style={{ fontSize: '1rem', color: '#00ff00' }}
+                          />
+                        ) : (
+                          <HighlightOffIcon
+                            fontSize='small'
+                            style={{ fontSize: '1rem', color: '#ff0000' }}
+                          />
+                        )}
+                        <Typography
+                          variant='h6'
+                          style={{
+                            margin: '0 0 0 5px',
+                            fontSize: '0.7rem',
+                            color: isLowerCase ? '#00ff00' : '#ff0000',
+                          }}
+                        >
+                          Must contain one lowercase letter
+                        </Typography>
+                      </span>
+                      <span style={{ display: 'flex', margin: 0 }}>
+                        {isNumber ? (
+                          <CheckCircleOutlineIcon
+                            fontSize='small'
+                            style={{ fontSize: '1rem', color: '#00ff00' }}
+                          />
+                        ) : (
+                          <HighlightOffIcon
+                            fontSize='small'
+                            style={{ fontSize: '1rem', color: '#ff0000' }}
+                          />
+                        )}
+                        <Typography
+                          variant='h6'
+                          style={{
+                            margin: '0 0 0 5px',
+                            fontSize: '0.7rem',
+                            color: isNumber ? '#00ff00' : '#ff0000',
+                          }}
+                        >
+                          Must contain one number
+                        </Typography>
+                      </span>
+                      <span style={{ display: 'flex', margin: 0 }}>
+                        {isSymbol ? (
+                          <CheckCircleOutlineIcon
+                            fontSize='small'
+                            style={{ fontSize: '1rem', color: '#00ff00' }}
+                          />
+                        ) : (
+                          <HighlightOffIcon
+                            fontSize='small'
+                            style={{ fontSize: '1rem', color: '#ff0000' }}
+                          />
+                        )}
+                        <Typography
+                          variant='h6'
+                          style={{
+                            margin: '0 0 0 5px',
+                            fontSize: '0.7rem',
+                            color: isSymbol ? '#00ff00' : '#ff0000',
+                          }}
+                        >
+                          Must contain one symbol (-+~:=_!@#$%^&*.,?)
+                        </Typography>
+                      </span>
+                    </div>
+                  </ListItem>
+                ) : null}
                 <ListItem>
                   <Controller
                     name='confirmPassword'
                     control={control}
                     defaultValue=''
-                    rules={{
-                      validate: (value) =>
-                        value === '' ||
-                        value.length > 6 ||
-                        'Password must be at least 6 characters',
-                    }}
                     render={({ field }) => (
                       <TextField
                         variant='standard'
@@ -390,11 +542,7 @@ const Profile = () => {
                         id='confirmPassword'
                         label='Confirm Password'
                         error={Boolean(errors.confirmPassword)}
-                        helperText={
-                          errors.password
-                            ? 'Password must be at least 6 characters'
-                            : ''
-                        }
+                        helperText={errors.confirmPassword?.message}
                         {...field}
                         InputProps={{
                           style: { fontSize: '0.8rem', fontWeight: 300 },

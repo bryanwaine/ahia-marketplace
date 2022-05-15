@@ -25,8 +25,12 @@ import { Controller, useForm } from 'react-hook-form';
 import { useSnackbar } from 'notistack';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
+import YupPassword from 'yup-password';
+YupPassword(Yup); // extend yup
 import { getError } from '../utils/error';
 import Cookies from 'js-cookie';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
 function NumberFormatCustom(props) {
   const { inputRef, onChange, ...other } = props;
@@ -69,10 +73,9 @@ const Register = () => {
     phone: Yup.string()
       .min(10, `Phone number should be 10 digits excluding the first '0'`)
       .max(10, `Phone number should be 10 digits excluding the first '0'`),
-    password: Yup.string()
-      .required('Password is required')
-      .min(10, 'Password must be at least 10 characters'),
+    password: Yup.string().password().required('Password is required'),
     confirmPassword: Yup.string()
+      .password()
       .required('Confirm Password is required')
       .oneOf([Yup.ref('password')], 'Passwords must match'),
   });
@@ -92,6 +95,13 @@ const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [showPhoneInfo, setShowPhoneInfo] = useState(false);
+  const [showPasswordInfo, setShowPasswordInfo] = useState(false);
+  const [inputValue, setInputValue] = useState('');
+  const [isUpperCase, setIsUpperCase] = useState(false);
+  const [isLowerCase, setIsLowerCase] = useState(false);
+  const [isNumber, setIsNumber] = useState(false);
+  const [isSymbol, setIsSymbol] = useState(false);
 
   useEffect(() => {
     if (userInfo) {
@@ -109,6 +119,22 @@ const Register = () => {
 
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
+  };
+
+  const passwordHintHandler = (e) => {
+    const uppercase = new RegExp('(?=.*[A-Z])');
+    const lowercase = new RegExp('(?=.*[a-z])');
+    const number = new RegExp('(?=.*\\d)');
+    const symbol = new RegExp('(?=.*[(-+~:=_!@#$%^&*.,?)])');
+
+    uppercase.test(e.target.value)
+      ? setIsUpperCase(true)
+      : setIsUpperCase(false);
+    lowercase.test(e.target.value)
+      ? setIsLowerCase(true)
+      : setIsLowerCase(false);
+    number.test(e.target.value) ? setIsNumber(true) : setIsNumber(false);
+    symbol.test(e.target.value) ? setIsSymbol(true) : setIsSymbol(false);
   };
 
   const submitHandler = async ({
@@ -147,11 +173,10 @@ const Register = () => {
 
   return (
     <Layout title='Register'>
-      
       <form onSubmit={handleSubmit(submitHandler)} className={classes.form}>
         <Typography component='h1' variant='h1'>
-        Create an Account
-      </Typography>
+          Create an Account
+        </Typography>
         <List>
           <ListItem>
             <Controller
@@ -254,6 +279,8 @@ const Register = () => {
                     style: { fontSize: '0.8rem', fontWeight: 300 },
                   }}
                   variant='standard'
+                  onFocus={() => setShowPhoneInfo(true)}
+                  onBlur={() => setShowPhoneInfo(false)}
                   fullWidth
                   id='phone'
                   label='Phone Number'
@@ -265,6 +292,17 @@ const Register = () => {
               )}
             />
           </ListItem>
+          {showPhoneInfo ? (
+            <ListItem>
+              <Typography
+                variant='h6'
+                style={{ margin: 0, fontSize: '0.7rem' }}
+              >
+                <span style={{ listStyleType: 'circle' }}>e.g. 9081234567</span>
+              </Typography>
+            </ListItem>
+          ) : null}
+
           <ListItem>
             <Controller
               name='password'
@@ -274,8 +312,14 @@ const Register = () => {
                 <TextField
                   variant='standard'
                   fullWidth
+                  onInput={(e) => {
+                    setInputValue(e.target.value);
+                    passwordHintHandler(e);
+                  }}
                   id='password'
                   label='Password'
+                  onFocus={() => setShowPasswordInfo(true)}
+                  onBlur={() => setShowPasswordInfo(false)}
                   autoComplete='new-password'
                   error={Boolean(errors.password)}
                   helperText={errors.password?.message}
@@ -304,6 +348,128 @@ const Register = () => {
               )}
             />
           </ListItem>
+          {showPasswordInfo ? (
+            <ListItem>
+              <div>
+                <span style={{ display: 'flex', margin: 0 }}>
+                  {inputValue.length < 8 ? (
+                    <HighlightOffIcon
+                      fontSize='small'
+                      style={{ fontSize: '1rem', color: '#ff0000' }}
+                    />
+                  ) : (
+                    <CheckCircleOutlineIcon
+                      fontSize='small'
+                      style={{ fontSize: '1rem', color: '#00ff00' }}
+                    />
+                  )}
+                  <Typography
+                    variant='h6'
+                    style={{
+                      margin: '0 0 0 5px',
+                      fontSize: '0.7rem',
+                      color: inputValue.length < 8 ? '#ff0000' : '#00ff00',
+                    }}
+                  >
+                    Length must be at least 8 characters
+                  </Typography>
+                </span>
+                <span style={{ display: 'flex', margin: 0 }}>
+                  {isUpperCase ? (
+                    <CheckCircleOutlineIcon
+                      fontSize='small'
+                      style={{ fontSize: '1rem', color: '#00ff00' }}
+                    />
+                  ) : (
+                    <HighlightOffIcon
+                      fontSize='small'
+                      style={{ fontSize: '1rem', color: '#ff0000' }}
+                    />
+                  )}
+                  <Typography
+                    variant='h6'
+                    style={{
+                      margin: '0 0 0 5px',
+                      fontSize: '0.7rem',
+                      color: isUpperCase ? '#00ff00' : '#ff0000',
+                    }}
+                  >
+                    Must contain one uppercase letter
+                  </Typography>
+                </span>
+                <span style={{ display: 'flex', margin: 0 }}>
+                  {isLowerCase ? (
+                    <CheckCircleOutlineIcon
+                      fontSize='small'
+                      style={{ fontSize: '1rem', color: '#00ff00' }}
+                    />
+                  ) : (
+                    <HighlightOffIcon
+                      fontSize='small'
+                      style={{ fontSize: '1rem', color: '#ff0000' }}
+                    />
+                  )}
+                  <Typography
+                    variant='h6'
+                    style={{
+                      margin: '0 0 0 5px',
+                      fontSize: '0.7rem',
+                      color: isLowerCase ? '#00ff00' : '#ff0000',
+                    }}
+                  >
+                    Must contain one lowercase letter
+                  </Typography>
+                </span>
+                <span style={{ display: 'flex', margin: 0 }}>
+                  {isNumber ? (
+                    <CheckCircleOutlineIcon
+                      fontSize='small'
+                      style={{ fontSize: '1rem', color: '#00ff00' }}
+                    />
+                  ) : (
+                    <HighlightOffIcon
+                      fontSize='small'
+                      style={{ fontSize: '1rem', color: '#ff0000' }}
+                    />
+                  )}
+                  <Typography
+                    variant='h6'
+                    style={{
+                      margin: '0 0 0 5px',
+                      fontSize: '0.7rem',
+                      color: isNumber ? '#00ff00' : '#ff0000',
+                    }}
+                  >
+                    Must contain one number
+                  </Typography>
+                </span>
+                <span style={{ display: 'flex', margin: 0 }}>
+                  {isSymbol ? (
+                    <CheckCircleOutlineIcon
+                      fontSize='small'
+                      style={{ fontSize: '1rem', color: '#00ff00' }}
+                    />
+                  ) : (
+                    <HighlightOffIcon
+                      fontSize='small'
+                      style={{ fontSize: '1rem', color: '#ff0000' }}
+                    />
+                  )}
+                  <Typography
+                    variant='h6'
+                    style={{
+                      margin: '0 0 0 5px',
+                      fontSize: '0.7rem',
+                      color: isSymbol ? '#00ff00' : '#ff0000',
+                    }}
+                  >
+                    Must contain one symbol (-+~:=_!@#$%^&*.,?)
+                  </Typography>
+                </span>
+              </div>
+            </ListItem>
+          ) : null}
+
           <ListItem>
             <Controller
               name='confirmPassword'
@@ -371,7 +537,7 @@ const Register = () => {
       <NextLink href={`/login?redirect=${redirect || '/'}`} passHref>
         <Link>
           <Typography variant='h6' className={classes.centeredLink}>
-            SIGN IN
+            Login
           </Typography>
         </Link>
       </NextLink>
