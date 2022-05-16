@@ -25,7 +25,7 @@ import Cookies from 'js-cookie';
 import { Controller, useForm } from 'react-hook-form';
 import { useSnackbar } from 'notistack';
 import { getError } from '../utils/error';
-import PersonIcon from '@mui/icons-material/Person';
+import MailIcon from '@mui/icons-material/Mail';
 import LockIcon from '@mui/icons-material/Lock';
 
 const Login = () => {
@@ -116,7 +116,7 @@ const Login = () => {
                       startAdornment: (
                         <InputAdornment position='start'>
                           <IconButton>
-                            <PersonIcon />
+                            <MailIcon />
                           </IconButton>
                         </InputAdornment>
                       ),

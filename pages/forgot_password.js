@@ -18,7 +18,7 @@ import { getError } from '../utils/error';
 import { fnOsDetect, fnBrowserDetect } from '../utils/deviceDetect';
 import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
-import PersonIcon from '@mui/icons-material/Person';
+import MailIcon from '@mui/icons-material/Mail';
 
 const Forgot_password = () => {
   const {
@@ -89,10 +89,8 @@ const Forgot_password = () => {
                       style: { fontSize: '0.8rem', fontWeight: 300 },
                       startAdornment: (
                         <InputAdornment position='start'>
-                          <IconButton
-                            
-                          >
-                            <PersonIcon />
+                          <IconButton>
+                            <MailIcon />
                           </IconButton>
                         </InputAdornment>
                       ),
