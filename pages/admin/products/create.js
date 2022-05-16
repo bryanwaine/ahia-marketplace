@@ -235,10 +235,10 @@ const ProductCreate = () => {
                         InputLabelProps={{
                           style: { fontSize: '0.8rem', fontWeight: 300 },
                         }}
-                        variant='standard'
+                        variant='outlined'
                         fullWidth
                         id='name'
-                        label='Name e.g. Vegetable Soup or Pounded Yam'
+                        label='Name e.g. Vegetable Soup or Semovita'
                         error={Boolean(errors.name)}
                         helperText={errors.name ? 'Name is required' : null}
                         {...field}
@@ -262,7 +262,7 @@ const ProductCreate = () => {
                         InputLabelProps={{
                           style: { fontSize: '0.8rem', fontWeight: 300 },
                         }}
-                        variant='standard'
+                        variant='outlined'
                         fullWidth
                         id='volume'
                         label='Volume e.g. 2.5 litres or 1 wrap'
@@ -289,7 +289,7 @@ const ProductCreate = () => {
                         InputLabelProps={{
                           style: { fontSize: '0.8rem', fontWeight: 300 },
                         }}
-                        variant='standard'
+                        variant='outlined'
                         fullWidth
                         id='servings'
                         label='Servings e.g. 12'
@@ -318,10 +318,10 @@ const ProductCreate = () => {
                         InputLabelProps={{
                           style: { fontSize: '0.8rem', fontWeight: 300 },
                         }}
-                        variant='standard'
+                        variant='outlined'
                         fullWidth
                         id='slug'
-                        label='Slug e.g. veg_soup_2.5l or pound_yam_1wrp'
+                        label='Slug e.g. veg_soup_2.5l or Semo_1wrp'
                         error={Boolean(errors.slug)}
                         helperText={errors.slug ? 'Slug is required' : null}
                         {...field}
@@ -345,7 +345,7 @@ const ProductCreate = () => {
                         InputLabelProps={{
                           style: { fontSize: '0.8rem', fontWeight: 300 },
                         }}
-                        variant='standard'
+                        variant='outlined'
                         fullWidth
                         id='category'
                         label='Category e.g. Soups or Swallow'
@@ -374,7 +374,7 @@ const ProductCreate = () => {
                         InputLabelProps={{
                           style: { fontSize: '0.8rem', fontWeight: 300 },
                         }}
-                        variant='standard'
+                        variant='outlined'
                         fullWidth
                         disabled
                         id='image'
@@ -426,7 +426,7 @@ const ProductCreate = () => {
                         InputLabelProps={{
                           style: { fontSize: '0.8rem', fontWeight: 300 },
                         }}
-                        variant='standard'
+                        variant='outlined'
                         fullWidth
                         disabled
                         id='featuredImage'
@@ -474,7 +474,7 @@ const ProductCreate = () => {
                         InputLabelProps={{
                           style: { fontSize: '0.8rem', fontWeight: 300 },
                         }}
-                        variant='standard'
+                        variant='outlined'
                         fullWidth
                         id='price'
                         label='Price e.g. 6000'
@@ -501,7 +501,7 @@ const ProductCreate = () => {
                         InputLabelProps={{
                           style: { fontSize: '0.8rem', fontWeight: 300 },
                         }}
-                        variant='standard'
+                        variant='outlined'
                         fullWidth
                         id='vendor'
                         label='Vendor e.g your_brand_name'
@@ -528,7 +528,7 @@ const ProductCreate = () => {
                         InputLabelProps={{
                           style: { fontSize: '0.8rem', fontWeight: 300 },
                         }}
-                        variant='standard'
+                        variant='outlined'
                         fullWidth
                         id='countInStock'
                         label='Count in stock e.g. 20'
@@ -559,7 +559,7 @@ const ProductCreate = () => {
                         InputLabelProps={{
                           style: { fontSize: '0.8rem', fontWeight: 300 },
                         }}
-                        variant='standard'
+                        variant='outlined'
                         fullWidth
                         multiline
                         id='description'

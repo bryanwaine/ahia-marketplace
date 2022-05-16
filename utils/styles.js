@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
     cursor: 'pointer',
   },
   ahiaNoLayout: {
-  marginTop: '-50px',
+    marginTop: '-50px',
     width: '100%',
     display: 'flex',
     justifyContent: 'center',
@@ -155,12 +155,31 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   buttonPrimary: {
-    backgroundColor: 'primary',
+    backgroundImage:
+      'linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)',
     color: '#ffffff',
+    boxShadow: '-3px 3px 5px 1px rgba(0,0,0,0.50)',
+    webkitBoxShadow: '-3px 3px 5px 1px rgba(0,0,0,0.50)',
+    mozBoxShadow: '-3px 3px 5px 1px rgba(0,0,0,0.50)',
+    '&:hover': {
+      boxShadow: '0px 0px 5px 1px rgba(0,0,0,0.66)',
+      webkitBoxShadow: '0px 0px 5px 1px rgba(0,0,0,0.66)',
+      mozBoxShadow: '0px 0px 5px 1px rgba(0,0,0,0.66)',
+    },
   },
   buttonSecondary: {
     backgroundColor: '#208080',
-    color: '#fff',
+    backgroundImage:
+      'linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)',
+    color: '#ffffff',
+    boxShadow: '-3px 3px 5px 1px rgba(0,0,0,0.50)',
+    webkitBoxShadow: '-3px 3px 5px 1px rgba(0,0,0,0.50)',
+    mozBoxShadow: '-3px 3px 5px 1px rgba(0,0,0,0.50)',
+    '&:hover': {
+      boxShadow: '0px 0px 5px 1px rgba(0,0,0,0.66)',
+      webkitBoxShadow: '0px 0px 5px 1px rgba(0,0,0,0.66)',
+      mozBoxShadow: '0px 0px 5px 1px rgba(0,0,0,0.66)',
+    },
   },
   buttonBack: {
     backgroundColor: '#aaaaaa',
@@ -240,7 +259,7 @@ const useStyles = makeStyles((theme) => ({
   form: {
     maxWidth: 500,
     margin: '0 auto',
-    padding: 10
+    padding: 10,
   },
   flexDiv: {
     display: 'flex',

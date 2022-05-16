@@ -287,7 +287,7 @@ const ProductEdit = ({ params }) => {
                           InputLabelProps={{
                             style: { fontSize: '0.8rem', fontWeight: 300 },
                           }}
-                          variant='standard'
+                          variant='outlined'
                           fullWidth
                           id='name'
                           label='Name'
@@ -314,7 +314,7 @@ const ProductEdit = ({ params }) => {
                           InputLabelProps={{
                             style: { fontSize: '0.8rem', fontWeight: 300 },
                           }}
-                          variant='standard'
+                          variant='outlined'
                           fullWidth
                           id='volume'
                           label='Volume'
@@ -343,7 +343,7 @@ const ProductEdit = ({ params }) => {
                           InputLabelProps={{
                             style: { fontSize: '0.8rem', fontWeight: 300 },
                           }}
-                          variant='standard'
+                          variant='outlined'
                           fullWidth
                           id='servings'
                           label='Servings'
@@ -372,7 +372,7 @@ const ProductEdit = ({ params }) => {
                           InputLabelProps={{
                             style: { fontSize: '0.8rem', fontWeight: 300 },
                           }}
-                          variant='standard'
+                          variant='outlined'
                           fullWidth
                           id='slug'
                           label='Slug'
@@ -399,7 +399,7 @@ const ProductEdit = ({ params }) => {
                           InputLabelProps={{
                             style: { fontSize: '0.8rem', fontWeight: 300 },
                           }}
-                          variant='standard'
+                          variant='outlined'
                           fullWidth
                           id='category'
                           label='Category'
@@ -428,7 +428,7 @@ const ProductEdit = ({ params }) => {
                           InputLabelProps={{
                             style: { fontSize: '0.8rem', fontWeight: 300 },
                           }}
-                          variant='standard'
+                          variant='outlined'
                           fullWidth
                           disabled
                           id='image'
@@ -484,7 +484,7 @@ const ProductEdit = ({ params }) => {
                           InputLabelProps={{
                             style: { fontSize: '0.8rem', fontWeight: 300 },
                           }}
-                          variant='standard'
+                          variant='outlined'
                           fullWidth
                           disabled
                           id='featuredImage'
@@ -532,7 +532,7 @@ const ProductEdit = ({ params }) => {
                           InputLabelProps={{
                             style: { fontSize: '0.8rem', fontWeight: 300 },
                           }}
-                          variant='standard'
+                          variant='outlined'
                           fullWidth
                           id='price'
                           label='Price'
@@ -559,7 +559,7 @@ const ProductEdit = ({ params }) => {
                           InputLabelProps={{
                             style: { fontSize: '0.8rem', fontWeight: 300 },
                           }}
-                          variant='standard'
+                          variant='outlined'
                           fullWidth
                           id='vendor'
                           label='Store'
@@ -588,7 +588,7 @@ const ProductEdit = ({ params }) => {
                           InputLabelProps={{
                             style: { fontSize: '0.8rem', fontWeight: 300 },
                           }}
-                          variant='standard'
+                          variant='outlined'
                           fullWidth
                           id='countInStock'
                           label='Count in stock'
@@ -619,7 +619,7 @@ const ProductEdit = ({ params }) => {
                           InputLabelProps={{
                             style: { fontSize: '0.8rem', fontWeight: 300 },
                           }}
-                          variant='standard'
+                          variant='outlined'
                           fullWidth
                           multiline
                           id='description'

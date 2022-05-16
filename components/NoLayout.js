@@ -4,6 +4,7 @@ import {
   Container,
   CssBaseline,
   Divider,
+  Link,
   ThemeProvider,
   Typography,
 } from '@material-ui/core';
@@ -104,11 +105,55 @@ export default function NoLayout({ description, title, children }) {
             margin: '30px 0 -100px',
           }}
         >
-          <Divider variant='middle'/>
+          <Divider variant='middle' />
           <footer>
-            <Typography variant='h6'>
+            <Typography
+              variant='h6'
+              style={{ fontSize: '0.7rem', marginBottom: 5 }}
+            >
               © {date}. Ahịa marketplace. <br /> All rights reserved.
             </Typography>
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                margin: '0 20px 10px 20px',
+              }}
+            >
+              <NextLink href={`/privacy_policy`} passHref>
+                <Link>
+                  <Typography
+                    variant='h6'
+                    className={classes.centeredLink}
+                    style={{ fontSize: '0.7rem', margin: 0 }}
+                  >
+                    Privacy Policy
+                  </Typography>
+                </Link>
+              </NextLink>
+              <NextLink href={`/terms_&_conditions`} passHref>
+                <Link>
+                  <Typography
+                    variant='h6'
+                    className={classes.centeredLink}
+                    style={{ fontSize: '0.7rem', margin: 0 }}
+                  >
+                    Terms and Conditions
+                  </Typography>
+                </Link>
+              </NextLink>
+              <NextLink href={`/privacy_policy`} passHref>
+                <Link>
+                  <Typography
+                    variant='h6'
+                    className={classes.centeredLink}
+                    style={{ fontSize: '0.7rem', margin: 0 }}
+                  >
+                    About Us
+                  </Typography>
+                </Link>
+              </NextLink>
+            </div>
           </footer>
         </div>
       </ThemeProvider>
