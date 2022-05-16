@@ -369,6 +369,48 @@ export default function Layout({
                     © {date}. Ahịa marketplace. <br /> All rights reserved.
                   </Typography>
                 </footer>
+                <div
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    margin: '0 20px 10px 20px',
+                  }}
+                >
+                  <NextLink href={`/privacy_policy`} passHref>
+                    <Link>
+                      <Typography
+                        variant='h6'
+                        className={classes.centeredLink}
+                        style={{ fontSize: '0.7rem', margin: 0 }}
+                      >
+                        Privacy Policy
+                      </Typography>
+                    </Link>
+                  </NextLink>
+                  <NextLink href={`/terms_&_conditions`} passHref>
+                    <Link>
+                      <Typography
+                        variant='h6'
+                        className={classes.centeredLink}
+                        style={{ fontSize: '0.7rem', margin: 0 }}
+                      >
+                        Terms and Conditions
+                      </Typography>
+                    </Link>
+                  </NextLink>
+                  <NextLink href={`/privacy_policy`} passHref>
+                    <Link>
+                      <Typography
+                        variant='h6'
+                        className={classes.centeredLink}
+                        style={{ fontSize: '0.7rem', margin: 0 }}
+                      >
+                        About Us
+                      </Typography>
+                    </Link>
+                  </NextLink>
+                </div>
               </div>
             </Drawer>
             <div className={classes.navBarSearchDiv}>
