@@ -17,6 +17,14 @@ import { useContext } from 'react';
 import Cookies from 'js-cookie';
 import { Controller, useForm } from 'react-hook-form';
 import CheckoutWizard from '../components/CheckoutWizard';
+import PersonIcon from '@mui/icons-material/Person';
+import MailIcon from '@mui/icons-material/Mail';
+import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
+import HomeIcon from '@mui/icons-material/Home';
+import LocationCityIcon from '@mui/icons-material/LocationCity';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import InputAdornment from '@mui/material/InputAdornment';
+import IconButton from '@mui/material/IconButton';
 
 function NumberFormatCustom(props) {
   const { inputRef, onChange, ...other } = props;
@@ -125,10 +133,12 @@ const Shipping = () => {
     <Layout title='Shipping Address'>
       <CheckoutWizard activeStep={1} />
       <form onSubmit={handleSubmit(submitHandler)} className={classes.form}>
-        <Typography component='h1' variant='h1'>
-          Shipping Address
-        </Typography>
         <List>
+          <ListItem>
+            <Typography component='h1' variant='h1'>
+              Shipping Address
+            </Typography>
+          </ListItem>
           <ListItem>
             <Controller
               name='fullName'
@@ -142,12 +152,19 @@ const Shipping = () => {
                 <TextField
                   InputProps={{
                     style: { fontSize: '0.8rem', fontWeight: 300 },
+                    startAdornment: (
+                      <InputAdornment position='start'>
+                        <IconButton>
+                          <PersonIcon />
+                        </IconButton>
+                      </InputAdornment>
+                    ),
                   }}
                   InputLabelProps={{
                     style: { fontSize: '0.8rem', fontWeight: 300 },
                   }}
                   className={classes.textFieldFont}
-                  variant='standard'
+                  variant='outlined'
                   fullWidth
                   id='fullName'
                   label='Full Name'
@@ -177,11 +194,18 @@ const Shipping = () => {
                 <TextField
                   InputProps={{
                     style: { fontSize: '0.8rem', fontWeight: 300 },
+                    startAdornment: (
+                      <InputAdornment position='start'>
+                        <IconButton>
+                          <MailIcon />
+                        </IconButton>
+                      </InputAdornment>
+                    ),
                   }}
                   InputLabelProps={{
                     style: { fontSize: '0.8rem', fontWeight: 300 },
                   }}
-                  variant='standard'
+                  variant='outlined'
                   fullWidth
                   id='email'
                   label='Email'
@@ -200,32 +224,31 @@ const Shipping = () => {
             />
           </ListItem>
           <ListItem className={classes.flexNumDiv}>
-            <div className={classes.prefix}>
-              <Typography variant='h6' className={classes.prefixTop}>
-                Prefix
-              </Typography>
-              <Typography variant='h6' className={classes.prefix}>
-                +234
-              </Typography>
-            </div>
             <Controller
               name='phone'
               control={control}
               defaultValue=''
               rules={{
-                minLength: 10,
-                maxLength: 10,
+                minLength: 11,
+                maxLength: 11,
                 pattern: /[0-9]{10}/,
               }}
               render={({ field }) => (
                 <TextField
                   InputProps={{
                     style: { fontSize: '0.8rem', fontWeight: 300 },
+                    startAdornment: (
+                      <InputAdornment position='start'>
+                        <IconButton>
+                          <PhoneIphoneIcon />
+                        </IconButton>
+                      </InputAdornment>
+                    ),
                   }}
                   InputLabelProps={{
                     style: { fontSize: '0.8rem', fontWeight: 300 },
                   }}
-                  variant='standard'
+                  variant='outlined'
                   fullWidth
                   id='phone'
                   label='Phone Number'
@@ -256,11 +279,18 @@ const Shipping = () => {
                 <TextField
                   InputProps={{
                     style: { fontSize: '0.8rem', fontWeight: 300 },
+                    startAdornment: (
+                      <InputAdornment position='start'>
+                        <IconButton>
+                          <HomeIcon />
+                        </IconButton>
+                      </InputAdornment>
+                    ),
                   }}
                   InputLabelProps={{
                     style: { fontSize: '0.8rem', fontWeight: 300 },
                   }}
-                  variant='standard'
+                  variant='outlined'
                   fullWidth
                   id='address'
                   label='Address'
@@ -290,11 +320,18 @@ const Shipping = () => {
                 <TextField
                   InputProps={{
                     style: { fontSize: '0.8rem', fontWeight: 300 },
+                    startAdornment: (
+                      <InputAdornment position='start'>
+                        <IconButton>
+                          <LocationCityIcon />
+                        </IconButton>
+                      </InputAdornment>
+                    ),
                   }}
                   InputLabelProps={{
                     style: { fontSize: '0.8rem', fontWeight: 300 },
                   }}
-                  variant='standard'
+                  variant='outlined'
                   fullWidth
                   id='city'
                   label='City'
@@ -324,11 +361,18 @@ const Shipping = () => {
                 <TextField
                   InputProps={{
                     style: { fontSize: '0.8rem', fontWeight: 300 },
+                    startAdornment: (
+                      <InputAdornment position='start'>
+                        <IconButton>
+                          <LocationOnIcon />
+                        </IconButton>
+                      </InputAdornment>
+                    ),
                   }}
                   InputLabelProps={{
                     style: { fontSize: '0.8rem', fontWeight: 300 },
                   }}
-                  variant='standard'
+                  variant='outlined'
                   fullWidth
                   id='state'
                   label='State'
@@ -346,7 +390,13 @@ const Shipping = () => {
             />
           </ListItem>
 
-          <ListItem style={{ display: 'flex', justifyContent: 'center', marginBottom: '2rem' }}>
+          <ListItem
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              marginBottom: '2rem',
+            }}
+          >
             {loading ? (
               <div className={classes.buttonLoading}>
                 <CircularProgress />

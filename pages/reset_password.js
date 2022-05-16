@@ -1,5 +1,6 @@
 import {
   Button,
+  Card,
   CircularProgress,
   List,
   ListItem,
@@ -11,7 +12,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
 import React, { useState } from 'react';
-import Layout from '../components/Layout';
+import NoLayout from '../components/NoLayout';
 import useStyles from '../utils/styles';
 import axios from 'axios';
 import { useRouter } from 'next/router';
@@ -24,6 +25,8 @@ YupPassword(Yup); // extend yup
 import { getError } from '../utils/error';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import LockIcon from '@mui/icons-material/Lock';
+import EnhancedEncryptionIcon from '@mui/icons-material/EnhancedEncryption';
 
 const Reset_password = () => {
   // form validation rules
@@ -109,239 +112,261 @@ const Reset_password = () => {
   };
 
   return (
-    <Layout title='Register'>
+    <NoLayout title='Register'>
       <form onSubmit={handleSubmit(submitHandler)} className={classes.form}>
-        <Typography component='h1' variant='h1'>
-          Reset your password
-        </Typography>
-        <List>
-          <ListItem>
-            <Controller
-              name='password'
-              control={control}
-              defaultValue=''
-              render={({ field }) => (
-                <TextField
-                  variant='standard'
-                  fullWidth
-                  onInput={(e) => {
-                    setInputValue(e.target.value);
-                    passwordHintHandler(e);
-                  }}
-                  id='password'
-                  label='Password'
-                  onFocus={() => setShowPasswordInfo(true)}
-                  onBlur={() => setShowPasswordInfo(false)}
-                  autoComplete='new-password'
-                  error={Boolean(errors.password)}
-                  helperText={errors.password?.message}
-                  {...field}
-                  InputProps={{
-                    style: { fontSize: '0.8rem', fontWeight: 300 },
-
-                    endAdornment: (
-                      <InputAdornment position='end'>
-                        <IconButton
-                          aria-label='toggle password visibility'
-                          onClick={handleClickShowPassword}
-                          onMouseDown={handleMouseDownPassword}
-                          edge='end'
-                        >
-                          {showPassword ? <VisibilityOff /> : <Visibility />}
-                        </IconButton>
-                      </InputAdornment>
-                    ),
-                    type: showPassword ? 'text' : 'password',
-                  }}
-                  InputLabelProps={{
-                    style: { fontSize: '0.8rem', fontWeight: 300 },
-                  }}
-                />
-              )}
-            />
-          </ListItem>
-          {showPasswordInfo ? (
+        <Card raised={true}>
+          <List>
             <ListItem>
-              <div>
-                <span style={{ display: 'flex', margin: 0 }}>
-                  {inputValue.length < 8 ? (
-                    <HighlightOffIcon
-                      fontSize='small'
-                      style={{ fontSize: '1rem', color: '#ff0000' }}
-                    />
-                  ) : (
-                    <CheckCircleOutlineIcon
-                      fontSize='small'
-                      style={{ fontSize: '1rem', color: '#00ff00' }}
-                    />
-                  )}
-                  <Typography
-                    variant='h6'
-                    style={{
-                      margin: '0 0 0 5px',
-                      fontSize: '0.7rem',
-                      color: inputValue.length < 8 ? '#ff0000' : '#00ff00',
-                    }}
-                  >
-                    Length must be at least 8 characters
-                  </Typography>
-                </span>
-                <span style={{ display: 'flex', margin: 0 }}>
-                  {isUpperCase ? (
-                    <CheckCircleOutlineIcon
-                      fontSize='small'
-                      style={{ fontSize: '1rem', color: '#00ff00' }}
-                    />
-                  ) : (
-                    <HighlightOffIcon
-                      fontSize='small'
-                      style={{ fontSize: '1rem', color: '#ff0000' }}
-                    />
-                  )}
-                  <Typography
-                    variant='h6'
-                    style={{
-                      margin: '0 0 0 5px',
-                      fontSize: '0.7rem',
-                      color: isUpperCase ? '#00ff00' : '#ff0000',
-                    }}
-                  >
-                    Must contain one uppercase letter
-                  </Typography>
-                </span>
-                <span style={{ display: 'flex', margin: 0 }}>
-                  {isLowerCase ? (
-                    <CheckCircleOutlineIcon
-                      fontSize='small'
-                      style={{ fontSize: '1rem', color: '#00ff00' }}
-                    />
-                  ) : (
-                    <HighlightOffIcon
-                      fontSize='small'
-                      style={{ fontSize: '1rem', color: '#ff0000' }}
-                    />
-                  )}
-                  <Typography
-                    variant='h6'
-                    style={{
-                      margin: '0 0 0 5px',
-                      fontSize: '0.7rem',
-                      color: isLowerCase ? '#00ff00' : '#ff0000',
-                    }}
-                  >
-                    Must contain one lowercase letter
-                  </Typography>
-                </span>
-                <span style={{ display: 'flex', margin: 0 }}>
-                  {isNumber ? (
-                    <CheckCircleOutlineIcon
-                      fontSize='small'
-                      style={{ fontSize: '1rem', color: '#00ff00' }}
-                    />
-                  ) : (
-                    <HighlightOffIcon
-                      fontSize='small'
-                      style={{ fontSize: '1rem', color: '#ff0000' }}
-                    />
-                  )}
-                  <Typography
-                    variant='h6'
-                    style={{
-                      margin: '0 0 0 5px',
-                      fontSize: '0.7rem',
-                      color: isNumber ? '#00ff00' : '#ff0000',
-                    }}
-                  >
-                    Must contain one number
-                  </Typography>
-                </span>
-                <span style={{ display: 'flex', margin: 0 }}>
-                  {isSymbol ? (
-                    <CheckCircleOutlineIcon
-                      fontSize='small'
-                      style={{ fontSize: '1rem', color: '#00ff00' }}
-                    />
-                  ) : (
-                    <HighlightOffIcon
-                      fontSize='small'
-                      style={{ fontSize: '1rem', color: '#ff0000' }}
-                    />
-                  )}
-                  <Typography
-                    variant='h6'
-                    style={{
-                      margin: '0 0 0 5px',
-                      fontSize: '0.7rem',
-                      color: isSymbol ? '#00ff00' : '#ff0000',
-                    }}
-                  >
-                    Must contain one symbol (-+~:=_!@#$%^&*.,?)
-                  </Typography>
-                </span>
-              </div>
+              <Typography component='h1' variant='h1'>
+                Reset your password
+              </Typography>
             </ListItem>
-          ) : null}
-          <ListItem>
-            <Controller
-              name='confirmPassword'
-              control={control}
-              defaultValue=''
-              render={({ field }) => (
-                <TextField
-                  variant='standard'
+            <ListItem>
+              <Controller
+                name='password'
+                control={control}
+                defaultValue=''
+                render={({ field }) => (
+                  <TextField
+                    variant='outlined'
+                    fullWidth
+                    onInput={(e) => {
+                      setInputValue(e.target.value);
+                      passwordHintHandler(e);
+                    }}
+                    id='password'
+                    label='Password'
+                    onFocus={() => setShowPasswordInfo(true)}
+                    onBlur={() => setShowPasswordInfo(false)}
+                    autoComplete='new-password'
+                    error={Boolean(errors.password)}
+                    helperText={errors.password?.message}
+                    {...field}
+                    InputProps={{
+                      style: { fontSize: '0.8rem', fontWeight: 300 },
+                      startAdornment: (
+                        <InputAdornment position='start'>
+                          <IconButton
+                            aria-label='toggle password visibility'
+                            onClick={handleClickShowPassword}
+                            onMouseDown={handleMouseDownPassword}
+                            edge='end'
+                          >
+                            <LockIcon />
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                      endAdornment: (
+                        <InputAdornment position='end'>
+                          <IconButton
+                            aria-label='toggle password visibility'
+                            onClick={handleClickShowPassword}
+                            onMouseDown={handleMouseDownPassword}
+                            edge='end'
+                          >
+                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                      type: showPassword ? 'text' : 'password',
+                    }}
+                    InputLabelProps={{
+                      style: { fontSize: '0.8rem', fontWeight: 300 },
+                    }}
+                  />
+                )}
+              />
+            </ListItem>
+            {showPasswordInfo ? (
+              <ListItem>
+                <div>
+                  <span style={{ display: 'flex', margin: 0 }}>
+                    {inputValue.length < 8 ? (
+                      <HighlightOffIcon
+                        fontSize='small'
+                        style={{ fontSize: '1rem', color: '#ff0000' }}
+                      />
+                    ) : (
+                      <CheckCircleOutlineIcon
+                        fontSize='small'
+                        style={{ fontSize: '1rem', color: '#00ff00' }}
+                      />
+                    )}
+                    <Typography
+                      variant='h6'
+                      style={{
+                        margin: '0 0 0 5px',
+                        fontSize: '0.7rem',
+                        color: inputValue.length < 8 ? '#ff0000' : '#00ff00',
+                      }}
+                    >
+                      Length must be at least 8 characters
+                    </Typography>
+                  </span>
+                  <span style={{ display: 'flex', margin: 0 }}>
+                    {isUpperCase ? (
+                      <CheckCircleOutlineIcon
+                        fontSize='small'
+                        style={{ fontSize: '1rem', color: '#00ff00' }}
+                      />
+                    ) : (
+                      <HighlightOffIcon
+                        fontSize='small'
+                        style={{ fontSize: '1rem', color: '#ff0000' }}
+                      />
+                    )}
+                    <Typography
+                      variant='h6'
+                      style={{
+                        margin: '0 0 0 5px',
+                        fontSize: '0.7rem',
+                        color: isUpperCase ? '#00ff00' : '#ff0000',
+                      }}
+                    >
+                      Must contain one uppercase letter
+                    </Typography>
+                  </span>
+                  <span style={{ display: 'flex', margin: 0 }}>
+                    {isLowerCase ? (
+                      <CheckCircleOutlineIcon
+                        fontSize='small'
+                        style={{ fontSize: '1rem', color: '#00ff00' }}
+                      />
+                    ) : (
+                      <HighlightOffIcon
+                        fontSize='small'
+                        style={{ fontSize: '1rem', color: '#ff0000' }}
+                      />
+                    )}
+                    <Typography
+                      variant='h6'
+                      style={{
+                        margin: '0 0 0 5px',
+                        fontSize: '0.7rem',
+                        color: isLowerCase ? '#00ff00' : '#ff0000',
+                      }}
+                    >
+                      Must contain one lowercase letter
+                    </Typography>
+                  </span>
+                  <span style={{ display: 'flex', margin: 0 }}>
+                    {isNumber ? (
+                      <CheckCircleOutlineIcon
+                        fontSize='small'
+                        style={{ fontSize: '1rem', color: '#00ff00' }}
+                      />
+                    ) : (
+                      <HighlightOffIcon
+                        fontSize='small'
+                        style={{ fontSize: '1rem', color: '#ff0000' }}
+                      />
+                    )}
+                    <Typography
+                      variant='h6'
+                      style={{
+                        margin: '0 0 0 5px',
+                        fontSize: '0.7rem',
+                        color: isNumber ? '#00ff00' : '#ff0000',
+                      }}
+                    >
+                      Must contain one number
+                    </Typography>
+                  </span>
+                  <span style={{ display: 'flex', margin: 0 }}>
+                    {isSymbol ? (
+                      <CheckCircleOutlineIcon
+                        fontSize='small'
+                        style={{ fontSize: '1rem', color: '#00ff00' }}
+                      />
+                    ) : (
+                      <HighlightOffIcon
+                        fontSize='small'
+                        style={{ fontSize: '1rem', color: '#ff0000' }}
+                      />
+                    )}
+                    <Typography
+                      variant='h6'
+                      style={{
+                        margin: '0 0 0 5px',
+                        fontSize: '0.7rem',
+                        color: isSymbol ? '#00ff00' : '#ff0000',
+                      }}
+                    >
+                      Must contain one symbol (-+~:=_!@#$%^&*.,?)
+                    </Typography>
+                  </span>
+                </div>
+              </ListItem>
+            ) : null}
+            <ListItem>
+              <Controller
+                name='confirmPassword'
+                control={control}
+                defaultValue=''
+                render={({ field }) => (
+                  <TextField
+                    variant='outlined'
+                    fullWidth
+                    id='confirmPassword'
+                    label='Confirm Password'
+                    error={Boolean(errors.confirmPassword)}
+                    helperText={errors.confirmPassword?.message}
+                    {...field}
+                    InputProps={{
+                      style: { fontSize: '0.8rem', fontWeight: 300 },
+                      startAdornment: (
+                        <InputAdornment position='start'>
+                          <IconButton>
+                            <EnhancedEncryptionIcon />
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                      endAdornment: (
+                        <InputAdornment position='end'>
+                          <IconButton
+                            aria-label='toggle password visibility'
+                            onClick={handleClickShowConfirmPassword}
+                            onMouseDown={handleMouseDownPassword}
+                            edge='end'
+                          >
+                            {showConfirmPassword ? (
+                              <VisibilityOff />
+                            ) : (
+                              <Visibility />
+                            )}
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                      type: showConfirmPassword ? 'text' : 'password',
+                    }}
+                    InputLabelProps={{
+                      style: { fontSize: '0.8rem', fontWeight: 300 },
+                    }}
+                  />
+                )}
+              />
+            </ListItem>
+            <ListItem style={{ display: 'flex', justifyContent: 'center' }}>
+              {loading ? (
+                <div className={classes.buttonLoading}>
+                  <CircularProgress />
+                </div>
+              ) : (
+                <Button
                   fullWidth
-                  id='confirmPassword'
-                  label='Confirm Password'
-                  error={Boolean(errors.confirmPassword)}
-                  helperText={errors.confirmPassword?.message}
-                  {...field}
-                  InputProps={{
-                    style: { fontSize: '0.8rem', fontWeight: 300 },
-                    endAdornment: (
-                      <InputAdornment position='end'>
-                        <IconButton
-                          aria-label='toggle password visibility'
-                          onClick={handleClickShowConfirmPassword}
-                          onMouseDown={handleMouseDownPassword}
-                          edge='end'
-                        >
-                          {showConfirmPassword ? (
-                            <VisibilityOff />
-                          ) : (
-                            <Visibility />
-                          )}
-                        </IconButton>
-                      </InputAdornment>
-                    ),
-                    type: showConfirmPassword ? 'text' : 'password',
-                  }}
-                  InputLabelProps={{
-                    style: { fontSize: '0.8rem', fontWeight: 300 },
-                  }}
-                />
+                  variant='contained'
+                  className={classes.buttonPrimary}
+                  color='primary'
+                  type='submit'
+                >
+                  SUBMIT
+                </Button>
               )}
-            />
-          </ListItem>
-          <ListItem style={{ display: 'flex', justifyContent: 'center' }}>
-            {loading ? (
-              <div className={classes.buttonLoading}>
-                <CircularProgress />
-              </div>
-            ) : (
-              <Button
-                fullWidth
-                variant='contained'
-                className={classes.buttonPrimary}
-                color='primary'
-                type='submit'
-              >
-                SUBMIT
-              </Button>
-            )}
-          </ListItem>
-        </List>
+            </ListItem>
+          </List>
+        </Card>
       </form>
-    </Layout>
+    </NoLayout>
   );
 };
 

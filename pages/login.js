@@ -92,7 +92,7 @@ const Login = () => {
 
   return (
     <NoLayout title='Login to your account'>
-      <form onSubmit={handleSubmit(submitHandler)} className={classes.form} >
+      <form onSubmit={handleSubmit(submitHandler)} className={classes.form}>
         <Card raised={true}>
           <List>
             <ListItem>
@@ -115,12 +115,7 @@ const Login = () => {
                       style: { fontSize: '0.8rem', fontWeight: 300 },
                       startAdornment: (
                         <InputAdornment position='start'>
-                          <IconButton
-                            aria-label='toggle password visibility'
-                            onClick={handleClickShowPassword}
-                            onMouseDown={handleMouseDownPassword}
-                            edge='end'
-                          >
+                          <IconButton>
                             <PersonIcon />
                           </IconButton>
                         </InputAdornment>
@@ -177,12 +172,7 @@ const Login = () => {
                       style: { fontSize: '0.8rem', fontWeight: 300 },
                       startAdornment: (
                         <InputAdornment position='start'>
-                          <IconButton
-                            aria-label='toggle password visibility'
-                            onClick={handleClickShowPassword}
-                            onMouseDown={handleMouseDownPassword}
-                            edge='end'
-                          >
+                          <IconButton>
                             <LockIcon />
                           </IconButton>
                         </InputAdornment>
@@ -239,22 +229,22 @@ const Login = () => {
           </NextLink>
         </Card>
       </form>
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <Typography variant='h6' className={classes.centeredText}>
-              New to Ahịa? &nbsp;{' '}
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <Typography variant='h6' className={classes.centeredText}>
+          New to Ahịa? &nbsp;{' '}
+        </Typography>
+        <NextLink href={`/register?redirect=${redirect || '/'}`} passHref>
+          <Link>
+            <Typography
+              variant='h6'
+              className={classes.centeredLink}
+              style={{ textTransform: 'none' }}
+            >
+              Create an account
             </Typography>
-            <NextLink href={`/register?redirect=${redirect || '/'}`} passHref>
-              <Link>
-                <Typography
-                  variant='h6'
-                  className={classes.centeredLink}
-                  style={{ textTransform: 'none' }}
-                >
-                  Create an account
-                </Typography>
-              </Link>
-            </NextLink>
-          </div>
+          </Link>
+        </NextLink>
+      </div>
     </NoLayout>
   );
 };

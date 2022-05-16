@@ -33,6 +33,12 @@ import YupPassword from 'yup-password';
 YupPassword(Yup); // extend yup
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import PersonIcon from '@mui/icons-material/Person';
+import MailIcon from '@mui/icons-material/Mail';
+import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
+import LockIcon from '@mui/icons-material/Lock';
+import EnhancedEncryptionIcon from '@mui/icons-material/EnhancedEncryption';
+import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 
 
 function NumberFormatCustom(props) {
@@ -219,11 +225,18 @@ const Profile = () => {
                       <TextField
                         InputProps={{
                           style: { fontSize: '0.8rem', fontWeight: 300 },
+                          startAdornment: (
+                            <InputAdornment position='start'>
+                              <IconButton>
+                                <PersonIcon />
+                              </IconButton>
+                            </InputAdornment>
+                          ),
                         }}
                         InputLabelProps={{
                           style: { fontSize: '0.8rem', fontWeight: 300 },
                         }}
-                        variant='standard'
+                        variant='outlined'
                         fullWidth
                         id='firstName'
                         label='First Name'
@@ -254,11 +267,18 @@ const Profile = () => {
                       <TextField
                         InputProps={{
                           style: { fontSize: '0.8rem', fontWeight: 300 },
+                          startAdornment: (
+                            <InputAdornment position='start'>
+                              <IconButton>
+                                <PersonAddAlt1Icon />
+                              </IconButton>
+                            </InputAdornment>
+                          ),
                         }}
                         InputLabelProps={{
                           style: { fontSize: '0.8rem', fontWeight: 300 },
                         }}
-                        variant='standard'
+                        variant='outlined'
                         fullWidth
                         id='lastName'
                         label='Last Name'
@@ -289,11 +309,18 @@ const Profile = () => {
                       <TextField
                         InputProps={{
                           style: { fontSize: '0.8rem', fontWeight: 300 },
+                          startAdornment: (
+                            <InputAdornment position='start'>
+                              <IconButton>
+                                <MailIcon />
+                              </IconButton>
+                            </InputAdornment>
+                          ),
                         }}
                         InputLabelProps={{
                           style: { fontSize: '0.8rem', fontWeight: 300 },
                         }}
-                        variant='standard'
+                        variant='outlined'
                         fullWidth
                         id='email'
                         label='Email'
@@ -312,18 +339,6 @@ const Profile = () => {
                   />
                 </ListItem>
                 <ListItem className={classes.flexNumDiv}>
-                  <div className={classes.prefix}>
-                    <Typography
-                      className={classes.prefixTop}
-                      variant='h6'
-                      style={{ margin: 0 }}
-                    >
-                      Prefix
-                    </Typography>
-                    <Typography variant='h6' style={{ margin: 0 }}>
-                      +234
-                    </Typography>
-                  </div>
                   <Controller
                     name='phone'
                     control={control}
@@ -337,11 +352,18 @@ const Profile = () => {
                       <TextField
                         InputProps={{
                           style: { fontSize: '0.8rem', fontWeight: 300 },
+                          startAdornment: (
+                            <InputAdornment position='start'>
+                              <IconButton>
+                                <PhoneIphoneIcon />
+                              </IconButton>
+                            </InputAdornment>
+                          ),
                         }}
                         InputLabelProps={{
                           style: { fontSize: '0.8rem', fontWeight: 300 },
                         }}
-                        variant='standard'
+                        variant='outlined'
                         fullWidth
                         id='phone'
                         label='Phone Number'
@@ -366,7 +388,7 @@ const Profile = () => {
                     defaultValue=''
                     render={({ field }) => (
                       <TextField
-                        variant='standard'
+                        variant='outlined'
                         fullWidth
                         onInput={(e) => {
                           setInputValue(e.target.value);
@@ -382,7 +404,13 @@ const Profile = () => {
                         {...field}
                         InputProps={{
                           style: { fontSize: '0.8rem', fontWeight: 300 },
-
+                          startAdornment: (
+                            <InputAdornment position='start'>
+                              <IconButton>
+                                <LockIcon />
+                              </IconButton>
+                            </InputAdornment>
+                          ),
                           endAdornment: (
                             <InputAdornment position='end'>
                               <IconButton
@@ -537,7 +565,7 @@ const Profile = () => {
                     defaultValue=''
                     render={({ field }) => (
                       <TextField
-                        variant='standard'
+                        variant='outlined'
                         fullWidth
                         id='confirmPassword'
                         label='Confirm Password'
@@ -546,6 +574,13 @@ const Profile = () => {
                         {...field}
                         InputProps={{
                           style: { fontSize: '0.8rem', fontWeight: 300 },
+                          startAdornment: (
+                            <InputAdornment position='start'>
+                              <IconButton>
+                                <EnhancedEncryptionIcon />
+                              </IconButton>
+                            </InputAdornment>
+                          ),
                           endAdornment: (
                             <InputAdornment position='end'>
                               <IconButton

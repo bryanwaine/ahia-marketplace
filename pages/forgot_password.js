@@ -1,5 +1,6 @@
 import {
   Button,
+  Card,
   CircularProgress,
   List,
   ListItem,
@@ -8,13 +9,16 @@ import {
 } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import Layout from '../components/Layout';
+import NoLayout from '../components/NoLayout';
 import useStyles from '../utils/styles';
 import { useSnackbar } from 'notistack';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { getError } from '../utils/error';
 import { fnOsDetect, fnBrowserDetect } from '../utils/deviceDetect';
+import InputAdornment from '@mui/material/InputAdornment';
+import IconButton from '@mui/material/IconButton';
+import PersonIcon from '@mui/icons-material/Person';
 
 const Forgot_password = () => {
   const {
@@ -56,73 +60,85 @@ const Forgot_password = () => {
   };
 
   return (
-    <Layout title='Forgot your password?'>
+    <NoLayout title='Forgot your password?'>
       <form onSubmit={handleSubmit(submitHandler)} className={classes.form}>
-        <Typography component='h1' variant='h1'>
-          Forgot your Password?
-        </Typography>
-
-        <List>
-          <ListItem>
-            <Typography variant='h6' className={classes.centeredText}>
-              Enter the email address used in registration.
-            </Typography>
-          </ListItem>
-          <ListItem>
-            <Controller
-              name='email'
-              control={control}
-              defaultValue=''
-              rules={{
-                required: true,
-                pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
-              }}
-              render={({ field }) => (
-                <TextField
-                  InputProps={{
-                    style: { fontSize: '0.8rem', fontWeight: 300 },
-                  }}
-                  InputLabelProps={{
-                    style: { fontSize: '0.8rem', fontWeight: 300 },
-                  }}
-                  variant='standard'
+        <Card raised={true}>
+          <List>
+            <ListItem>
+              <Typography component='h1' variant='h1'>
+                Forgot your Password?
+              </Typography>
+            </ListItem>
+            <ListItem>
+              <Typography variant='h6' className={classes.centeredText}>
+                Enter the email address used in registration.
+              </Typography>
+            </ListItem>
+            <ListItem>
+              <Controller
+                name='email'
+                control={control}
+                defaultValue=''
+                rules={{
+                  required: true,
+                  pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
+                }}
+                render={({ field }) => (
+                  <TextField
+                    InputProps={{
+                      style: { fontSize: '0.8rem', fontWeight: 300 },
+                      startAdornment: (
+                        <InputAdornment position='start'>
+                          <IconButton
+                            
+                          >
+                            <PersonIcon />
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
+                    InputLabelProps={{
+                      style: { fontSize: '0.8rem', fontWeight: 300 },
+                    }}
+                    variant='outlined'
+                    fullWidth
+                    id='email'
+                    label='Email'
+                    inputProps={{ type: 'email' }}
+                    error={Boolean(errors.email)}
+                    helperText={
+                      errors.email
+                        ? errors.email.type === 'pattern'
+                          ? 'Email is not valid'
+                          : 'Email is required'
+                        : null
+                    }
+                    {...field}
+                  />
+                )}
+              />
+            </ListItem>
+            <ListItem style={{ display: 'flex', justifyContent: 'center' }}>
+              {loading ? (
+                <div className={classes.buttonLoading}>
+                  <CircularProgress />
+                </div>
+              ) : (
+                <Button
                   fullWidth
-                  id='email'
-                  label='Email'
-                  inputProps={{ type: 'email' }}
-                  error={Boolean(errors.email)}
-                  helperText={
-                    errors.email
-                      ? errors.email.type === 'pattern'
-                        ? 'Email is not valid'
-                        : 'Email is required'
-                      : null
-                  }
-                  {...field}
-                />
+                  variant='contained'
+                  className={classes.buttonPrimary}
+                  color='primary'
+                  type='submit'
+                >
+                  Submit
+                </Button>
               )}
-            />
-          </ListItem>
-          <ListItem style={{ display: 'flex', justifyContent: 'center' }}>
-            {loading ? (
-              <div className={classes.buttonLoading}>
-                <CircularProgress />
-              </div>
-            ) : (
-              <Button
-                fullWidth
-                variant='contained'
-                className={classes.buttonPrimary}
-                color='primary'
-                type='submit'
-              >
-                Submit
-              </Button>
-            )}
-          </ListItem>
-        </List>
+            </ListItem>
+          </List>
+        </Card>
       </form>
-    </Layout>
+    </NoLayout>
   );
 };
 

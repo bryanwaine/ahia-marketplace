@@ -198,12 +198,7 @@ const Register = () => {
                       style: { fontSize: '0.8rem', fontWeight: 300 },
                       startAdornment: (
                         <InputAdornment position='start'>
-                          <IconButton
-                            aria-label='toggle password visibility'
-                            onClick={handleClickShowPassword}
-                            onMouseDown={handleMouseDownPassword}
-                            edge='end'
-                          >
+                          <IconButton>
                             <PersonIcon />
                           </IconButton>
                         </InputAdornment>
@@ -235,12 +230,7 @@ const Register = () => {
                       style: { fontSize: '0.8rem', fontWeight: 300 },
                       startAdornment: (
                         <InputAdornment position='start'>
-                          <IconButton
-                            aria-label='toggle password visibility'
-                            onClick={handleClickShowPassword}
-                            onMouseDown={handleMouseDownPassword}
-                            edge='end'
-                          >
+                          <IconButton>
                             <PersonAddAlt1Icon />
                           </IconButton>
                         </InputAdornment>
@@ -272,12 +262,7 @@ const Register = () => {
                       style: { fontSize: '0.8rem', fontWeight: 300 },
                       startAdornment: (
                         <InputAdornment position='start'>
-                          <IconButton
-                            aria-label='toggle password visibility'
-                            onClick={handleClickShowPassword}
-                            onMouseDown={handleMouseDownPassword}
-                            edge='end'
-                          >
+                          <IconButton>
                             <MailIcon />
                           </IconButton>
                         </InputAdornment>
@@ -309,12 +294,7 @@ const Register = () => {
                       style: { fontSize: '0.8rem', fontWeight: 300 },
                       startAdornment: (
                         <InputAdornment position='start'>
-                          <IconButton
-                            aria-label='toggle password visibility'
-                            onClick={handleClickShowPassword}
-                            onMouseDown={handleMouseDownPassword}
-                            edge='end'
-                          >
+                          <IconButton>
                             <PhoneIphoneIcon />
                           </IconButton>
                         </InputAdornment>
@@ -360,17 +340,11 @@ const Register = () => {
                       style: { fontSize: '0.8rem', fontWeight: 300 },
                       startAdornment: (
                         <InputAdornment position='start'>
-                          <IconButton
-                            aria-label='toggle password visibility'
-                            onClick={handleClickShowPassword}
-                            onMouseDown={handleMouseDownPassword}
-                            edge='end'
-                          >
+                          <IconButton>
                             <LockIcon />
                           </IconButton>
                         </InputAdornment>
                       ),
-
                       endAdornment: (
                         <InputAdornment position='end'>
                           <IconButton
@@ -532,12 +506,7 @@ const Register = () => {
                       style: { fontSize: '0.8rem', fontWeight: 300 },
                       startAdornment: (
                         <InputAdornment position='start'>
-                          <IconButton
-                            aria-label='toggle password visibility'
-                            onClick={handleClickShowPassword}
-                            onMouseDown={handleMouseDownPassword}
-                            edge='end'
-                          >
+                          <IconButton>
                             <EnhancedEncryptionIcon />
                           </IconButton>
                         </InputAdornment>

@@ -1,6 +1,6 @@
 import { Card, Grid, Link, Typography } from '@material-ui/core';
 import React from 'react';
-import Layout from '../components/Layout';
+import NoLayout from '../components/NoLayout';
 import NextLink from 'next/link';
 import useStyles from '../utils/styles';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
@@ -9,7 +9,7 @@ const Check_email = () => {
   const classes = useStyles();
 
   return (
-    <Layout title='Check your email for further Instructions'>
+    <NoLayout title='Check your email for further Instructions'>
       <div className={classes.form}>
         <Grid
           container
@@ -56,7 +56,7 @@ const Check_email = () => {
           </NextLink>
         </Grid>
       </div>
-    </Layout>
+    </NoLayout>
   );
 };
 

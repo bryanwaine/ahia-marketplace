@@ -1,9 +1,10 @@
 import { Typography } from '@material-ui/core';
 import React from 'react'
+import BrokenImageIcon from '@mui/icons-material/BrokenImage';
 
 const Link_Expired = () => {
   return (
-    <div>
+    <div style={{margin: '0 50px'}}>
       <Typography
         component='h2'
         variant='h2'
@@ -11,7 +12,9 @@ const Link_Expired = () => {
       >
         Expired Link
       </Typography>
-      <Typography variant='p'>This link is expired.</Typography>
+      <div style={{display: 'flex', alignItems: 'center' }}><Typography variant='p'>This link is expired.</Typography>
+      <BrokenImageIcon fontSize='large'/></div>
+      
     </div>
   );
 }
