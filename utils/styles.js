@@ -41,9 +41,9 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 30,
     paddingTop: 5,
     background: '#04111d !important',
-    boxShadow: '0px -4px 14px -6px rgba(0,0,0,0.54) !important',
-    webkitBoxShadow: '0px -4px 14px -6px rgba(0,0,0,0.54) !important',
+    webkitBoxShadow: '0px -4px 14px -6px rgba(0,0,0,0.54)  !important',
     mozBoxShadow: '0px -4px 14px -6px rgba(0,0,0,0.54) !important',
+    boxShadow: '0px -4px 14px -6px rgba(0,0,0,0.54) !important',
     '& a': {
       color: '#aaaaaa !important',
     },
@@ -158,13 +158,13 @@ const useStyles = makeStyles((theme) => ({
     backgroundImage:
       'linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)',
     color: '#ffffff',
-    boxShadow: '-3px 3px 5px 1px rgba(0,0,0,0.50)',
-    webkitBoxShadow: '-3px 3px 5px 1px rgba(0,0,0,0.50)',
-    mozBoxShadow: '-3px 3px 5px 1px rgba(0,0,0,0.50)',
+    webkitBoxShadow: '-3px 3px 5px 1px rgba(0,0,0,0.50)  !important',
+    mozBoxShadow: '-3px 3px 5px 1px rgba(0,0,0,0.50)  !important',
+    boxShadow: '-3px 3px 5px 1px rgba(0,0,0,0.50)  !important',
     '&:hover': {
-      boxShadow: '0px 0px 5px 1px rgba(0,0,0,0.66)',
-      webkitBoxShadow: '0px 0px 5px 1px rgba(0,0,0,0.66)',
-      mozBoxShadow: '0px 0px 5px 1px rgba(0,0,0,0.66)',
+      webkitBoxShadow: '0px 0px 5px 1px rgba(0,0,0,0.66)  !important',
+      mozBoxShadow: '0px 0px 5px 1px rgba(0,0,0,0.66)  !important',
+      boxShadow: '0px 0px 5px 1px rgba(0,0,0,0.66)  !important',
     },
   },
   buttonSecondary: {
@@ -172,13 +172,13 @@ const useStyles = makeStyles((theme) => ({
     backgroundImage:
       'linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)',
     color: '#ffffff',
-    boxShadow: '-3px 3px 5px 1px rgba(0,0,0,0.50)',
-    webkitBoxShadow: '-3px 3px 5px 1px rgba(0,0,0,0.50)',
-    mozBoxShadow: '-3px 3px 5px 1px rgba(0,0,0,0.50)',
+    webkitBoxShadow: '-3px 3px 5px 1px rgba(0,0,0,0.50)  !important',
+    mozBoxShadow: '-3px 3px 5px 1px rgba(0,0,0,0.50)  !important',
+    boxShadow: '-3px 3px 5px 1px rgba(0,0,0,0.50)  !important',
     '&:hover': {
-      boxShadow: '0px 0px 5px 1px rgba(0,0,0,0.66)',
-      webkitBoxShadow: '0px 0px 5px 1px rgba(0,0,0,0.66)',
-      mozBoxShadow: '0px 0px 5px 1px rgba(0,0,0,0.66)',
+      boxShadow: '0px 0px 5px 1px rgba(0,0,0,0.66)  !important',
+      webkitBoxShadow: '0px 0px 5px 1px rgba(0,0,0,0.66)  !important',
+      mozBoxShadow: '0px 0px 5px 1px rgba(0,0,0,0.66)  !important',
     },
   },
   buttonBack: {
