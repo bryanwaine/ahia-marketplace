@@ -77,7 +77,7 @@ const Order_History = () => {
     <Layout title='Order History' selectedNavPerson>
       <Grid container spacing={3}>
         <Grid item md={3} xs={12} className={classes.gridHide}>
-          <Card className={classes.section}>
+          <Card className={classes.section} raised={true}>
             <List>
               <NextLink href='/profile'>
                 <ListItem button component='a'>
@@ -99,7 +99,7 @@ const Order_History = () => {
           </Card>
         </Grid>
         <Grid item md={9} xs={12}>
-          <Card className={classes.section}>
+          <Card className={classes.section} raised={true}>
             <List>
               <ListItem>
                 <Typography variant='h1' component='h1'>

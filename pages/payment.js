@@ -66,7 +66,7 @@ const Payment = () => {
         </Typography>
 
         <List>
-          <Card style={{ background: '#ffffff', marginBottom: 30 }}>
+          <Card style={{ background: '#ffffff', marginBottom: 30 }} raised={true}>
             <ListItem>
               <FormControl component='fieldset'>
                 <RadioGroup

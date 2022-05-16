@@ -29,6 +29,7 @@ const Check_email = () => {
                 padding: 20,
                 margin: 10,
               }}
+              raised={true}
             >
               <DoneAllIcon
                 fontSize='large'

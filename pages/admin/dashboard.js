@@ -78,7 +78,7 @@ const Admin_Dashboard = () => {
     <Layout title='Dashboard' selectedNavPerson>
       <Grid container spacing={3}>
         <Grid item md={3} xs={12} className={classes.gridHide}>
-          <Card className={classes.section}>
+          <Card className={classes.section} raised={true}>
             <List>
               <NextLink href='/admin/dashboard'>
                 <ListItem button component='a' selected>
@@ -116,7 +116,7 @@ const Admin_Dashboard = () => {
           </Card>
         </Grid>
         <Grid item md={9} xs={12}>
-          <Card className={classes.section}>
+          <Card className={classes.section} raised={true}>
             <List>
               <ListItem>
                 {loading ? (
@@ -128,7 +128,7 @@ const Admin_Dashboard = () => {
                 ) : (
                   <Grid container spacing={5}>
                     <Grid item md={3} xs={12}>
-                      <Card raised>
+                      <Card raised={true}>
                         <CardContent>
                           <Typography variant='h1'>
                             ₦{toCurrency(summary.ordersPrice)}
@@ -145,7 +145,7 @@ const Admin_Dashboard = () => {
                       </Card>
                     </Grid>
                     <Grid item md={3} xs={12}>
-                      <Card raised>
+                      <Card raised={true}>
                         <CardContent>
                           <Typography variant='h1'>
                             {summary.ordersCount}
@@ -162,7 +162,7 @@ const Admin_Dashboard = () => {
                       </Card>
                     </Grid>
                     <Grid item md={3} xs={12}>
-                      <Card raised>
+                      <Card raised={true}>
                         <CardContent>
                           <Typography variant='h1'>
                             {summary.productsCount}
@@ -179,7 +179,7 @@ const Admin_Dashboard = () => {
                       </Card>
                     </Grid>
                     <Grid item md={3} xs={12}>
-                      <Card raised>
+                      <Card raised={true}>
                         <CardContent>
                           <Typography variant='h1'>
                             {summary.usersCount}
@@ -233,26 +233,6 @@ const Admin_Dashboard = () => {
                   <Bar dataKey='Total Sales' fill='#11ff11' />
                 </BarChart>
               </ListItem>
-              {/* <ListItem>
-                <Bar
-                  data={{
-                    labels: summary.salesData.map((x) => x._id),
-                    datasets: [
-                      {
-                        label: 'Sales',
-                        backgroundColor: '#ffffff',
-                        data: summary.salesData.map((x) => x.totalSales),
-                      },
-                    ],
-                  }}
-                  options={{
-                    legend: {
-                      display: true,
-                      position: 'right',
-                    },
-                  }}
-                />
-              </ListItem> */}
             </List>
           </Card>
         </Grid>

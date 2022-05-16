@@ -55,6 +55,12 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     cursor: 'pointer',
   },
+  ahiaNoLayout: {
+  marginTop: '-50px',
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+  },
   brand: {
     fontWeight: 'bold',
     fontSize: '1.5rem',
@@ -234,6 +240,7 @@ const useStyles = makeStyles((theme) => ({
   form: {
     maxWidth: 500,
     margin: '0 auto',
+    padding: 10
   },
   flexDiv: {
     display: 'flex',

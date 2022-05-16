@@ -1,5 +1,6 @@
 import {
   Button,
+  Card,
   CircularProgress,
   Link,
   List,
@@ -11,7 +12,7 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import InputAdornment from '@mui/material/InputAdornment';
 import React, { useEffect, useState } from 'react';
-import Layout from '../components/Layout';
+import NoLayout from '../components/NoLayout';
 import IconButton from '@mui/material/IconButton';
 import dynamic from 'next/dynamic';
 import useStyles from '../utils/styles';
@@ -24,6 +25,8 @@ import Cookies from 'js-cookie';
 import { Controller, useForm } from 'react-hook-form';
 import { useSnackbar } from 'notistack';
 import { getError } from '../utils/error';
+import PersonIcon from '@mui/icons-material/Person';
+import LockIcon from '@mui/icons-material/Lock';
 
 const Login = () => {
   const {
@@ -88,136 +91,171 @@ const Login = () => {
   };
 
   return (
-    <Layout title='Login to your account'>
-      <form onSubmit={handleSubmit(submitHandler)} className={classes.form}>
-        <Typography component='h1' variant='h1'>
-          Login
-        </Typography>
-        <List>
-          <ListItem>
-            <Controller
-              name='email'
-              control={control}
-              defaultValue=''
-              rules={{
-                required: true,
-                pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
-              }}
-              render={({ field }) => (
-                <TextField
-                  InputProps={{
-                    style: { fontSize: '0.8rem', fontWeight: 300 },
-                  }}
-                  InputLabelProps={{
-                    style: { fontSize: '0.8rem', fontWeight: 300 },
-                  }}
-                  variant='standard'
-                  fullWidth
-                  id='email'
-                  label='Email'
-                  inputProps={{ type: 'email' }}
-                  error={Boolean(errors.email)}
-                  helperText={
-                    errors.email
-                      ? errors.email.type === 'pattern'
-                        ? 'Email is not valid'
-                        : 'Email is required'
-                      : null
-                  }
-                  {...field}
-                />
-              )}
-            />
-          </ListItem>
-          <ListItem>
-            <Controller
-              name='password'
-              control={control}
-              defaultValue=''
-              rules={{
-                required: true,
-                minLength: 6,
-              }}
-              render={({ field }) => (
-                <TextField
-                  variant='standard'
-                  fullWidth
-                  id='password'
-                  label='Password'
-                  autoComplete='new-password'
-                  error={Boolean(errors.password)}
-                  helperText={
-                    errors.password
-                      ? errors.password.type === 'minLength'
-                        ? 'Password is too short'
-                        : 'Password is required'
-                      : null
-                  }
-                  {...field}
-                  InputProps={{
-                    style: { fontSize: '0.8rem', fontWeight: 300 },
-                    endAdornment: (
-                      <InputAdornment position='end'>
-                        <IconButton
-                          aria-label='toggle password visibility'
-                          onClick={handleClickShowPassword}
-                          onMouseDown={handleMouseDownPassword}
-                          edge='end'
-                        >
-                          {showPassword ? <VisibilityOff /> : <Visibility />}
-                        </IconButton>
-                      </InputAdornment>
-                    ),
-                    type: showPassword ? 'text' : 'password',
-                  }}
-                  InputLabelProps={{
-                    style: { fontSize: '0.8rem', fontWeight: 300 },
-                  }}
-                />
-              )}
-            />
-          </ListItem>
-          <ListItem style={{ display: 'flex', justifyContent: 'center' }}>
-            {loading ? (
-              <div className={classes.buttonLoading}>
-                <CircularProgress />
-              </div>
-            ) : (
-              <Button
-                fullWidth
-                variant='contained'
-                className={classes.buttonPrimary}
-                color='primary'
-                type='submit'
-              >
+    <NoLayout title='Login to your account'>
+      <form onSubmit={handleSubmit(submitHandler)} className={classes.form} >
+        <Card raised={true}>
+          <List>
+            <ListItem>
+              <Typography component='h1' variant='h1'>
                 Login
-              </Button>
-            )}
-          </ListItem>
-        </List>
-        <NextLink href={`/forgot_password`} passHref>
-          <Link>
-            <Typography
-              variant='h6'
-              className={classes.centeredText}
-              style={{ color: '#ff0000' }}
-            >
-              Forgot password?
-            </Typography>
-          </Link>
-        </NextLink>
-        <Typography variant='h6' className={classes.centeredText}>
-          New to Ahịa? &nbsp;{' '}
-        </Typography>
-        <NextLink href={`/register?redirect=${redirect || '/'}`} passHref>
-          <Link>
-            <Typography variant='h6' className={classes.centeredLink}>
-              CREATE AN ACCOUNT
-            </Typography>
-          </Link>
-        </NextLink>
+              </Typography>
+            </ListItem>
+            <ListItem>
+              <Controller
+                name='email'
+                control={control}
+                defaultValue=''
+                rules={{
+                  required: true,
+                  pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
+                }}
+                render={({ field }) => (
+                  <TextField
+                    InputProps={{
+                      style: { fontSize: '0.8rem', fontWeight: 300 },
+                      startAdornment: (
+                        <InputAdornment position='start'>
+                          <IconButton
+                            aria-label='toggle password visibility'
+                            onClick={handleClickShowPassword}
+                            onMouseDown={handleMouseDownPassword}
+                            edge='end'
+                          >
+                            <PersonIcon />
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
+                    InputLabelProps={{
+                      style: { fontSize: '0.8rem', fontWeight: 300 },
+                    }}
+                    variant='outlined'
+                    fullWidth
+                    id='email'
+                    label='Email'
+                    inputProps={{ type: 'email' }}
+                    error={Boolean(errors.email)}
+                    helperText={
+                      errors.email
+                        ? errors.email.type === 'pattern'
+                          ? 'Email is not valid'
+                          : 'Email is required'
+                        : null
+                    }
+                    {...field}
+                  />
+                )}
+              />
+            </ListItem>
+            <ListItem></ListItem>
+            <ListItem>
+              <Controller
+                name='password'
+                control={control}
+                defaultValue=''
+                rules={{
+                  required: true,
+                  minLength: 6,
+                }}
+                render={({ field }) => (
+                  <TextField
+                    variant='outlined'
+                    fullWidth
+                    id='password'
+                    label='Password'
+                    autoComplete='new-password'
+                    error={Boolean(errors.password)}
+                    helperText={
+                      errors.password
+                        ? errors.password.type === 'minLength'
+                          ? 'Password is too short'
+                          : 'Password is required'
+                        : null
+                    }
+                    {...field}
+                    InputProps={{
+                      style: { fontSize: '0.8rem', fontWeight: 300 },
+                      startAdornment: (
+                        <InputAdornment position='start'>
+                          <IconButton
+                            aria-label='toggle password visibility'
+                            onClick={handleClickShowPassword}
+                            onMouseDown={handleMouseDownPassword}
+                            edge='end'
+                          >
+                            <LockIcon />
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                      endAdornment: (
+                        <InputAdornment position='end'>
+                          <IconButton
+                            aria-label='toggle password visibility'
+                            onClick={handleClickShowPassword}
+                            onMouseDown={handleMouseDownPassword}
+                            edge='end'
+                          >
+                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                      type: showPassword ? 'text' : 'password',
+                    }}
+                    InputLabelProps={{
+                      style: { fontSize: '0.8rem', fontWeight: 300 },
+                    }}
+                  />
+                )}
+              />
+            </ListItem>
+            <ListItem style={{ display: 'flex', justifyContent: 'center' }}>
+              {loading ? (
+                <div className={classes.buttonLoading}>
+                  <CircularProgress />
+                </div>
+              ) : (
+                <Button
+                  fullWidth
+                  variant='contained'
+                  className={classes.buttonPrimary}
+                  color='primary'
+                  type='submit'
+                >
+                  Login
+                </Button>
+              )}
+            </ListItem>
+          </List>
+          <NextLink href={`/forgot_password`} passHref>
+            <Link>
+              <Typography
+                variant='h6'
+                className={classes.centeredText}
+                style={{ color: '#ff0000', margin: '0 0 10px 0' }}
+              >
+                Forgot password?
+              </Typography>
+            </Link>
+          </NextLink>
+        </Card>
       </form>
-    </Layout>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <Typography variant='h6' className={classes.centeredText}>
+              New to Ahịa? &nbsp;{' '}
+            </Typography>
+            <NextLink href={`/register?redirect=${redirect || '/'}`} passHref>
+              <Link>
+                <Typography
+                  variant='h6'
+                  className={classes.centeredLink}
+                  style={{ textTransform: 'none' }}
+                >
+                  Create an account
+                </Typography>
+              </Link>
+            </NextLink>
+          </div>
+    </NoLayout>
   );
 };
 

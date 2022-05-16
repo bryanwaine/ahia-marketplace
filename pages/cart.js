@@ -264,7 +264,7 @@ const CartScreen = () => {
             </TableContainer>
           </Grid>
           <Grid item md={3} xs={12}>
-            <Card>
+            <Card raised={true}>
               <List>
                 <ListItem>
                   <Typography variant='h2'>

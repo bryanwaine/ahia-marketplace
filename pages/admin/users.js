@@ -168,7 +168,7 @@ const Users = () => {
       ) : null}
       <Grid container spacing={3}>
         <Grid item md={3} xs={12} className={classes.gridHide}>
-          <Card className={classes.section}>
+          <Card className={classes.section} raised={true}>
             <List>
               <NextLink href='/admin/dashboard'>
                 <ListItem button component='a'>
@@ -206,7 +206,7 @@ const Users = () => {
           </Card>
         </Grid>
         <Grid item md={9} xs={12}>
-          <Card className={classes.section}>
+          <Card className={classes.section} raised={true}>
             <List>
               <ListItem
                 style={{ display: 'flex', justifyContent: 'space-between' }}
@@ -226,7 +226,13 @@ const Users = () => {
                 ) : (
                   <TableContainer>
                     <Typography>
-                      ({users.length} {users.length === 0 ? 'users' : users.length > 1 ? 'users' : 'user'})
+                      ({users.length}{' '}
+                      {users.length === 0
+                        ? 'users'
+                        : users.length > 1
+                        ? 'users'
+                        : 'user'}
+                      )
                     </Typography>
                     <Table>
                       <TableHead>

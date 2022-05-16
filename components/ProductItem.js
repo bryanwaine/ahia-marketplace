@@ -64,7 +64,7 @@ const ProductItem = ({
 }) => {
   const classes = useStyles();
   return (
-    <Card>
+    <Card raised={true}>
       <NextLink href={`/products/${product.slug}`} passHref>
         <CardActionArea>
           <CardMedia

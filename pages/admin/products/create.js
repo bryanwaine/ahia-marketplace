@@ -172,7 +172,7 @@ const ProductCreate = () => {
     <Layout title={`Create Product`}>
       <Grid container spacing={3}>
         <Grid item md={3} xs={12} className={classes.gridHide}>
-          <Card className={classes.section}>
+          <Card className={classes.section} raised={true}>
             <List>
               <NextLink href='/admin/dashboard'>
                 <ListItem button component='a'>
@@ -210,7 +210,7 @@ const ProductCreate = () => {
           </Card>
         </Grid>
         <Grid item md={9} xs={12}>
-          <Card className={classes.section}>
+          <Card className={classes.section} raised={true}>
             <Typography component='h1' variant='h1' style={{ marginLeft: 10 }}>
               Create Product
             </Typography>

@@ -46,7 +46,7 @@ const Categories = () => {
                 cursor: 'pointer',
               }}
             >
-              <Card style={{ width: '10rem', height: '5rem', padding: '1rem' }}>
+              <Card style={{ width: '10rem', height: '5rem', padding: '1rem' }} raised={true}>
                 <Typography variant='h4' style={{ margin: 0 }}>
                   <strong> {category}</strong>
                 </Typography>

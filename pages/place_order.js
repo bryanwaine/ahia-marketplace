@@ -101,7 +101,7 @@ const Place_Order = () => {
 
       <Grid container spacing={3}>
         <Grid item md={9} xs={12}>
-          <Card className={classes.section}>
+          <Card className={classes.section} raised={true}>
             <List>
               <ListItem>
                 <Typography variant='h2' component='h2'>
@@ -159,7 +159,7 @@ const Place_Order = () => {
               </ListItem>
             </List>
           </Card>
-          <Card className={classes.section}>
+          <Card className={classes.section} raised={true}>
             <List>
               <ListItem>
                 <Typography variant='h2' component='h2'>
@@ -186,7 +186,7 @@ const Place_Order = () => {
               </ListItem>
             </List>
           </Card>
-          <Card className={classes.section}>
+          <Card className={classes.section} raised={true}>
             <List>
               <ListItem>
                 <Typography variant='h2' component='h2'>
@@ -258,7 +258,7 @@ const Place_Order = () => {
           </Card>
         </Grid>
         <Grid item md={3} xs={12}>
-          <Card className={classes.section}>
+          <Card className={classes.section} raised={true}>
             <List>
               <ListItem>
                 <Typography variant='h2'>Order Summary</Typography>

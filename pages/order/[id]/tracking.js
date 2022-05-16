@@ -192,7 +192,7 @@ const Tracking = ({ params }) => {
         }}
       >
         <Grid item md={5} xs={12}>
-          <Card style={{ padding: 20 }}>
+          <Card style={{ padding: 20 }} raised={true}>
             <div style={{ display: 'flex', alignItems: 'end' }}>
               {step === 0 ? (
                 <OutdoorGrillIcon style={{ fontSize: 100, color: '#ff0000' }} />

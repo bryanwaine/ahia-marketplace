@@ -152,7 +152,7 @@ const Order = ({ params }) => {
         amount: totalPrice * 100,
         currency: 'NGN',
         metadata: {
-          phone_number: `0${Number(userInfo.phone)}`,
+          phone_number: `${Number(userInfo.phone)}`,
           first_name: `${userInfo.firstName}`,
           last_name: `${userInfo.lastName}`,
         },
@@ -281,7 +281,7 @@ const Order = ({ params }) => {
       ) : (
         <Grid container spacing={3}>
           <Grid item md={9} xs={12}>
-            <Card className={classes.section}>
+            <Card className={classes.section} raised={true}>
               <List>
                 <ListItem>
                   <Typography variant='h2' component='h2'>
@@ -333,7 +333,7 @@ const Order = ({ params }) => {
                   }}
                 >
                   <PhoneIphoneIcon sx={{ marginRight: 1 }} />
-                  <Typography variant='h6' style={{ margin: 0 }}>{`+234${Number(
+                  <Typography variant='h6' style={{ margin: 0 }}>{`${Number(
                     shippingAddress.phone
                   )}`}</Typography>
                 </ListItem>
@@ -352,7 +352,7 @@ const Order = ({ params }) => {
                 </ListItem>
               </List>
             </Card>
-            <Card className={classes.section}>
+            <Card className={classes.section} raised={true}>
               <List>
                 <ListItem>
                   <Typography variant='h2' component='h2'>
@@ -392,7 +392,7 @@ const Order = ({ params }) => {
                 </ListItem>
               </List>
             </Card>
-            <Card className={classes.section}>
+            <Card className={classes.section} raised={true}>
               <List>
                 <ListItem>
                   <Typography variant='h2' component='h2'>
@@ -470,7 +470,7 @@ const Order = ({ params }) => {
             </Card>
           </Grid>
           <Grid item md={3} xs={12}>
-            <Card className={classes.section}>
+            <Card className={classes.section} raised={true}>
               <List>
                 <ListItem>
                   <Typography variant='h2'>Order Summary</Typography>

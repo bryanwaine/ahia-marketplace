@@ -166,7 +166,7 @@ const Products = () => {
       ) : null}
       <Grid container spacing={3}>
         <Grid item md={3} xs={12} className={classes.gridHide}>
-          <Card className={classes.section}>
+          <Card className={classes.section} raised={true}>
             <List>
               <NextLink href='/admin/dashboard'>
                 <ListItem button component='a'>
@@ -204,7 +204,7 @@ const Products = () => {
           </Card>
         </Grid>
         <Grid item md={9} xs={12}>
-          <Card className={classes.section}>
+          <Card className={classes.section} raised={true}>
             <List>
               <ListItem
                 style={{ display: 'flex', justifyContent: 'space-between' }}
@@ -234,7 +234,13 @@ const Products = () => {
                 ) : (
                   <TableContainer>
                     <Typography>
-                      ({products.length} {products.length === 0 ? 'products' : products.length > 1 ? 'products' : 'product'})
+                      ({products.length}{' '}
+                      {products.length === 0
+                        ? 'products'
+                        : products.length > 1
+                        ? 'products'
+                        : 'product'}
+                      )
                     </Typography>
                     <Table>
                       <TableHead>
