@@ -3,11 +3,13 @@ import Welcome from './email_templates/welcome';
 import VerifyEmail from './email_templates/verifyEmail';
 import ResetPassword from './email_templates/resetPassword';
 import ResetPasswordSuccess from './email_templates/resetPasswordSuccess';
+import SendOrderEmail from './email_templates/sendOrderEmail';
 
 const welcomeSubject = `Welcome to Ahia Marketplace!`;
 const verifyEmailSubject = `Your Ahia Marketplace verification code`;
 const resetPasswordSubject = `Reset your password`;
 const resetPasswordSuccessSubject = `Your password has been reset successfully`;
+const sendOrderEmailSubject = `Your order summary`;
 
 const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
@@ -81,9 +83,42 @@ const sendResetPasswordSuccessEmail = async (email, firstName) => {
   }
 };
 
+const sendOrderEmail = async (
+  email,
+  cartArray,
+  totalPrice,
+  shippingPrice,
+  itemsPrice,
+  processingAt,
+  orderId,
+  firstName
+) => {
+  try {
+    const result = await transporter.sendMail({
+      from: `'Ahia Marketplace' <ahia.marketplace.ng@gmail.com>`,
+      to: email,
+      subject: sendOrderEmailSubject,
+      html: SendOrderEmail(
+        email,
+        cartArray,
+        totalPrice,
+        shippingPrice,
+        itemsPrice,
+        processingAt,
+        orderId,
+        firstName
+      ),
+    });
+    return console.log(result);
+  } catch (err) {
+    return console.log(err);
+  }
+};
+
 export {
   sendVerifyEmail,
   sendWelcomeEmail,
   sendResetPasswordEmail,
   sendResetPasswordSuccessEmail,
+  sendOrderEmail
 };

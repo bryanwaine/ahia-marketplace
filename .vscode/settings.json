@@ -1,3 +1,4 @@
 {
-  "cSpell.ignoreWords": ["notistack"]
+  "cSpell.ignoreWords": ["notistack"],
+  "liveServer.settings.port": 5501
 }

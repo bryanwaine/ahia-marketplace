@@ -153,7 +153,7 @@ const Place_Order = () => {
                 }}
               >
                 <PhoneIphoneIcon sx={{ marginRight: 1 }} />
-                <Typography variant='h6' style={{ margin: 0 }}>{`${Number(
+                <Typography variant='h6' style={{ margin: 0 }}>{`0${Number(
                   shippingAddress.phone
                 )}`}</Typography>
               </ListItem>

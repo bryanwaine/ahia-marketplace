@@ -333,7 +333,7 @@ const Order = ({ params }) => {
                   }}
                 >
                   <PhoneIphoneIcon sx={{ marginRight: 1 }} />
-                  <Typography variant='h6' style={{ margin: 0 }}>{`${Number(
+                  <Typography variant='h6' style={{ margin: 0 }}>{`0${Number(
                     shippingAddress.phone
                   )}`}</Typography>
                 </ListItem>
@@ -415,7 +415,7 @@ const Order = ({ params }) => {
                         {orderItems.map((item) => (
                           <TableRow key={item._id}>
                             <TableCell>
-                              <NextLink href={`/product/${item.slug}`} passHref>
+                              <NextLink href={`/products/${item.slug}`} passHref>
                                 <Link>
                                   <Image
                                     src={item.image}
@@ -427,7 +427,7 @@ const Order = ({ params }) => {
                               </NextLink>
                             </TableCell>
                             <TableCell>
-                              <NextLink href={`/product/${item.slug}`} passHref>
+                              <NextLink href={`/products/${item.slug}`} passHref>
                                 <Link>
                                   <Typography
                                     variant='h6'

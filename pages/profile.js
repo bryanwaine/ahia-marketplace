@@ -70,10 +70,21 @@ NumberFormatCustom.propTypes = {
 const Profile = () => {
   // form validation rules
   const validationSchema = Yup.object().shape({
-    password: Yup.string().password().required('Password is required'),
+    firstName: Yup.string()
+      .required('First Name is required')
+      .min(2, 'First Name is not valid'),
+    lastName: Yup.string()
+      .required('Last Name is required')
+      .min(2, 'Last Name is not valid'),
+    email: Yup.string()
+      .required('Email is required')
+      .email('Email is not valid'),
+    phone: Yup.string()
+      .min(11, `Phone number should be 11 digits`)
+      .max(11, `Phone number should be 11 digits`),
+    password: Yup.string().password(),
     confirmPassword: Yup.string()
       .password()
-      .required('Confirm Password is required')
       .oneOf([Yup.ref('password')], 'Passwords must match'),
   });
 
@@ -107,7 +118,7 @@ const Profile = () => {
       setValue('firstName', userInfo.firstName);
       setValue('lastName', userInfo.lastName);
       setValue('email', userInfo.email);
-      setValue('phone', userInfo.phone);
+      setValue('phone', `0${userInfo.phone}`);
     }
   }, []);
 
@@ -242,13 +253,7 @@ const Profile = () => {
                         label='First Name'
                         inputProps={{ type: 'text' }}
                         error={Boolean(errors.firstName)}
-                        helperText={
-                          errors.firstName
-                            ? errors.firstName.type === 'minLength'
-                              ? 'First Name is not valid'
-                              : 'First Name is required'
-                            : null
-                        }
+                        helperText={errors.firstName?.message}
                         {...field}
                       />
                     )}
@@ -284,13 +289,7 @@ const Profile = () => {
                         label='Last Name'
                         inputProps={{ type: 'text' }}
                         error={Boolean(errors.lastName)}
-                        helperText={
-                          errors.lastName
-                            ? errors.lastName.type === 'minLength'
-                              ? 'Last Name is not valid'
-                              : 'Last Name is required'
-                            : null
-                        }
+                        helperText={errors.lastName?.message}
                         {...field}
                       />
                     )}
@@ -326,13 +325,7 @@ const Profile = () => {
                         label='Email'
                         inputProps={{ type: 'email' }}
                         error={Boolean(errors.email)}
-                        helperText={
-                          errors.email
-                            ? errors.email.type === 'pattern'
-                              ? 'Email is not valid'
-                              : 'Email is required'
-                            : null
-                        }
+                        helperText={errors.email?.message}
                         {...field}
                       />
                     )}
@@ -343,11 +336,6 @@ const Profile = () => {
                     name='phone'
                     control={control}
                     defaultValue=''
-                    rules={{
-                      minLength: 10,
-                      maxLength: 10,
-                      pattern: /[0-9]{10}/,
-                    }}
                     render={({ field }) => (
                       <TextField
                         InputProps={{
@@ -369,13 +357,7 @@ const Profile = () => {
                         label='Phone Number'
                         inputProps={{ inputComponent: NumberFormatCustom }}
                         error={Boolean(errors.phone)}
-                        helperText={
-                          errors.phone
-                            ? errors.phone.type === 'pattern'
-                              ? `Only digits are allowed`
-                              : `Phone number should be 10 digits excluding the first '0'`
-                            : null
-                        }
+                        helperText={errors.phone?.message}
                         {...field}
                       />
                     )}
