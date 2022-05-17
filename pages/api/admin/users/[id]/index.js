@@ -21,7 +21,7 @@ handler.get(async (req, res) => {
       res.send(user);
     }
   } catch (err) {
-    res.status(err.status).send({ message: err.message });
+    res.status(500).send({ message: err.message });
   }
 });
 
@@ -39,7 +39,7 @@ handler.put(async (req, res) => {
       res.send({ message: 'User updated successfully' });
     }
   } catch (err) {
-    res.status(err.status).send({ message: err.message });
+    res.status(500).send({ message: err.message });
   }
 });
 
@@ -54,7 +54,7 @@ handler.delete(async (req, res) => {
       res.send({ message: 'User deleted successfully' });
     }
   } catch (err) {
-    res.status(err.status).send({ message: err.message });
+    res.status(500).send({ message: err.message });
   }
 });
 

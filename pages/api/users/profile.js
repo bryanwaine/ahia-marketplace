@@ -32,7 +32,7 @@ handler.put(async (req, res) => {
       isAdmin: user.isAdmin,
     });
   } catch (err) {
-    res.status(err.status).send({ message: err.message });
+    res.status(500).send({ message: err.message });
   }
 });
 

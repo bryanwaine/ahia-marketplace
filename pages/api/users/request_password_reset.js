@@ -1,9 +1,7 @@
 import nc from 'next-connect';
 import User from '../../../models/User';
 import db from '../../../utils/db';
-import {
-  sendResetPasswordEmail,
-} from '../../../utils/emailService';
+import { sendResetPasswordEmail } from '../../../utils/emailService';
 
 const clientURL = process.env.CLIENT_URL;
 const handler = nc();
@@ -30,7 +28,7 @@ handler.patch(async (req, res) => {
       return res.status(404).send({ message: `Email does not exist` });
     }
   } catch (err) {
-    return res.status(err.status).send({ message: err.message });
+    return res.status(500).send({ message: err.message });
   }
 });
 

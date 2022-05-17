@@ -40,7 +40,7 @@ handler.use(isAuth, isAdmin, upload.single('file')).post(async (req, res) => {
     const result = await streamUpload(req, res);
     res.send(result);
   } catch (err) {
-    res.status(err.status).send({ message: err.message });
+    res.status(500).send({ message: err.message });
   }
 });
 

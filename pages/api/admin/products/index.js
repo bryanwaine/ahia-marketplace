@@ -33,7 +33,7 @@ handler.post(async (req, res) => {
 
     res.status(201).send({ message: 'Product created successfully' });
   } catch (err) {
-    res.status(err.status).send({ message: err.message });
+    res.status(500).send({ message: err.message });
   }
 });
 
@@ -48,7 +48,7 @@ handler.get(async (req, res) => {
       res.send(products);
     }
   } catch (err) {
-    res.status(err.status).send({ message: err.message });
+    res.status(500).send({ message: err.message });
   }
 });
 

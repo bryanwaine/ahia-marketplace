@@ -21,7 +21,7 @@ handler.get(async (req, res) => {
       res.send(users);
     }
   } catch (err) {
-    res.status(err.status).send({ message: err.message });
+    res.status(500).send({ message: err.message });
   }
 });
 

@@ -28,7 +28,7 @@ handler.post(async (req, res) => {
       res.status(401).send({ message: `Invalid credentials` });
     }
   } catch (err) {
-    res.status(err.status).send({ message: err.message });
+    res.status(500).send({ message: err.message });
   }
 });
 
@@ -63,7 +63,7 @@ handler.patch(async (req, res) => {
       return res.status(400).send({ message: `Verification code is invalid` });
     }
   } catch (err) {
-    return res.status(err.status).send({ message: err.message });
+    return res.status(500).send({ message: err.message });
   }
 });
 

@@ -597,6 +597,7 @@ ${newArr}
                             </td>
                           </tr>
                         </table>
+                        <p style="font-size: 16px; line-height: 1.625; color: #51545E; margin: .4em 0 1.1875em;">Click <a href="https://ahia.vercel.app/order/${order_Id}/tracking" style="color: #ff0000;">here</a> to track your order.</p>
                         <p style="font-size: 16px; line-height: 1.625; color: #51545E; margin: .4em 0 1.1875em;">If you have any questions about this order, simply reply to this email or reach out to our <a href="https://ahia.vercel.app/support" style="color: #ff0000;">support team</a> for help.</p>
                         <p style="font-size: 16px; line-height: 1.625; color: #51545E; margin: .4em 0 1.1875em;">Cheers,
                           <br />The Ahia Marketplace Team</p>

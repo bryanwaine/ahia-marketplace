@@ -11,7 +11,7 @@ handler.get(async (req, res) => {
     await db.disconnect();
     res.send(product);
   } catch (err) {
-    res.status(err.status).send({ message: err.message });
+    res.status(500).send({ message: err.message });
   }
 });
 

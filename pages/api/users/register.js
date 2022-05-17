@@ -43,7 +43,7 @@ handler.post(async (req, res) => {
         .send({ message: `Email already exists. Please Login.` });
     }
   } catch (err) {
-    return res.status(err.status).send({ message: err.message });
+    return res.status(500).send({ message: err.message });
   }
 });
 
@@ -74,10 +74,8 @@ handler.patch(async (req, res) => {
         isAdmin: user.isAdmin,
         isEmailVerified: user.isEmailVerified,
       });
-    }  else if (verificationToken !== req.body.verificationCode) {
-      return res
-        .status(400)
-        .send({ message: `Verification code is invalid` });
+    } else if (verificationToken !== req.body.verificationCode) {
+      return res.status(400).send({ message: `Verification code is invalid` });
     } else {
       return res.status(404).send({ message: `Email does not exist.` });
     }
