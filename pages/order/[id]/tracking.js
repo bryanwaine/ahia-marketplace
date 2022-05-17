@@ -94,8 +94,9 @@ const Tracking = ({ params }) => {
   const { processingAt, readyForDeliveryAt, deliveredAt } = order;
 
   useEffect(() => {
+    const id = router.asPath.toString().slice(7, 31)
     if (!userInfo) {
-      return router.push(`/login?redirect=/order/${order._id}/tracking`);
+      return router.push(`/login?redirect=/order/${id}/tracking`);
     }
     if (order.isReadyForDelivery) {
       setStep(1);
