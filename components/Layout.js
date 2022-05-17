@@ -399,7 +399,7 @@ export default function Layout({
                       </Typography>
                     </Link>
                   </NextLink>
-                  <NextLink href={`/privacy_policy`} passHref>
+                  <NextLink href={`/about_us`} passHref>
                     <Link>
                       <Typography
                         variant='h6'
