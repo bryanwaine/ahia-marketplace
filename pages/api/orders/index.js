@@ -43,7 +43,7 @@ handler.post(async (req, res) => {
     await db.disconnect();
     res.status(201).send(order);
   } catch (err) {
-    res.status(err.status).send({ message: err.message });
+    res.status(500).send({ message: err.message });
   }
 });
 
