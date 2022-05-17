@@ -157,7 +157,7 @@ const useStyles = makeStyles((theme) => ({
   buttonPrimary: {
     backgroundImage:
       'linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)',
-    color: '#ffffff',
+    color: '#ffffff !important',
     webkitBoxShadow: '-3px 3px 5px 1px rgba(0,0,0,0.50)  !important',
     mozBoxShadow: '-3px 3px 5px 1px rgba(0,0,0,0.50)  !important',
     boxShadow: '-3px 3px 5px 1px rgba(0,0,0,0.50)  !important',

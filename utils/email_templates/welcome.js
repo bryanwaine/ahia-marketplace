@@ -501,9 +501,10 @@ const Welcome = (firstName) => {
                         <p style="font-size: 16px; line-height: 1.625; color: #51545E; margin: .4em 0 1.1875em;">Thanks,
                           <br />The Ahia Marketplace Team</p>
                           <div style="height: 1px; width: 100%; background: #EAEAEC; margin: .4em 0 1.1875em"/>
-                        <p style="font-size: 12px; line-height: 1.625; color: #51545E; margin: .4em 0 1.1875em;"><strong>P.S.</strong> Need immediate help getting started? Check out our <a href="docs.ahia.vercel.app" style="color: #ff0000;">help documentation</a>. Or, just reply to this email, the Ahia Marketplace support team is always ready to help!</p>
+                        
                         <!-- Sub copy -->
-                        <table class="body-sub" role="presentation" style="margin-top: 25px; padding-top: 25px; border-top-width: 1px; border-top-color: #EAEAEC; border-top-style: solid;">
+                        <table class="body-sub" role="presentation" style="margin: 25px 0 25px; height: 2rem padding-top: 25px; border-top-width: 1px; border-top-color: #EAEAEC; border-top-style: solid;">
+                        <div style="height: 2rem"></div>
                         </table>
                       </div>
                     </td>

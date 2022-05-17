@@ -377,7 +377,7 @@ export default function Layout({
                     margin: '0 20px 10px 20px',
                   }}
                 >
-                  <NextLink href={`/privacy_policy`} passHref>
+                  <NextLink href={`/privacy_policy.html`} passHref>
                     <Link>
                       <Typography
                         variant='h6'
@@ -388,7 +388,7 @@ export default function Layout({
                       </Typography>
                     </Link>
                   </NextLink>
-                  <NextLink href={`/terms_&_conditions`} passHref>
+                  <NextLink href={`/terms_and_conditions.html`} passHref>
                     <Link>
                       <Typography
                         variant='h6'
