@@ -91,9 +91,9 @@ const Shipping = () => {
       setValue(
         'phone',
         shippingAddress.phone
-          ? shippingAddress.phone
+          ? `${shippingAddress.phone}`
           : userInfo
-          ? userInfo.phone
+          ?`${ userInfo.phone}`
           : ''
       );
       setValue('address', shippingAddress.address);

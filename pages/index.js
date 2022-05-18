@@ -153,7 +153,7 @@ export default function Home(props) {
 
   return (
     <Layout title='Home' selectedNavHome>
-      <Carousel className={classes.carousel}>
+      <Carousel className={classes.carousel} >
         {featuredProducts.map((product) => (
           <NextLink
             key={product._id}
@@ -165,7 +165,7 @@ export default function Home(props) {
                 src={product.featuredImage}
                 alt={product.name}
                 width={1000}
-                height={300}
+                height={450}
               />
             </Link>
           </NextLink>

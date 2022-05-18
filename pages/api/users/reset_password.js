@@ -25,7 +25,7 @@ handler.patch(async (req, res) => {
       await db.disconnect();
       return res.status(200).send({ message: 'Success' });
     } else {
-      return res.status(404).send({ message: `User does not exist` });
+      return res.status(404).send({ message: `Error` });
     }
   } catch (err) {
     return res.status(400).send({ message: `Link is expired` });

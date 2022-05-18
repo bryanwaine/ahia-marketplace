@@ -214,7 +214,7 @@ const ProductEdit = ({ params }) => {
   };
 
   return (
-    <Layout title={`Edit Product ${productId}`}>
+    <Layout title={`Edit Product (${productId})`}>
       <Grid container spacing={3}>
         <Grid item md={3} xs={12} className={classes.gridHide}>
           <Card className={classes.section} raised={true}>
@@ -257,7 +257,7 @@ const ProductEdit = ({ params }) => {
         <Grid item md={9} xs={12}>
           <Card className={classes.section} raised={true}>
             <Typography component='h1' variant='h1' style={{ marginLeft: 10 }}>
-              Edit Product {productId}
+              Edit Product ({productId})
             </Typography>
             <form
               onSubmit={handleSubmit(submitHandler)}

@@ -260,7 +260,7 @@ const Order = ({ params }) => {
   };
 
   return (
-    <Layout title={`Order ${orderId}`}>
+    <Layout title={`Order (${orderId})`}>
       <Script src='https://js.paystack.co/v1/inline.js' />
       <Typography component='h1' variant='h1'>
         Order ({orderId})

@@ -89,8 +89,8 @@ export default function NoLayout({ description, title, children }) {
                     : ahia_white_logo
                 }
                 alt='ahia-marketplace'
-                width={80}
-                height={60}
+                width={100}
+                height={75}
               />
             </NextLink>
           </div>

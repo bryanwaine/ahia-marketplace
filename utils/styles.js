@@ -56,7 +56,8 @@ const useStyles = makeStyles((theme) => ({
     cursor: 'pointer',
   },
   ahiaNoLayout: {
-    marginTop: '-50px',
+    marginTop: '-70px',
+    marginBottom: '20px',
     width: '100%',
     display: 'flex',
     justifyContent: 'center',

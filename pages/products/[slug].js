@@ -270,13 +270,12 @@ export default function ProductScreen(props) {
       </div>
       {cartArray.map((product) => (
         <Grid key={product.id} container spacing={1}>
-          <Grid item md={5} xs={12}>
+          <Grid item md={5} xs={12} style={{ display: 'flex', justifyContent: 'center' }}>
             <Image
               src={product.image}
               alt={product.name}
-              width={300}
-              height={300}
-              layout='responsive'
+              width={250}
+              height={250}
             />
           </Grid>
           <Grid item md={4} xs={12}>
@@ -306,7 +305,7 @@ export default function ProductScreen(props) {
                 <Link href='#reviews'>
                   <Typography variant='h6' style={{ margin: 0 }}>
                     ({product.numReviews}{' '}
-                    {product.numReviews.length === 0 ? `reviews` : product.numReviews.length > 1 ? `reviews` : `review`})
+                    {product.numReviews < 1 ? `reviews` : product.numReviews > 1 ? `reviews` : `review`})
                   </Typography>
                 </Link>
               </ListItem>
@@ -351,7 +350,7 @@ export default function ProductScreen(props) {
                   <Grid container>
                     <Grid Item xs={6}>
                       <Typography variant='h6' style={{ margin: 0 }}>
-                        <strong>Status:</strong>
+                        <strong>Availability:</strong>
                       </Typography>
                     </Grid>
                     <Grid Item xs={6}>
@@ -413,7 +412,7 @@ export default function ProductScreen(props) {
       <List>
         <ListItem>
           <Typography variant='h3' name='reviews' id='reviews'>
-            Customer Reviews
+            <strong>Customer Reviews</strong>
           </Typography>
         </ListItem>
         <ListItem
@@ -517,7 +516,7 @@ export default function ProductScreen(props) {
               </List>
             </form>
           ) : (
-            <Typography variant='h3'>
+            <Typography variant='h6'>
               Please{' '}
               <Link href={`/login?redirect=/products/${product.slug}`}>
                 login

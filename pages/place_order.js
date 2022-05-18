@@ -157,6 +157,19 @@ const Place_Order = () => {
                   shippingAddress.phone
                 )}`}</Typography>
               </ListItem>
+              <ListItem>
+                <NextLink href={`/shipping`} passHref>
+                  <Link>
+                    <Typography
+                      variant='h6'
+                      className={classes.centeredLink}
+                      style={{ textTransform: 'none', margin: 0 }}
+                    >
+                      Change
+                    </Typography>
+                  </Link>
+                </NextLink>
+              </ListItem>
             </List>
           </Card>
           <Card className={classes.section} raised={true}>
@@ -183,6 +196,19 @@ const Place_Order = () => {
                 <Typography variant='h6' style={{ marginLeft: 10 }}>
                   {paymentMethod}
                 </Typography>
+              </ListItem>
+              <ListItem>
+                <NextLink href={`/payment`} passHref>
+                  <Link>
+                    <Typography
+                      variant='h6'
+                      className={classes.centeredLink}
+                      style={{ textTransform: 'none', margin: 0 }}
+                    >
+                      Change
+                    </Typography>
+                  </Link>
+                </NextLink>
               </ListItem>
             </List>
           </Card>
