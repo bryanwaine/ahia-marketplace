@@ -16,7 +16,7 @@ const WhatsappChat = () => {
           autoOpenTimer={30000}
           messageBox={true}
           messageBoxTxt="Hi, I'd like to make an inquiry."
-          iconSize='40'
+          iconSize='50'
           iconColor='white'
           iconBgColor='red'
           headerIcon='https://ahia.vercel.app/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fahia_black_logo.bfa7d64f.png&w=256&q=75'
