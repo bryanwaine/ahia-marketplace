@@ -534,7 +534,8 @@ const Profile = () => {
                             color: isSymbol ? '#00ff00' : '#ff0000',
                           }}
                         >
-                          Must contain one symbol (-+~:=_!@#$%^&*.,?)
+                          Must contain one symbol
+                          (?=.*[(\\-+~:=/_\\\\!@#$%^&*.,?)])
                         </Typography>
                       </span>
                     </div>
