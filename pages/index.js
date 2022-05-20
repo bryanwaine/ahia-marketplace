@@ -153,7 +153,7 @@ export default function Home(props) {
 
   return (
     <Layout title='Home' selectedNavHome>
-      <Carousel className={classes.carousel} >
+      <Carousel className={classes.carousel}>
         {featuredProducts.map((product) => (
           <NextLink
             key={product._id}
@@ -166,6 +166,7 @@ export default function Home(props) {
                 alt={product.name}
                 width={1000}
                 height={450}
+                priority={true}
               />
             </Link>
           </NextLink>
@@ -202,18 +203,25 @@ export default function Home(props) {
             </Grid>
           ))}
         </Grid>
-        <Grid container style={{ display: 'flex', justifyContent: 'center', margin: '3rem 0 0 0' }}>
-        <Grid item md={3} xs={6}>
-          <NextLink href={`/categories`}>
-          <Button
-            fullWidth
-            variant='contained'
-            color='primary'
-            className={classes.buttonPrimary}
-          >
-            BROWSE ALL CATEGORIES
-            </Button>
-          </NextLink>
+        <Grid
+          container
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            margin: '3rem 0 0 0',
+          }}
+        >
+          <Grid item md={3} xs={6}>
+            <NextLink href={`/categories`}>
+              <Button
+                fullWidth
+                variant='contained'
+                color='primary'
+                className={classes.buttonPrimary}
+              >
+                BROWSE ALL CATEGORIES
+              </Button>
+            </NextLink>
           </Grid>
         </Grid>
         <div style={{ height: '2rem' }} />

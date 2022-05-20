@@ -24,7 +24,7 @@ const productSchema = new mongoose.Schema(
     isFeatured: { type: Boolean, required: true, default: false },
     price: { type: Number, required: true },
     vendor: { type: String, required: true },
-    rating: { type: String, default: 0 },
+    rating: { type: Number, default: 0 },
     numReviews: { type: Number, default: 0 },
     countInStock: { type: Number, required: true, default: 0 },
     description: { type: String, required: true },

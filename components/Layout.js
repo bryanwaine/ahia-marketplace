@@ -304,7 +304,7 @@ export default function Layout({
                 />
               </IconButton>
               <div className={classes.ahia}>
-                <NextLink href='/' passHref>
+                <NextLink href='/'>
                   <Image
                     src={
                       theme.palette.type === 'light'

@@ -165,7 +165,7 @@ const Place_Order = () => {
                       className={classes.centeredLink}
                       style={{ textTransform: 'none', margin: 0 }}
                     >
-                      Change
+                      edit
                     </Typography>
                   </Link>
                 </NextLink>
@@ -205,7 +205,7 @@ const Place_Order = () => {
                       className={classes.centeredLink}
                       style={{ textTransform: 'none', margin: 0 }}
                     >
-                      Change
+                      edit
                     </Typography>
                   </Link>
                 </NextLink>

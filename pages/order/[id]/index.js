@@ -173,7 +173,6 @@ const Order = ({ params }) => {
             );
 
             const verified = verification.data.data;
-            console.log(verified);
 
             if (
               verified.reference === reference &&
