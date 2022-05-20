@@ -138,7 +138,7 @@ const Profile = () => {
      const uppercase = new RegExp('(?=.*[A-Z])');
      const lowercase = new RegExp('(?=.*[a-z])');
      const number = new RegExp('(?=.*\\d)');
-    const symbol = new RegExp('(?=.*[(-+~:=\\-_!@#$%^&*.,?)])');
+    const symbol = new RegExp('(?=.*[(\\-+~:=/_\\\\!@#$%^&*.,?)])');
 
      uppercase.test(e.target.value)
        ? setIsUpperCase(true)
