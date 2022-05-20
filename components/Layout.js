@@ -48,6 +48,12 @@ import ahia_black_logo from '../public/images/ahia_black_logo.png';
 import ahia_white_logo from '../public/images/ahia_white_logo.png';
 import Image from 'next/image';
 import axios from 'axios';
+import dynamic from 'next/dynamic';
+
+const DynamicComponentWithNoSSR = dynamic(
+  () => import('../components/WhatsappChat'),
+  { ssr: false }
+);
 
 const ThemeToggleSwitch = styled(Switch)(({ theme }) => ({
   '& .MuiSwitch-root': {
@@ -730,7 +736,10 @@ export default function Layout({
             </div>
           </Toolbar>
         </AppBar>
-        <Container className={classes.main}>{children}</Container>
+        <Container className={classes.main}>
+          {children}
+            <DynamicComponentWithNoSSR />
+        </Container>
 
         <AppBar
           position='static'

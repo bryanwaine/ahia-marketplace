@@ -672,6 +672,12 @@ const useStyles = makeStyles((theme) => ({
           : '#111111 !important',
     },
   },
+  whatsappWidget: {
+    '& .whatsapp_widget_wrapper': {
+      bottom: '80px !important',
+      right: '20px !important',
+    },
+  },
 }));
 
 export default useStyles;
