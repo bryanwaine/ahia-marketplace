@@ -677,9 +677,6 @@ const useStyles = makeStyles((theme) => ({
       bottom: '80px !important',
       right: '20px !important',
     },
-    '& .whatsapp_widget_icon': {
-      border: 'none !important',
-    },
   },
 }));
 
