@@ -535,7 +535,7 @@ const Profile = () => {
                           }}
                         >
                           Must contain one symbol
-                          (?=.*[(-+~:=/_\!@#$%^&*.,?)])
+                          ([-+~:=/_\!@#$%^&*.,?])
                         </Typography>
                       </span>
                     </div>
