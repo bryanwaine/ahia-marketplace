@@ -214,7 +214,7 @@ const ProductEdit = ({ params }) => {
   };
 
   return (
-    <Layout title={`Edit Product (${productId})`}>
+    <Layout title={`Edit Product (${productId})`} selectedNavPerson>
       <Grid container spacing={3}>
         <Grid item md={3} xs={12} className={classes.gridHide}>
           <Card className={classes.section} raised={true}>

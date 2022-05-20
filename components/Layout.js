@@ -190,12 +190,12 @@ export default function Layout({
         margin: '1rem 0',
       },
       h6: {
-        fontSize: '0.8rem',
+        fontSize: '0.7rem',
         fontWeight: 400,
         margin: '1rem 0',
       },
-      p: {
-        fontSize: '1rem',
+      h7: {
+        fontSize: '0.5rem',
         fontWeight: 300,
         margin: '1rem 0',
       },

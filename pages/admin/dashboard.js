@@ -130,15 +130,19 @@ const Admin_Dashboard = () => {
                     <Grid item md={3} xs={12}>
                       <Card raised={true}>
                         <CardContent>
-                          <Typography variant='h1'>
+                          <Typography style={{ margin: 0 }}>
+                            Sales
+                          </Typography>
+                          <Typography variant='h1' style={{ fontSize: '2rem' }}>
                             ₦{toCurrency(summary.ordersPrice)}
                           </Typography>
-                          <Typography>Sales</Typography>
                         </CardContent>
                         <CardActions>
                           <NextLink href='/admin/orders' passHref>
                             <Button size='small' color='primary'>
-                              View Sales
+                              <Typography variant='h6' style={{ margin: 0 }}>
+                                View Sales
+                              </Typography>
                             </Button>
                           </NextLink>
                         </CardActions>
@@ -147,15 +151,19 @@ const Admin_Dashboard = () => {
                     <Grid item md={3} xs={12}>
                       <Card raised={true}>
                         <CardContent>
-                          <Typography variant='h1'>
+                          <Typography style={{ margin: 0 }}>
+                            Orders
+                          </Typography>
+                          <Typography variant='h1' style={{ fontSize: '2rem' }}>
                             {summary.ordersCount}
                           </Typography>
-                          <Typography>Orders</Typography>
                         </CardContent>
                         <CardActions>
                           <NextLink href='/admin/orders' passHref>
                             <Button size='small' color='primary'>
-                              View Orders
+                              <Typography variant='h6' style={{ margin: 0 }}>
+                                View Orders
+                              </Typography>
                             </Button>
                           </NextLink>
                         </CardActions>
@@ -164,15 +172,19 @@ const Admin_Dashboard = () => {
                     <Grid item md={3} xs={12}>
                       <Card raised={true}>
                         <CardContent>
-                          <Typography variant='h1'>
+                          <Typography  style={{ margin: 0 }}>
+                            Products
+                          </Typography>
+                          <Typography variant='h1' style={{ fontSize: '2rem' }}>
                             {summary.productsCount}
                           </Typography>
-                          <Typography>Products</Typography>
                         </CardContent>
                         <CardActions>
                           <NextLink href='/admin/products' passHref>
                             <Button size='small' color='primary'>
-                              View Products
+                              <Typography variant='h6' style={{ margin: 0 }}>
+                                View Products
+                              </Typography>
                             </Button>
                           </NextLink>
                         </CardActions>
@@ -181,15 +193,19 @@ const Admin_Dashboard = () => {
                     <Grid item md={3} xs={12}>
                       <Card raised={true}>
                         <CardContent>
-                          <Typography variant='h1'>
+                          <Typography  style={{ margin: 0 }}>
+                            Users
+                          </Typography>
+                          <Typography variant='h1' style={{ fontSize: '2rem' }}>
                             {summary.usersCount}
                           </Typography>
-                          <Typography>Users</Typography>
                         </CardContent>
                         <CardActions>
                           <NextLink href='/admin/users' passHref>
                             <Button size='small' color='primary'>
-                              View Users
+                              <Typography variant='h6' style={{ margin: 0 }}>
+                                View Users
+                              </Typography>
                             </Button>
                           </NextLink>
                         </CardActions>

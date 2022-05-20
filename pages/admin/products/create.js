@@ -169,7 +169,7 @@ const ProductCreate = () => {
   };
 
   return (
-    <Layout title={`Create Product`}>
+    <Layout title={`Create Product`} selectedNavPerson>
       <Grid container spacing={3}>
         <Grid item md={3} xs={12} className={classes.gridHide}>
           <Card className={classes.section} raised={true}>

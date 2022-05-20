@@ -600,8 +600,10 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-between',
   },
   transparentBackground: {
-    backgroundColor: 'transparent',
+    background: 'transparent',
     fontWeight: 300,
+    width: '100%',
+    margin: 0,
   },
   textFieldFont: {
     '&::placeholder': {

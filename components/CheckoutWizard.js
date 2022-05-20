@@ -14,7 +14,10 @@ const CheckoutWizard = ({ activeStep = 0 }) => {
         (step) => (
           <Step key={step}>
             <StepLabel>
-              <Typography variant='h6' style={{ margin: 0 }}>
+              <Typography
+                variant='h6'
+                style={{ margin: 0}}
+              >
                 {step}
               </Typography>
             </StepLabel>
