@@ -8,14 +8,13 @@ handler.patch(async (req, res) => {
   try {
     await db.connect();
     const user = await User.findOne({ email: req.body.email });
-    await db.disconnect();
     if (user) {
         if (!req.body.cartItems)
         { user.cartItems = [] }
         else
-        { user.cartItems = JSON.parse(req.body.cartItems); }
-          
+        { user.cartItems = JSON.parse(req.body.cartItems); }        
         await user.save();
+        await db.disconnect();
         res.status(200).send({ message: 'Success'});
     } else {
       res.status(400).send({ message: `Unable to update user` });
