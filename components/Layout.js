@@ -646,14 +646,14 @@ export default function Layout({
                     </ListItemIcon>
                     <NextLink
                       href={
-                        userInfo.isAdmin ? '/admin/orders' : '/order_history'
+                        userInfo && userInfo.isAdmin ? '/admin/orders' : '/order_history'
                       }
                       passHref
                     >
                       <ListItemText primary='My Orders' />
                     </NextLink>
                   </StyledMenuItem>
-                  {userInfo.isAdmin && (
+                  {userInfo && userInfo.isAdmin && (
                     <StyledMenuItem onClick={userMenuCloseHandler}>
                       <ListItemIcon>
                         <DashboardOutlinedIcon fontSize='medium' />
@@ -879,7 +879,7 @@ export default function Layout({
                         <CancelOutlinedIcon />
                       </IconButton>
                       <Typography variant='h3' style={{ marginLeft: 20 }}>
-                        <strong>Hi, {userInfo.firstName}.</strong>
+                        Hi,&nbsp;<strong>{userInfo.firstName}.</strong>
                       </Typography>
                     </ListItem>
                     <Divider />
@@ -906,7 +906,7 @@ export default function Layout({
                       </ListItemIcon>
                       <NextLink
                         href={
-                          userInfo.isAdmin ? '/admin/orders' : '/order_history'
+                          userInfo && userInfo.isAdmin ? '/admin/orders' : '/order_history'
                         }
                         passHref
                       >
@@ -916,7 +916,7 @@ export default function Layout({
                         />
                       </NextLink>
                     </ListItem>
-                    {userInfo.isAdmin && (
+                    {userInfo && userInfo.isAdmin && (
                       <ListItem
                         onClick={userMenuCloseHandler}
                         style={{ cursor: 'pointer' }}

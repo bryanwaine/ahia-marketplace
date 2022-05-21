@@ -555,7 +555,7 @@ const Order = ({ params }) => {
                     )}
                   </ListItem>
                 )}
-                {userInfo.isAdmin && paymentMethod === 'Pay at Pickup' && (
+                {userInfo && userInfo.isAdmin && paymentMethod === 'Pay at Pickup' && (
                   <ListItem
                     style={{ display: 'flex', justifyContent: 'center' }}
                   >
@@ -586,7 +586,7 @@ const Order = ({ params }) => {
                     )}
                   </ListItem>
                 )}
-                {userInfo.isAdmin && paymentMethod === 'Pay on Delivery' && (
+                {userInfo && userInfo.isAdmin && paymentMethod === 'Pay on Delivery' && (
                   <ListItem
                     style={{ display: 'flex', justifyContent: 'center' }}
                   >
