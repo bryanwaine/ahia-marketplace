@@ -30,8 +30,8 @@ import YupPassword from 'yup-password';
 YupPassword(Yup); // extend yup
 import { getError } from '../utils/error';
 import Cookies from 'js-cookie';
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import CancelIcon from '@mui/icons-material/Cancel';
 import PersonIcon from '@mui/icons-material/Person';
 import MailIcon from '@mui/icons-material/Mail';
 import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
@@ -370,15 +370,27 @@ const Register = () => {
               <ListItem>
                 <div>
                   <span style={{ display: 'flex', margin: 0 }}>
+                    <Typography
+                      variant='h6'
+                      style={{
+                        margin: '0 0 0 5px',
+                        fontSize: '0.7rem',
+                        color: '#aaaaaa',
+                      }}
+                    >
+                      Your password must contian:
+                    </Typography>
+                  </span>
+                  <span style={{ display: 'flex', margin: 0 }}>
                     {inputValue.length < 8 ? (
-                      <HighlightOffIcon
+                      <CancelIcon
                         fontSize='small'
                         style={{ fontSize: '1rem', color: '#ff0000' }}
                       />
                     ) : (
-                      <CheckCircleOutlineIcon
+                      <CheckCircleIcon
                         fontSize='small'
-                        style={{ fontSize: '1rem', color: '#00ff00' }}
+                        style={{ fontSize: '1rem', color: '#12b370' }}
                       />
                     )}
                     <Typography
@@ -386,20 +398,20 @@ const Register = () => {
                       style={{
                         margin: '0 0 0 5px',
                         fontSize: '0.7rem',
-                        color: inputValue.length < 8 ? '#ff0000' : '#00ff00',
+                        color: inputValue.length < 8 ? '#ff0000' : '#12b370',
                       }}
                     >
-                      Length must be at least 8 characters
+                      8 characters minimum
                     </Typography>
                   </span>
                   <span style={{ display: 'flex', margin: 0 }}>
                     {isUpperCase ? (
-                      <CheckCircleOutlineIcon
+                      <CheckCircleIcon
                         fontSize='small'
-                        style={{ fontSize: '1rem', color: '#00ff00' }}
+                        style={{ fontSize: '1rem', color: '#12b370' }}
                       />
                     ) : (
-                      <HighlightOffIcon
+                      <CancelIcon
                         fontSize='small'
                         style={{ fontSize: '1rem', color: '#ff0000' }}
                       />
@@ -409,20 +421,20 @@ const Register = () => {
                       style={{
                         margin: '0 0 0 5px',
                         fontSize: '0.7rem',
-                        color: isUpperCase ? '#00ff00' : '#ff0000',
+                        color: isUpperCase ? '#12b370' : '#ff0000',
                       }}
                     >
-                      Must contain one uppercase letter
+                      uppercase letters
                     </Typography>
                   </span>
                   <span style={{ display: 'flex', margin: 0 }}>
                     {isLowerCase ? (
-                      <CheckCircleOutlineIcon
+                      <CheckCircleIcon
                         fontSize='small'
-                        style={{ fontSize: '1rem', color: '#00ff00' }}
+                        style={{ fontSize: '1rem', color: '#12b370' }}
                       />
                     ) : (
-                      <HighlightOffIcon
+                      <CancelIcon
                         fontSize='small'
                         style={{ fontSize: '1rem', color: '#ff0000' }}
                       />
@@ -432,20 +444,20 @@ const Register = () => {
                       style={{
                         margin: '0 0 0 5px',
                         fontSize: '0.7rem',
-                        color: isLowerCase ? '#00ff00' : '#ff0000',
+                        color: isLowerCase ? '#12b370' : '#ff0000',
                       }}
                     >
-                      Must contain one lowercase letter
+                      lowercase letters
                     </Typography>
                   </span>
                   <span style={{ display: 'flex', margin: 0 }}>
                     {isNumber ? (
-                      <CheckCircleOutlineIcon
+                      <CheckCircleIcon
                         fontSize='small'
-                        style={{ fontSize: '1rem', color: '#00ff00' }}
+                        style={{ fontSize: '1rem', color: '#12b370' }}
                       />
                     ) : (
-                      <HighlightOffIcon
+                      <CancelIcon
                         fontSize='small'
                         style={{ fontSize: '1rem', color: '#ff0000' }}
                       />
@@ -455,20 +467,20 @@ const Register = () => {
                       style={{
                         margin: '0 0 0 5px',
                         fontSize: '0.7rem',
-                        color: isNumber ? '#00ff00' : '#ff0000',
+                        color: isNumber ? '#12b370' : '#ff0000',
                       }}
                     >
-                      Must contain one number
+                      numbers
                     </Typography>
                   </span>
                   <span style={{ display: 'flex', margin: 0 }}>
                     {isSymbol ? (
-                      <CheckCircleOutlineIcon
+                      <CheckCircleIcon
                         fontSize='small'
-                        style={{ fontSize: '1rem', color: '#00ff00' }}
+                        style={{ fontSize: '1rem', color: '#12b370' }}
                       />
                     ) : (
-                      <HighlightOffIcon
+                      <CancelIcon
                         fontSize='small'
                         style={{ fontSize: '1rem', color: '#ff0000' }}
                       />
@@ -478,10 +490,10 @@ const Register = () => {
                       style={{
                         margin: '0 0 0 5px',
                         fontSize: '0.7rem',
-                        color: isSymbol ? '#00ff00' : '#ff0000',
+                        color: isSymbol ? '#12b370' : '#ff0000',
                       }}
                     >
-                      Must contain one symbol ([-+~:=/_\!@#$%^&*.,?])
+                      special characters
                     </Typography>
                   </span>
                 </div>
