@@ -181,6 +181,18 @@ const Reset_password = () => {
               <ListItem>
                 <div>
                   <span style={{ display: 'flex', margin: 0 }}>
+                    <Typography
+                      variant='h6'
+                      style={{
+                        margin: '0 0 0 5px',
+                        fontSize: '0.7rem',
+                        color: '#aaaaaa',
+                      }}
+                    >
+                      Your password must contian:
+                    </Typography>
+                  </span>
+                  <span style={{ display: 'flex', margin: 0 }}>
                     {inputValue.length < 8 ? (
                       <CancelIcon
                         fontSize='small'
@@ -200,7 +212,7 @@ const Reset_password = () => {
                         color: inputValue.length < 8 ? '#ff0000' : '#12b370',
                       }}
                     >
-                      Length must be at least 8 characters
+                      8 characters minimum
                     </Typography>
                   </span>
                   <span style={{ display: 'flex', margin: 0 }}>
@@ -223,7 +235,7 @@ const Reset_password = () => {
                         color: isUpperCase ? '#12b370' : '#ff0000',
                       }}
                     >
-                      Must contain one uppercase letter
+                      uppercase letters
                     </Typography>
                   </span>
                   <span style={{ display: 'flex', margin: 0 }}>
@@ -246,7 +258,7 @@ const Reset_password = () => {
                         color: isLowerCase ? '#12b370' : '#ff0000',
                       }}
                     >
-                      Must contain one lowercase letter
+                      lowercase letters
                     </Typography>
                   </span>
                   <span style={{ display: 'flex', margin: 0 }}>
@@ -269,7 +281,7 @@ const Reset_password = () => {
                         color: isNumber ? '#12b370' : '#ff0000',
                       }}
                     >
-                      Must contain one number
+                      numbers
                     </Typography>
                   </span>
                   <span style={{ display: 'flex', margin: 0 }}>
@@ -292,7 +304,7 @@ const Reset_password = () => {
                         color: isSymbol ? '#12b370' : '#ff0000',
                       }}
                     >
-                      Must contain one symbol (-+~:=_!@#$%^&*.,?)
+                      special characters
                     </Typography>
                   </span>
                 </div>
