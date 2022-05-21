@@ -159,9 +159,9 @@ const useStyles = makeStyles((theme) => ({
     backgroundImage:
       'linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)',
     color: '#ffffff !important',
-    webkitBoxShadow: '-3px 3px 5px 1px rgba(0,0,0,0.50)  !important',
-    mozBoxShadow: '-3px 3px 5px 1px rgba(0,0,0,0.50)  !important',
-    boxShadow: '-3px 3px 5px 1px rgba(0,0,0,0.50)  !important',
+    webkitBoxShadow: '3px 3px 5px 1px rgba(0,0,0,0.50)  !important',
+    mozBoxShadow: '3px 3px 5px 1px rgba(0,0,0,0.50)  !important',
+    boxShadow: '3px 3px 5px 1px rgba(0,0,0,0.50)  !important',
     '&:hover': {
       webkitBoxShadow: '0px 0px 5px 1px rgba(0,0,0,0.66)  !important',
       mozBoxShadow: '0px 0px 5px 1px rgba(0,0,0,0.66)  !important',
@@ -173,9 +173,9 @@ const useStyles = makeStyles((theme) => ({
     backgroundImage:
       'linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)',
     color: '#ffffff',
-    webkitBoxShadow: '-3px 3px 5px 1px rgba(0,0,0,0.50)  !important',
-    mozBoxShadow: '-3px 3px 5px 1px rgba(0,0,0,0.50)  !important',
-    boxShadow: '-3px 3px 5px 1px rgba(0,0,0,0.50)  !important',
+    webkitBoxShadow: '3px 3px 5px 1px rgba(0,0,0,0.50)  !important',
+    mozBoxShadow: '3px 3px 5px 1px rgba(0,0,0,0.50)  !important',
+    boxShadow: '3px 3px 5px 1px rgba(0,0,0,0.50)  !important',
     '&:hover': {
       boxShadow: '0px 0px 5px 1px rgba(0,0,0,0.66)  !important',
       webkitBoxShadow: '0px 0px 5px 1px rgba(0,0,0,0.66)  !important',
@@ -674,9 +674,16 @@ const useStyles = makeStyles((theme) => ({
   },
   whatsappWidget: {
     '& .whatsapp_widget_wrapper': {
-      bottom: '80px !important',
-      right: '20px !important',
-      width: 50
+      [theme.breakpoints.down('md')]: {
+        bottom: '80px !important',
+        right: '20px !important',
+        width: 50,
+      },
+    },
+    '& .whatsapp_widget_icon': {
+      webkitBoxShadow: '3px 3px 5px 1px rgba(0,0,0,0.50)  !important',
+      mozBoxShadow: '3px 3px 5px 1px rgba(0,0,0,0.50)  !important',
+      boxShadow: '3px 3px 5px 1px rgba(0,0,0,0.50)  !important',
     },
   },
 }));
