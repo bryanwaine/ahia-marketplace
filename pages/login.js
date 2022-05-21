@@ -80,8 +80,49 @@ const Login = () => {
         enqueueSnackbar(`Welcome back, ${data.firstName}`, {
           variant: 'success',
         });
-        dispatch({ type: 'USER_LOGIN', payload: data });
-        Cookies.set('userInfo', JSON.stringify(data));
+         const {
+           token,
+           _id,
+           firstName,
+           lastName,
+           email,
+           phone,
+           isAdmin,
+           isEmailVerified,
+           cartItems,
+        } = data;
+        dispatch({
+          type: 'USER_LOGIN',
+          payload: {
+            token,
+            _id,
+            firstName,
+            lastName,
+            email,
+            phone,
+            isAdmin,
+            isEmailVerified,
+          },
+        });
+         Cookies.set(
+           'userInfo',
+           JSON.stringify({
+             token,
+             _id,
+             firstName,
+             lastName,
+             email,
+             phone,
+             isAdmin,
+             isEmailVerified,
+           })
+         );
+        Cookies.set('cartItems', JSON.stringify(cartItems));
+        cartItems.map((item) => {
+          const quantity = item.quantity
+          dispatch({ type: 'CART_ADD_ITEM', payload: { ...item, quantity } })
+        })
+        
         router.push(redirect || '/');
       }
     } catch (err) {

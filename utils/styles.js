@@ -676,6 +676,7 @@ const useStyles = makeStyles((theme) => ({
     '& .whatsapp_widget_wrapper': {
       bottom: '80px !important',
       right: '20px !important',
+      width: 50
     },
   },
 }));

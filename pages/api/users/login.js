@@ -23,6 +23,7 @@ handler.post(async (req, res) => {
         phone: user.phone,
         isAdmin: user.isAdmin,
         isEmailVerified: user.isEmailVerified,
+        cartItems: user.cartItems ? user.cartItems : [],
       });
     } else {
       res.status(401).send({ message: `Invalid credentials` });

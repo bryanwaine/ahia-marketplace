@@ -159,6 +159,8 @@ export default function Layout({
   const [activeSearch, setActiveSearch] = useState(false);
   const [categories, setCategories] = useState([]);
   const [query, setQuery] = useState('');
+  const cartItems = Cookies.get('cartItems');
+  const email = userInfo && userInfo.email
 
   const fetchCategories = async () => {
     try {
@@ -259,8 +261,12 @@ export default function Layout({
     setAnchorEl(null);
   };
 
-  const userLogoutHandler = () => {
+  const userLogoutHandler = async() => {
     setAnchorEl(null);
+    await axios.patch('/api/users/logout', {
+      email,
+      cartItems
+    })
     closeSnackbar();
     enqueueSnackbar(`Goodbye, ${userInfo.firstName}`, {
       variant: 'success',
@@ -268,6 +274,8 @@ export default function Layout({
     dispatch({ type: 'USER_LOGOUT' });
     Cookies.remove('userInfo');
     Cookies.remove('cartItems');
+    Cookies.remove('shippingAddress');
+    Cookies.remove('paymentMethod');
     router.push('/');
   };
 

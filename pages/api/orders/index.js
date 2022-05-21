@@ -47,4 +47,17 @@ handler.post(async (req, res) => {
   }
 });
 
+handler.patch(async (req, res) => {
+  try {
+    await db.connect();
+    const user = await User.findById(req.user._id);
+    user.cartItems = req.body.cartItems;
+    await user.save();
+    await db.disconnect();
+    res.status(201).send({message: 'Success'});
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+});
+
 export default handler;

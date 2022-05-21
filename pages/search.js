@@ -421,6 +421,11 @@ const Search = (props) => {
                 Sort by
               </Typography>
               <Select value={sort} onChange={sortHandler}>
+                <MenuItem value='all'>
+                  <Typography variant='h6' style={{ margin: 0 }}>
+                    All
+                  </Typography>
+                </MenuItem>
                 <MenuItem value='featured'>
                   <Typography variant='h6' style={{ margin: 0 }}>
                     Featured

@@ -542,7 +542,7 @@ const Order = ({ params }) => {
                         variant='contained'
                         color='primary'
                         className={
-                          userInfo.isAdmin ||
+                         userInfo && userInfo.isAdmin ||
                           paymentMethod === 'Pay at Pickup' ||
                           paymentMethod === 'Pay on Delivery'
                             ? classes.noButton

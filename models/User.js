@@ -16,6 +16,26 @@ const refreshToken = new mongoose.Schema({
   },
 });
 
+const cartItem = new mongoose.Schema({
+  name: { type: String },
+  volume: { type: String },
+  servings: { type: Number },
+  slug: { type: String, unique: true },
+  category: { type: String },
+  image: { type: String },
+  featuredImage: { type: String },
+  isFeatured: { type: Boolean, default: false },
+  price: { type: Number },
+  vendor: { type: String },
+  rating: { type: Number, default: 0 },
+  numReviews: { type: Number, default: 0 },
+  countInStock: { type: Number, required: true, default: 0 },
+  description: { type: String },
+  createdAt: { type: Date },
+  updatedAt: { type: Date },
+  quantity: { type: Number}
+});
+
 const userSchema = new mongoose.Schema(
   {
     firstName: { type: String, required: true },
@@ -25,6 +45,7 @@ const userSchema = new mongoose.Schema(
     password: { type: String, required: true },
     isAdmin: { type: Boolean, required: true, default: false },
     isEmailVerified: { type: Boolean, required: true, default: false },
+    cartItems: [cartItem],
     refreshTokens: [refreshToken],
     verifyEmailToken: {
       type: String,
@@ -63,7 +84,7 @@ userSchema.methods.createPasswordResetToken = function () {
     expiresIn: '600s',
   });
 
-  this.passwordResetToken = resetToken
+  this.passwordResetToken = resetToken;
 
   return resetToken;
 };
