@@ -29,7 +29,7 @@ handler.post(async (req, res) => {
       res.status(401).send({ message: `Invalid credentials` });
     }
   } catch (err) {
-    res.status(500).send({ message: err.message });
+    res.status(500).send({ message: `Login was not successful. Please try again` });
   }
 });
 

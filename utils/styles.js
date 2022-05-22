@@ -230,7 +230,7 @@ const useStyles = makeStyles((theme) => ({
   link: {
     color: 'primary',
     padding: '0 5px !important',
-    margin: '0 !important',
+    margin: '2.5px 0 0 0',
   },
   centeredLink: {
     color: '#ff0000',
