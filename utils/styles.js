@@ -217,6 +217,7 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     borderRadius: 15,
     marginBottom: 7,
+    height: '2rem',
   },
   display: {
     display: 'flex',
@@ -230,7 +231,8 @@ const useStyles = makeStyles((theme) => ({
   link: {
     color: 'primary',
     padding: '0 5px !important',
-    margin: '2.5px 0 0 0',
+    margin: '1px 0 0 0',
+    height: '2rem',
   },
   centeredLink: {
     color: '#ff0000',
