@@ -686,6 +686,7 @@ const useStyles = makeStyles((theme) => ({
       webkitBoxShadow: '3px 3px 5px 1px rgba(0,0,0,0.50)  !important',
       mozBoxShadow: '3px 3px 5px 1px rgba(0,0,0,0.50)  !important',
       boxShadow: '3px 3px 5px 1px rgba(0,0,0,0.50)  !important',
+      border: 'none'
     },
   },
 }));
